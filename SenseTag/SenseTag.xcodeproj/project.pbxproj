@@ -19,6 +19,7 @@
 /* Begin PBXFileReference section */
 		FA4A6F472D074F10004DDC46 /* SenseTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SenseTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4A6F572D074F12004DDC46 /* SenseTagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SenseTagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA4A6F752D0756F5004DDC46 /* NFCNDEFManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NFCNDEFManager; path = ../NFCNDEFManager; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -57,6 +58,7 @@
 			children = (
 				FA4A6F492D074F10004DDC46 /* SenseTag */,
 				FA4A6F5A2D074F12004DDC46 /* SenseTagTests */,
+				FA4A6F752D0756F5004DDC46 /* NFCNDEFManager */,
 				FA4A6F482D074F10004DDC46 /* Products */,
 			);
 			sourceTree = "<group>";
