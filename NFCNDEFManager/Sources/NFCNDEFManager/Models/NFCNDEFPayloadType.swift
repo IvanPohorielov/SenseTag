@@ -1,5 +1,5 @@
 //
-//  NFCNDEFPayloadType.swift
+//  NFCNDEFWellKnownPayloadType.swift
 //  NFCNDEFManager
 //
 //  Created by Ivan Pohorielov on 10.12.2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum NFCNDEFPayloadType: String, Hashable, CaseIterable, Sendable {
+public enum NFCNDEFWellKnownPayloadType: String, Hashable, CaseIterable, Sendable {
     case text = "T"
     case url = "U"
     
@@ -18,9 +18,5 @@ public enum NFCNDEFPayloadType: String, Hashable, CaseIterable, Sendable {
         case .url:
             "URL"
         }
-    }
-    
-    var typeNDEF: Data {
-        Data(self.rawValue.utf8)
     }
 }

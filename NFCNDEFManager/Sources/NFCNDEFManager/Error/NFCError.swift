@@ -15,11 +15,6 @@ public enum NFCError: Error, Sendable {
     case sessionAlreadyRunning
     case sessionInvalidated(String)
     
-    // Payload
-    case recordUnsupportedType
-    case recordUnknownPayload
-    case recordUnsupportedPayloadType
-    
     // Tag status specific
     case tagNotSupportedStatus
     case tagReadOnlyStatus

@@ -14,7 +14,7 @@ struct ContentView: View {
     
     @State var msg: String = String(localized: "Scan to read or Edit here to write...")
     
-    @State var type: NFCNDEFPayloadType = .text
+    @State var type: NFCNDEFWellKnownPayloadType = .text
     
     private let synthesizer = AVSpeechSynthesizer()
     
@@ -52,7 +52,7 @@ struct ContentView: View {
             
             Picker("Type Picker", selection: $type) {
                 // Loop through the enum cases to display options in the Picker
-                ForEach(NFCNDEFPayloadType.allCases, id: \.self) { type in
+                ForEach(NFCNDEFWellKnownPayloadType.allCases, id: \.self) { type in
                     Text(type.title).tag(type)
                 }
             }
@@ -114,20 +114,26 @@ struct ContentView: View {
                 let data = try await NFCNDEFManager().read()
                 
                 if let payload = data.first {
-                    switch payload.type {
-                    case .text:
-                        let text = try payload.extractText()
-                        
-                        self.msg = text
-                        
-                        let utterance = AVSpeechUtterance(string: msg)
-                        utterance.prefersAssistiveTechnologySettings = true
-                        synthesizer.speak(utterance)
-                        
-                    case .url:
-                        let url = try payload.extractURL()
-                        
-                        self.msg = url.absoluteString
+                    
+                    switch payload {
+                    case .wellKnown(let wellKnownPayload):
+                        switch wellKnownPayload {
+                        case .text(let text, let locale):
+                            
+                            self.msg = text
+                            
+                            let utterance = AVSpeechUtterance(string: msg)
+                            utterance.prefersAssistiveTechnologySettings = true
+                            utterance.voice = AVSpeechSynthesisVoice(identifier: locale.identifier)
+                            synthesizer.speak(utterance)
+                            
+                        case .url(let url):
+                            self.msg = url.absoluteString
+                        }
+                    case .empty:
+                        self.msg = "TAG IS EMPTY"
+                    case .other:
+                        break
                     }
                 }
             } catch {
@@ -141,12 +147,12 @@ struct ContentView: View {
             var payload: NFCNDEFManagerPayload? {
                 switch type {
                 case .text:
-                    return NFCNDEFManagerPayload(text: msg)
+                    return .wellKnown(.text(msg, Locale.current))
                 case .url:
                     guard let url = URL(string: msg) else {
                         return nil
                     }
-                    return NFCNDEFManagerPayload(url: url)
+                    return .wellKnown(.url(url))
                 }
             }
             

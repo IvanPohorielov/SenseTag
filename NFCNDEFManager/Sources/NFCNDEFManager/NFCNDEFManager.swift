@@ -148,40 +148,11 @@ private extension NFCNDEFManager {
     
     private func handleRead(_ tag: NFCNDEFTag) async throws -> [NFCNDEFManagerPayload] {
         let message = try await { try await tag.readNDEF() }()
-        return try getPayloads(message)
+        return getPayloads(message)
     }
     
-    private func getPayloads(_ message: NFCNDEFMessage) throws -> [NFCNDEFManagerPayload] {
-        let result = try message.records.map { record in
-            
-            guard let recordType = NFCNDEFPayloadType(
-                rawValue: String(
-                    decoding: record.type,
-                    as: UTF8.self
-                )
-            ) else {
-                throw NFCError.recordUnsupportedType
-            }
-            
-            switch recordType {
-            case .text:
-                
-                guard let text = record.wellKnownTypeTextPayload().0 else {
-                    throw NFCError.recordUnknownPayload
-                }
-                
-                return NFCNDEFManagerPayload(text: text)
-            case .url:
-                
-                guard let url = record.wellKnownTypeURIPayload() else {
-                    throw NFCError.recordUnknownPayload
-                }
-                
-                return NFCNDEFManagerPayload(url: url)
-            }
-        }
-        
-        return result
+    private func getPayloads(_ message: NFCNDEFMessage) -> [NFCNDEFManagerPayload] {
+        message.records.map { $0.mapped() }
     }
     
     // MARK: - Writing
@@ -190,34 +161,11 @@ private extension NFCNDEFManager {
         
         try await self.handleTagStatus(tag)
         
-        let records = try payloads.map { try self.getRecord($0) }
+        let records = payloads.map { $0.mapped() }
         
         let message = NFCNDEFMessage(records: records)
         
         try await { try await tag.writeNDEF(message) }()
-    }
-    
-    private func getRecord(_ payload: NFCNDEFManagerPayload) throws -> NFCNDEFPayload {
-        
-        let record: NFCNDEFPayload?
-        
-        switch payload.type {
-        case .text:
-            let text = try payload.extractText()
-            record = NFCNDEFPayload.wellKnownTypeTextPayload(
-                string: text,
-                locale: Locale.current
-            )
-        case .url:
-            let url = try payload.extractURL()
-            record = NFCNDEFPayload.wellKnownTypeURIPayload(url: url)
-        }
-        
-        guard let record else {
-            throw NFCError.recordUnsupportedPayloadType
-        }
-        
-        return record
     }
     
     private func handleLock(_ tag: NFCNDEFTag) async throws {
