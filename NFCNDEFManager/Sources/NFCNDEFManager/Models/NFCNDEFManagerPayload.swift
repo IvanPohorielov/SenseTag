@@ -28,20 +28,23 @@ public extension NFCNDEFManagerPayload {
     
     func extractText() throws -> String {
         guard type == .text else {
-            throw NFCError.noPayload
+            throw NFCError.recordUnsupportedType
         }
         guard let text = String(data: data, encoding: .utf8) else {
-            throw NFCError.noPayload
+            throw NFCError.recordUnknownPayload
         }
         return text
     }
     
     func extractURL() throws -> URL {
         guard type == .url else {
-            throw NFCError.noPayload
+            throw NFCError.recordUnsupportedType
         }
-        guard let urlString = String(data: data, encoding: .utf8), let url = URL(string: urlString) else {
-            throw NFCError.noPayload
+        guard
+            let urlString = String(data: data, encoding: .utf8),
+            let url = URL(string: urlString)
+        else {
+            throw NFCError.recordUnknownPayload
         }
         return url
     }

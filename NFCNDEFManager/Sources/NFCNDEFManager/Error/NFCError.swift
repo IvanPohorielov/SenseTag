@@ -9,15 +9,19 @@ import Foundation
 
 public enum NFCError: Error, Sendable {
     // Common error
-    case nfcNotAvailable
+    case readerNFCUnsupported
+    
+    // Session
     case sessionAlreadyRunning
     case sessionInvalidated(String)
     
     // Payload
-    case noPayload
+    case recordUnsupportedType
+    case recordUnknownPayload
+    case recordUnsupportedPayloadType
     
     // Tag status specific
-    case notSupportedTagStatus
-    case readOnlyTagStatus
-    case unknownTagStatus
+    case tagNotSupportedStatus
+    case tagReadOnlyStatus
+    case tagUnknownStatus
 }
