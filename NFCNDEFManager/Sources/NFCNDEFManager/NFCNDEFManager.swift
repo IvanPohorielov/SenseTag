@@ -59,6 +59,26 @@ public final actor NFCNDEFManager {
         }
     }
     
+    public func lock() async throws {
+        
+        try self.startSession(
+            alertMessage: "Hold your iPhone near the NFC tag to lock."
+        )
+        
+        do {
+            for try await tag in sessionDelegate.detect() {
+                
+                try await self.handleLock(tag)
+                
+                // Close sesion after first tag readed
+                self.invalidateSession()
+            }
+        } catch {
+            self.invalidateSession(with: error.localizedDescription)
+            throw error
+        }
+    }
+    
     // MARK: - Private Methods
     
     private func startSession(alertMessage: String) throws {
@@ -148,23 +168,13 @@ private extension NFCNDEFManager {
     
     private func handleWrite(to tag: NFCNDEFTag, payload: NFCNDEFManagerPayload) async throws {
         
-        let (status, _) = try await { try await tag.queryNDEFStatus() }()
+        try await self.handleTagStatus(tag)
         
-        switch status {
-        case .readOnly:
-            throw NFCError.tagReadOnlyStatus
-        case .notSupported:
-            throw NFCError.tagNotSupportedStatus
-        case .readWrite:
-            let record = try self.getRecord(payload)
-            
-            let message = NFCNDEFMessage(records: [record])
-            
-            try await { try await tag.writeNDEF(message) }()
-            
-        @unknown default:
-            throw NFCError.tagUnknownStatus
-        }
+        let record = try self.getRecord(payload)
+        
+        let message = NFCNDEFMessage(records: [record])
+        
+        try await { try await tag.writeNDEF(message) }()
     }
     
     private func getRecord(_ payload: NFCNDEFManagerPayload) throws -> NFCNDEFPayload {
@@ -188,5 +198,30 @@ private extension NFCNDEFManager {
         }
         
         return record
+    }
+    
+    private func handleLock(_ tag: NFCNDEFTag) async throws {
+        
+        try await self.handleTagStatus(tag)
+        
+        try await { try await tag.writeLock() }()
+    }
+    
+    // MARK: - Common
+    
+    private func handleTagStatus(_ tag: NFCNDEFTag) async throws {
+        
+        let (status, _) = try await { try await tag.queryNDEFStatus() }()
+        
+        switch status {
+        case .readOnly:
+            throw NFCError.tagReadOnlyStatus
+        case .notSupported:
+            throw NFCError.tagNotSupportedStatus
+        case .readWrite:
+            break
+        @unknown default:
+            throw NFCError.tagUnknownStatus
+        }
     }
 }

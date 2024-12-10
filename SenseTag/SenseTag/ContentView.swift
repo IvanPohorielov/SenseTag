@@ -65,23 +65,43 @@ struct ContentView: View {
     
     // MARK: - Action Buttons
     var action: some View {
-        HStack(spacing: 0) {
-            Button (action: { read() }) {
-                ZStack {
-                    Color.pink.opacity(0.85)
-                    Label("Read NFC", systemImage: "wave.3.left.circle.fill")
-                        .foregroundColor(.white)
-                        .padding(.top, 15)
-                        .padding(.bottom, 35)
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                Button (action: { lock() }) {
+                    ZStack {
+                        Color.black.opacity(0.85)
+                        Label("Lock NFC", systemImage: "lock.circle.fill")
+                            .foregroundColor(.white)
+                            .padding(.vertical, 10)
+                    }
+                }
+                Button (action: { write() }) {
+                    ZStack {
+                        Color.red.opacity(0.85)
+                        Label("Clear NFC", systemImage: "trash.circle.fill")
+                            .foregroundColor(.white)
+                            .padding(.vertical, 10)
+                    }
                 }
             }
-            Button (action: { write() }) {
-                ZStack {
-                    Color.accentColor.opacity(0.85)
-                    Label("Write NFC", systemImage: "wave.3.left.circle.fill")
-                        .foregroundColor(.white)
-                        .padding(.top, 15)
-                        .padding(.bottom, 35)
+            HStack(spacing: 0) {
+                Button (action: { read() }) {
+                    ZStack {
+                        Color.green.opacity(0.85)
+                        Label("Read NFC", systemImage: "wave.3.left.circle.fill")
+                            .foregroundColor(.white)
+                            .padding(.top, 15)
+                            .padding(.bottom, 35)
+                    }
+                }
+                Button (action: { write() }) {
+                    ZStack {
+                        Color.blue.opacity(0.85)
+                        Label("Write NFC", systemImage: "wave.3.left.circle.fill")
+                            .foregroundColor(.white)
+                            .padding(.top, 15)
+                            .padding(.bottom, 35)
+                    }
                 }
             }
         }
@@ -132,6 +152,17 @@ struct ContentView: View {
             
             guard let payload else { return }
             try? await NFCNDEFManager().write(payload)
+        }
+    }
+    
+    func lock() {
+        Task {
+            do {
+                try await NFCNDEFManager().lock()
+            } catch {
+                print("Error: \(error)")
+            }
+            
         }
     }
 }
