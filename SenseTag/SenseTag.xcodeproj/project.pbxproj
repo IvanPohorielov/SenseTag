@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FA4A6F782D0757BE004DDC46 /* NFCNDEFManager in Frameworks */ = {isa = PBXBuildFile; productRef = FA4A6F772D0757BE004DDC46 /* NFCNDEFManager */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		FA4A6F582D074F12004DDC46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -22,9 +26,22 @@
 		FA4A6F752D0756F5004DDC46 /* NFCNDEFManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NFCNDEFManager; path = ../NFCNDEFManager; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FA4A87802D077C0A004DDC46 /* Exceptions for "SenseTag" folder in "SenseTag" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FA4A6F462D074F10004DDC46 /* SenseTag */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FA4A6F492D074F10004DDC46 /* SenseTag */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FA4A87802D077C0A004DDC46 /* Exceptions for "SenseTag" folder in "SenseTag" target */,
+			);
 			path = SenseTag;
 			sourceTree = "<group>";
 		};
@@ -40,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4A6F782D0757BE004DDC46 /* NFCNDEFManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +77,7 @@
 				FA4A6F492D074F10004DDC46 /* SenseTag */,
 				FA4A6F5A2D074F12004DDC46 /* SenseTagTests */,
 				FA4A6F752D0756F5004DDC46 /* NFCNDEFManager */,
+				FA4A6F762D0757BE004DDC46 /* Frameworks */,
 				FA4A6F482D074F10004DDC46 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +89,13 @@
 				FA4A6F572D074F12004DDC46 /* SenseTagTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FA4A6F762D0757BE004DDC46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,6 +118,7 @@
 			);
 			name = SenseTag;
 			packageProductDependencies = (
+				FA4A6F772D0757BE004DDC46 /* NFCNDEFManager */,
 			);
 			productName = SenseTag;
 			productReference = FA4A6F472D074F10004DDC46 /* SenseTag.app */;
@@ -328,11 +355,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SenseTag/SenseTag.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4K58C9955F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SenseTag/Info.plist;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Use NFC to read and write data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -361,11 +391,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SenseTag/SenseTag.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4K58C9955F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SenseTag/Info.plist;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Use NFC to read and write data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -466,6 +499,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FA4A6F772D0757BE004DDC46 /* NFCNDEFManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NFCNDEFManager;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FA4A6F3F2D074F10004DDC46 /* Project object */;
 }
