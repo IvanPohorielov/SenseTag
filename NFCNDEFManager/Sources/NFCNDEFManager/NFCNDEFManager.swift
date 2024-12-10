@@ -39,7 +39,7 @@ public final actor NFCNDEFManager {
         return payloads
     }
     
-    public func write(_ payload: NFCNDEFManagerPayload) async throws {
+    public func write(_ payloads: [NFCNDEFManagerPayload]) async throws {
         
         try self.startSession(
             alertMessage: "Hold your iPhone near the NFC tag to record."
@@ -48,7 +48,27 @@ public final actor NFCNDEFManager {
         do {
             for try await tag in sessionDelegate.detect() {
                 
-                try await self.handleWrite(to: tag, payload: payload)
+                try await self.handleWrite(to: tag, payloads: payloads)
+                
+                // Close sesion after first tag readed
+                self.invalidateSession()
+            }
+        } catch {
+            self.invalidateSession(with: error.localizedDescription)
+            throw error
+        }
+    }
+    
+    public func clear() async throws {
+        
+        try self.startSession(
+            alertMessage: "Hold your iPhone near the NFC tag to clear."
+        )
+        
+        do {
+            for try await tag in sessionDelegate.detect() {
+                
+                try await self.handleWrite(to: tag, payloads: [])
                 
                 // Close sesion after first tag readed
                 self.invalidateSession()
@@ -166,13 +186,13 @@ private extension NFCNDEFManager {
     
     // MARK: - Writing
     
-    private func handleWrite(to tag: NFCNDEFTag, payload: NFCNDEFManagerPayload) async throws {
+    private func handleWrite(to tag: NFCNDEFTag, payloads: [NFCNDEFManagerPayload]) async throws {
         
         try await self.handleTagStatus(tag)
         
-        let record = try self.getRecord(payload)
+        let records = try payloads.map { try self.getRecord($0) }
         
-        let message = NFCNDEFMessage(records: [record])
+        let message = NFCNDEFMessage(records: records)
         
         try await { try await tag.writeNDEF(message) }()
     }

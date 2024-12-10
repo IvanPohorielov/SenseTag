@@ -75,7 +75,7 @@ struct ContentView: View {
                             .padding(.vertical, 10)
                     }
                 }
-                Button (action: { write() }) {
+                Button (action: { clear() }) {
                     ZStack {
                         Color.red.opacity(0.85)
                         Label("Clear NFC", systemImage: "trash.circle.fill")
@@ -151,7 +151,18 @@ struct ContentView: View {
             }
             
             guard let payload else { return }
-            try? await NFCNDEFManager().write(payload)
+            try? await NFCNDEFManager().write([payload])
+        }
+    }
+    
+    func clear() {
+        Task {
+            do {
+                try await NFCNDEFManager().clear()
+            } catch {
+                print("Error: \(error)")
+            }
+            
         }
     }
     
