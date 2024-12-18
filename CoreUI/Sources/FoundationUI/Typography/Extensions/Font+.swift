@@ -5,46 +5,46 @@
 //  Created by Ivan Pohorielov on 15.12.2024.
 //
 
-import SwiftUI
+import struct SwiftUI.Font
 
 extension Font {
     static var senseHZero: Font {
-        return DefaultFonts.hZero.font
+        return DefaultFont.hZero.font
     }
 
     static var senseHOne: Font {
-        return DefaultFonts.hOne.font
+        return DefaultFont.hOne.font
     }
 
     static var senseHTwo: Font {
-        return DefaultFonts.hTwo.font
+        return DefaultFont.hTwo.font
     }
 
     static var senseHThree: Font {
-        return DefaultFonts.hThree.font
+        return DefaultFont.hThree.font
     }
 
     static var senseLabelL: Font {
-        return DefaultFonts.labelL.font
+        return DefaultFont.labelL.font
     }
 
     static var senseLabelM: Font {
-        return DefaultFonts.labelM.font
+        return DefaultFont.labelM.font
     }
 
     static var senseLabelS: Font {
-        return DefaultFonts.labelS.font
+        return DefaultFont.labelS.font
     }
 
     static var senseBodyL: Font {
-        return DefaultFonts.bodyL.font
+        return DefaultFont.bodyL.font
     }
 
     static var senseBody: Font {
-        return DefaultFonts.body.font
+        return DefaultFont.body.font
     }
 
     static var senseCaption: Font {
-        return DefaultFonts.caption.font
+        return DefaultFont.caption.font
     }
 }

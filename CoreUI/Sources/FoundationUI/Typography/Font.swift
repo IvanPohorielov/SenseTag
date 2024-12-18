@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-public enum DefaultFonts: String, Hashable, Sendable, CaseIterable {
+public enum DefaultFont: String, Hashable, Sendable, CaseIterable {
     
     /// 36 Bold
     case hZero
@@ -32,127 +32,115 @@ public enum DefaultFonts: String, Hashable, Sendable, CaseIterable {
     /// 12 Regular
     case caption
     
+    // MARK: - Properties
+    
+    public var size: CGFloat {
+        switch self {
+        case .hZero: return 36.0
+        case .hOne: return 24.0
+        case .hTwo: return 20.0
+        case .hThree: return 18.0
+        case .labelL: return 16.0
+        case .labelM: return 14.0
+        case .labelS: return 10.0
+        case .bodyL: return 16.0
+        case .body: return 14.0
+        case .caption: return 12.0
+        }
+    }
+    
+    public var uiWeight: UIFont.Weight {
+        switch self {
+        case .hZero, .hOne: return .bold
+        case .hTwo: return .semibold
+        case .hThree, .labelL, .labelM, .labelS: return .medium
+        case .bodyL, .body, .caption: return .regular
+        }
+    }
+    
+    public var weight: Font.Weight {
+        switch self {
+        case .hZero, .hOne: return .bold
+        case .hTwo: return .semibold
+        case .hThree, .labelL, .labelM, .labelS: return .medium
+        case .bodyL, .body, .caption: return .regular
+        }
+    }
+    
+    public var uiTextStyle: UIFont.TextStyle {
+            switch self {
+            case .hZero: return .largeTitle
+            case .hOne: return .title1
+            case .hTwo: return .title2
+            case .hThree: return .title3
+            case .labelL: return .headline
+            case .labelM: return .subheadline
+            case .labelS: return .footnote
+            case .bodyL, .body: return .body
+            case .caption: return .caption2
+            }
+        }
+
+        public var textStyle: Font.TextStyle {
+            switch self {
+            case .hZero: return .largeTitle
+            case .hOne: return .title
+            case .hTwo: return .title2
+            case .hThree: return .title3
+            case .labelL: return .headline
+            case .labelM: return .subheadline
+            case .labelS: return .footnote
+            case .bodyL, .body: return .body
+            case .caption: return .caption2
+            }
+        }
+    
     // MARK: - UIFont
     
     public var uiFont: UIFont {
-        switch self {
-        case .hZero:
-            return UIFont.systemFont(
-                ofSize: 36.0,
-                weight: .bold
+        UIFontMetrics(forTextStyle: self.uiTextStyle)
+            .scaledFont(
+                for: UIFont.systemFont(
+                    ofSize: self.size,
+                    weight: self.uiWeight
+                )
             )
-        case .hOne:
-            return UIFont.systemFont(
-                ofSize: 24.0,
-                weight: .bold
-            )
-        case .hTwo:
-            return UIFont.systemFont(
-                ofSize: 20.0,
-                weight: .semibold
-            )
-        case .hThree:
-            return UIFont.systemFont(
-                ofSize: 18.0,
-                weight: .medium
-            )
-        case .labelL:
-            return UIFont.systemFont(
-                ofSize: 16.0,
-                weight: UIFont.Weight.medium
-            )
-        case .labelM:
-            return UIFont.systemFont(
-                ofSize: 14.0,
-                weight: .medium
-            )
-        case .labelS:
-            return UIFont.systemFont(
-                ofSize: 10.0,
-                weight: .medium
-            )
-        case .bodyL:
-            return UIFont.systemFont(
-                ofSize: 16.0,
-                weight: .regular
-            )
-        case .body:
-            return UIFont.systemFont(
-                ofSize: 14.0,
-                weight: .regular
-            )
-        case .caption:
-            return UIFont.systemFont(
-                ofSize: 12.0,
-                weight: .regular
-            )
-        }
     }
     
     // MARK: - Font
-
+    
     public var font: Font {
-        switch self {
-        case .hZero:
-            return Font.system(
-                size: 36.0,
-                weight: .bold,
-                design: .default
+        Font
+            .custom(
+                "HelveticaNeue", // workaround scalable font
+                size: self.size,
+                relativeTo: self.textStyle
             )
-        case .hOne:
-            return Font.system(
-                size: 24.0,
-                weight: .bold,
-                design: .default
-            )
-        case .hTwo:
-            return Font.system(
-                size: 20.0,
-                weight: .semibold,
-                design: .default
-            )
-        case .hThree:
-            return Font.system(
-                size: 18.0,
-                weight: .medium,
-                design: .default
-            )
-        case .labelL:
-            return Font.system(
-                size: 16.0,
-                weight: .medium,
-                design: .default
-            )
-        case .labelM:
-            return Font.system(
-                size: 14.0,
-                weight: .medium,
-                design: .default
-            )
-        case .labelS:
-            return Font.system(
-                size: 10.0,
-                weight: .medium,
-                design: .default
-            )
-        case .bodyL:
-            return Font.system(
-                size: 16.0,
-                weight: .regular,
-                design: .default
-            )
-        case .body:
-            return Font.system(
-                size: 14.0,
-                weight: .regular,
-                design: .default
-            )
-        case .caption:
-            return Font.system(
-                size: 12.0,
-                weight: .regular,
-                design: .default
-            )
+            .weight(self.weight)
+    }
+}
+
+// MARK: - Preview
+
+#if DEBUG
+#Preview {
+    ScrollView {
+        LazyVStack {
+            ForEach(DefaultFont.allCases, id: \.self) { item in
+                RoundedRectangle(cornerRadius: .radius8)
+                    .fill(.clear)
+                    .frame(height: 100)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: .radius8)
+                            .stroke(.blue, lineWidth: .border1)
+                    }
+                    .overlay {
+                        Text(item.rawValue)
+                            .font(item.font)
+                    }
+                    .padding(.horizontal)
+            }
         }
     }
 }
+#endif
