@@ -39,5 +39,5 @@ public extension Color {
     static let orange: DefaultPaletteSwiftUIProxy = DefaultColors.orange.swiftUI
     static let red: DefaultPaletteSwiftUIProxy = DefaultColors.red.swiftUI
     static let blue: DefaultPaletteSwiftUIProxy = DefaultColors.blue.swiftUI
-    static let white: Color = DefaultColors.white.color
+    static let absoluteWhite: Color = DefaultColors.white.color
 }

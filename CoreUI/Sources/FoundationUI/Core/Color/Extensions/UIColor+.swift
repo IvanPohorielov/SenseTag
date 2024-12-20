@@ -39,5 +39,5 @@ public extension UIColor {
     static let orange: DefaultPaletteUIKitProxy = DefaultColors.orange.uiKit
     static let red: DefaultPaletteUIKitProxy = DefaultColors.red.uiKit
     static let blue: DefaultPaletteUIKitProxy = DefaultColors.blue.uiKit
-    static let white: UIColor = DefaultColors.white.uiColor
+    static let absoluteWhite: UIColor = DefaultColors.white.uiColor
 }

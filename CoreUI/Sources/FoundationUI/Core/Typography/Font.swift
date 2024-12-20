@@ -68,32 +68,32 @@ public enum DefaultFont: String, Hashable, Sendable, CaseIterable {
     }
     
     public var uiTextStyle: UIFont.TextStyle {
-            switch self {
-            case .hZero: return .largeTitle
-            case .hOne: return .title1
-            case .hTwo: return .title2
-            case .hThree: return .title3
-            case .labelL: return .headline
-            case .labelM: return .subheadline
-            case .labelS: return .footnote
-            case .bodyL, .body: return .body
-            case .caption: return .caption2
-            }
+        switch self {
+        case .hZero: return .largeTitle
+        case .hOne: return .title1
+        case .hTwo: return .title2
+        case .hThree: return .title3
+        case .labelL: return .headline
+        case .labelM: return .subheadline
+        case .labelS: return .footnote
+        case .bodyL, .body: return .body
+        case .caption: return .caption2
         }
-
-        public var textStyle: Font.TextStyle {
-            switch self {
-            case .hZero: return .largeTitle
-            case .hOne: return .title
-            case .hTwo: return .title2
-            case .hThree: return .title3
-            case .labelL: return .headline
-            case .labelM: return .subheadline
-            case .labelS: return .footnote
-            case .bodyL, .body: return .body
-            case .caption: return .caption2
-            }
+    }
+    
+    public var textStyle: Font.TextStyle {
+        switch self {
+        case .hZero: return .largeTitle
+        case .hOne: return .title
+        case .hTwo: return .title2
+        case .hThree: return .title3
+        case .labelL: return .headline
+        case .labelM: return .subheadline
+        case .labelS: return .footnote
+        case .bodyL, .body: return .body
+        case .caption: return .caption2
         }
+    }
     
     // MARK: - UIFont
     

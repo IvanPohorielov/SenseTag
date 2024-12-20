@@ -7,7 +7,7 @@
 
 import class UIKit.UIFont
 
-extension UIFont {
+public extension UIFont {
     static var senseHZero: UIFont {
         return DefaultFont.hZero.uiFont
     }

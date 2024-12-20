@@ -7,7 +7,7 @@
 
 import struct SwiftUI.Font
 
-extension Font {
+public extension Font {
     static var senseHZero: Font {
         return DefaultFont.hZero.font
     }
