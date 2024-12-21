@@ -34,7 +34,7 @@ public struct LinkButtonPreview: View {
     private var style: LinkButtonStyle = .regular
     
     @State
-    private var borderShage: ButtonCoreBorderShape = .roundedRectangle
+    private var borderShage: CoreButtonBorderShape = .roundedRectangle
     
     @State
     private var isFullWidht: Bool = false

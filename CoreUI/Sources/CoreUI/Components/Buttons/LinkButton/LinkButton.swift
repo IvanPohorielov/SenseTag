@@ -8,7 +8,7 @@
 import SwiftUI
 import FoundationUI
 
-public struct LinkButton<Icon: View>: ButtonCore, LinkButtonEnvProtocol, Loadable {
+public struct LinkButton<Icon: View>: CoreButton, LinkButtonEnvProtocol, Loadable {
     
     let text: String?
     
@@ -57,7 +57,7 @@ public extension LinkButton {
     }
     
     init(
-        _ content: ButtonCoreContent,
+        _ content: CoreButtonContent,
         @ViewBuilder iconBuilder: (ImageContent?) -> Icon = { content in
             Image(content)?
                 .resizable()
@@ -74,7 +74,7 @@ public extension LinkButton {
 public extension LinkButton where Icon == Image {
     
     init(
-        _ content: ButtonCoreContent,
+        _ content: CoreButtonContent,
         action: @escaping @MainActor () -> Void
     ) {
         self.text = content.text

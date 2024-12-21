@@ -34,7 +34,7 @@ public struct DefaultButtonPreview: View {
     private var style: DefaultButtonStyle = .secondary
     
     @State
-    private var borderShage: ButtonCoreBorderShape = .roundedRectangle
+    private var borderShage: CoreButtonBorderShape = .roundedRectangle
     
     @State
     private var isFullWidht: Bool = false
@@ -123,7 +123,7 @@ public struct DefaultButtonPreview: View {
                 Text("Bornder shape")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Picker("", selection: $borderShage) {
-                    ForEach(ButtonCoreBorderShape.allCases, id: \.self) {
+                    ForEach(CoreButtonBorderShape.allCases, id: \.self) {
                         switch $0 {
                         case .roundedRectangle:
                             Text("Rounded rectangle")

@@ -1,5 +1,5 @@
 //
-//  ButtonCoreContent.swift
+//  CoreButtonContent.swift
 //  CoreUI
 //
 //  Created by Ivan Pohorielov on 20.12.2024.
@@ -7,7 +7,7 @@
 
 import FoundationUI
 
-public struct ButtonCoreContent: Hashable, Sendable {
+public struct CoreButtonContent: Hashable, Sendable {
     
     public var text: String
     public var icon: ImageContent?

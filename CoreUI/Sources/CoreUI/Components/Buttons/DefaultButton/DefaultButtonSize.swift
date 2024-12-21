@@ -9,7 +9,7 @@ import Foundation
 import struct SwiftUI.Font
 import FoundationUI
 
-public struct DefaultButtonSize: ButtonCoreSize {
+public struct DefaultButtonSize: CoreButtonSize {
     
     let lineLimit: Int?
     

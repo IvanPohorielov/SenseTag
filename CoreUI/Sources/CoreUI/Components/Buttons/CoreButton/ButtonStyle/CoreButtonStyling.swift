@@ -1,5 +1,5 @@
 //
-//  ButtonCoreStyling.swift
+//  CoreButtonStyling.swift
 //  CoreUI
 //
 //  Created by Ivan Pohorielov on 18.12.2024.
@@ -8,18 +8,18 @@
 
 import SwiftUI
 
-struct ButtonCoreStyling<Style: ButtonCoreStyle, Size: ButtonCoreSize>: ButtonStyle {
+struct CoreButtonStyling<Style: CoreButtonStyle, Size: CoreButtonSize>: ButtonStyle {
     
     private var style: Style
     private var size: Size
-    private var borderShape: ButtonCoreBorderShape?
+    private var borderShape: CoreButtonBorderShape?
     private var isEnabled: Bool
     private var isFullWidth: Bool
     
     init(
         style: Style,
         size: Size,
-        borderShape: ButtonCoreBorderShape?,
+        borderShape: CoreButtonBorderShape?,
         isEnabled: Bool,
         isFullWidth: Bool?
     ) {
@@ -32,7 +32,7 @@ struct ButtonCoreStyling<Style: ButtonCoreStyle, Size: ButtonCoreSize>: ButtonSt
     
     public func makeBody(configuration: Configuration) -> some View {
         
-        let state: ButtonCoreState = ButtonCoreState.getState(
+        let state: CoreButtonState = CoreButtonState.getState(
             from: configuration,
             isEnabled: isEnabled
         )

@@ -16,6 +16,6 @@ protocol DefaultButtonEnvProtocol {
     
     var style: DefaultButtonStyle { get }
     
-    var borderShape: ButtonCoreBorderShape { get }
+    var borderShape: CoreButtonBorderShape { get }
     
 }

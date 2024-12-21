@@ -10,6 +10,6 @@ import SwiftUI
 public extension EnvironmentValues {
     
     @Entry
-    var buttonBorderShape: ButtonCoreBorderShape = .roundedRectangle
+    var buttonBorderShape: CoreButtonBorderShape = .roundedRectangle
     
 }

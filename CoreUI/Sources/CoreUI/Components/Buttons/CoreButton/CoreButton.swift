@@ -1,5 +1,5 @@
 //
-//  ButtonCore.swift
+//  CoreButton.swift
 //  CoreUI
 //
 //  Created by Ivan Pohorielov on 21.12.2024.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-protocol ButtonCore: View {
+protocol CoreButton: View {
     
     associatedtype Icon: View
-    associatedtype Style: ButtonCoreStyle
-    associatedtype Size: ButtonCoreSize
+    associatedtype Style: CoreButtonStyle
+    associatedtype Size: CoreButtonSize
     
     var text: String? { get }
     var icon: Icon? { get }
@@ -29,10 +29,10 @@ protocol ButtonCore: View {
     var isLoadingEnabled: Bool { get }
 }
 
-extension ButtonCore {
+extension CoreButton {
     
     func body(
-        borderShape: ButtonCoreBorderShape? = nil,
+        borderShape: CoreButtonBorderShape? = nil,
         isFullWidth: Bool? = nil
     ) -> some View {
         Button {
@@ -50,7 +50,7 @@ extension ButtonCore {
             )
         }
         .buttonStyle(
-            ButtonCoreStyling(
+            CoreButtonStyling(
                 style: style,
                 size: size,
                 borderShape: borderShape,
@@ -59,7 +59,7 @@ extension ButtonCore {
             )
         )
         .contentShape(Rectangle())
-        .accessibilityIdentifier(ButtonCoreAccessibility.ButtonCore.rawValue)
+        .accessibilityIdentifier(CoreButtonAccessibility.CoreButton.rawValue)
     }
     
     @ViewBuilder
@@ -73,7 +73,7 @@ extension ButtonCore {
                 .circular
             )
             .tint(style.foregroundColorNormal)
-            .accessibilityIdentifier(ButtonCoreAccessibility.progressView.rawValue)
+            .accessibilityIdentifier(CoreButtonAccessibility.progressView.rawValue)
     }
     
     @ViewBuilder
@@ -83,7 +83,7 @@ extension ButtonCore {
                 width: size.iconSize,
                 height: size.iconSize
             )
-            .accessibilityIdentifier(ButtonCoreAccessibility.iconView.rawValue)
+            .accessibilityIdentifier(CoreButtonAccessibility.iconView.rawValue)
     }
     
     @ViewBuilder
@@ -91,7 +91,7 @@ extension ButtonCore {
         if let text {
             Text(text)
                 .font(size.font)
-                .accessibilityIdentifier(ButtonCoreAccessibility.textView.rawValue)
+                .accessibilityIdentifier(CoreButtonAccessibility.textView.rawValue)
         }
     }
     

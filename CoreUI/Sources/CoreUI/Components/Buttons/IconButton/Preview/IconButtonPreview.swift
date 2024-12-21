@@ -29,7 +29,7 @@ public struct IconButtonPreview: View {
     private var style: IconButtonStyle = .secondary
     
     @State
-    private var borderShage: ButtonCoreBorderShape = .roundedRectangle
+    private var borderShage: CoreButtonBorderShape = .roundedRectangle
     
     // MARK: - Life cycle
     
@@ -100,7 +100,7 @@ public struct IconButtonPreview: View {
                 Text("Bornder shape")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Picker("", selection: $borderShage) {
-                    ForEach(ButtonCoreBorderShape.allCases, id: \.self) {
+                    ForEach(CoreButtonBorderShape.allCases, id: \.self) {
                         switch $0 {
                         case .roundedRectangle:
                             Text("Rounded rectangle")

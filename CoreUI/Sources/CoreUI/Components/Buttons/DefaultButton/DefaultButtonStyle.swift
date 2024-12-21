@@ -8,7 +8,7 @@
 import SwiftUI
 import FoundationUI
 
-public struct DefaultButtonStyle: ButtonCoreStyle {
+public struct DefaultButtonStyle: CoreButtonStyle {
     
     let backgroundColorNormal: Color?
     

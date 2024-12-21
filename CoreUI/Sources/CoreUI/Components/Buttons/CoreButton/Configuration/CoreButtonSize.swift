@@ -1,5 +1,5 @@
 //
-//  ButtonCoreLayout.swift
+//  CoreButtonLayout.swift
 //  PromUI
 //
 //  Created by Ivan Pohorielov on 24.10.2024.
@@ -8,7 +8,7 @@
 import Foundation
 import struct SwiftUI.Font
 
-protocol ButtonCoreSize: Hashable, Sendable, CaseIterable {
+protocol CoreButtonSize: Hashable, Sendable, CaseIterable {
     
     var lineLimit: Int? { get }
     var font: Font { get }
@@ -28,7 +28,7 @@ protocol ButtonCoreSize: Hashable, Sendable, CaseIterable {
     
 }
 
-extension ButtonCoreSize {
+extension CoreButtonSize {
     public static var allCases: [Self] {
         [
             Self.large,

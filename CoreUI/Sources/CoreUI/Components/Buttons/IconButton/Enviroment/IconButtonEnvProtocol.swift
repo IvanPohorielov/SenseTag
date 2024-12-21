@@ -14,6 +14,6 @@ protocol IconButtonEnvProtocol {
     
     var style: IconButtonStyle { get }
     
-    var borderShape: ButtonCoreBorderShape { get }
+    var borderShape: CoreButtonBorderShape { get }
     
 }

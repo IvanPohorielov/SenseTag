@@ -10,7 +10,7 @@ import FoundationUI
 
 
 
-public struct DefaultButton<Icon: View>: ButtonCore, DefaultButtonEnvProtocol, Loadable {
+public struct DefaultButton<Icon: View>: CoreButton, DefaultButtonEnvProtocol, Loadable {
     
     let text: String?
     
@@ -33,7 +33,7 @@ public struct DefaultButton<Icon: View>: ButtonCore, DefaultButtonEnvProtocol, L
     var isFullWidth: Bool
     
     @Environment(\.buttonBorderShape)
-    var borderShape: ButtonCoreBorderShape
+    var borderShape: CoreButtonBorderShape
     
     // MARK: - Loadable
     
@@ -68,7 +68,7 @@ public extension DefaultButton {
     }
     
     init(
-        _ content: ButtonCoreContent,
+        _ content: CoreButtonContent,
         @ViewBuilder iconBuilder: (ImageContent?) -> Icon = { content in
             Image(content)?
                 .resizable()
@@ -85,7 +85,7 @@ public extension DefaultButton {
 public extension DefaultButton where Icon == Image {
     
     init(
-        _ content: ButtonCoreContent,
+        _ content: CoreButtonContent,
         action: @escaping @MainActor () -> Void
     ) {
         self.text = content.text

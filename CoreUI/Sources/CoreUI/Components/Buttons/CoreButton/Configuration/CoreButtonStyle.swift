@@ -1,5 +1,5 @@
 //
-//  ButtonCoreStyle.swift
+//  CoreButtonStyle.swift
 //  CoreUI
 //
 //  Created by Ivan Pohorielov on 18.12.2024.
@@ -8,7 +8,7 @@
 import struct SwiftUI.Color
 import struct FoundationUI.DefaultPaletteSwiftUIProxy
 
-protocol ButtonCoreStyle: Hashable, Sendable, CaseIterable {
+protocol CoreButtonStyle: Hashable, Sendable, CaseIterable {
     
     var backgroundColorNormal: Color? { get }
     var backgroundColorPressed: Color? { get }
@@ -24,9 +24,9 @@ protocol ButtonCoreStyle: Hashable, Sendable, CaseIterable {
     
 }
 
-extension ButtonCoreStyle {
+extension CoreButtonStyle {
     
-    func backgroundColor(for state: ButtonCoreState) -> Color? {
+    func backgroundColor(for state: CoreButtonState) -> Color? {
         switch state {
         case .idle:
             return backgroundColorNormal
@@ -37,7 +37,7 @@ extension ButtonCoreStyle {
         }
     }
     
-    func foregroundColor(for state: ButtonCoreState) -> Color {
+    func foregroundColor(for state: CoreButtonState) -> Color {
         switch state {
         case .idle:
             return foregroundColorNormal
@@ -48,7 +48,7 @@ extension ButtonCoreStyle {
         }
     }
     
-    func borderColor(for state: ButtonCoreState) -> Color? {
+    func borderColor(for state: CoreButtonState) -> Color? {
         switch state {
         case .idle:
             return borderColorNormal

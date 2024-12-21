@@ -1,5 +1,5 @@
 //
-//  ButtonCoreBorderShape.swift
+//  CoreButtonBorderShape.swift
 //  CoreUI
 //
 //  Created by Ivan Pohorielov on 18.12.2024.
@@ -8,12 +8,12 @@
 import SwiftUI
 import FoundationUI
 
-public enum ButtonCoreBorderShape: String, Hashable, Sendable, CaseIterable {
+public enum CoreButtonBorderShape: String, Hashable, Sendable, CaseIterable {
     case roundedRectangle
     case capsule
 }
 
-extension ButtonCoreBorderShape {
+extension CoreButtonBorderShape {
     func shape(coreRadius: CGFloat) -> AnyShape {
         switch self {
         case .roundedRectangle:

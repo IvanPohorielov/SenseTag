@@ -1,5 +1,5 @@
 //
-//  ButtonCoreState.swift
+//  CoreButtonState.swift
 //  CoreUI
 //
 //  Created by Ivan Pohorielov on 18.12.2024.
@@ -8,17 +8,17 @@
 import protocol SwiftUI.ButtonStyle
 
 
-enum ButtonCoreState: String, Hashable, CaseIterable, Sendable {
+enum CoreButtonState: String, Hashable, CaseIterable, Sendable {
     case idle
     case pressed
     case disabled
 }
 
-extension ButtonCoreState {
+extension CoreButtonState {
     static func getState(
         from configuration: ButtonStyle.Configuration,
         isEnabled: Bool
-    ) -> ButtonCoreState {
+    ) -> CoreButtonState {
         if !isEnabled {
             return .disabled
         } else if configuration.isPressed {

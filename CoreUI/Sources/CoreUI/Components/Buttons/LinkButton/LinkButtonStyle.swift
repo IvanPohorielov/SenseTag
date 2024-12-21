@@ -8,7 +8,7 @@
 import SwiftUI
 import FoundationUI
 
-public struct LinkButtonStyle: ButtonCoreStyle {
+public struct LinkButtonStyle: CoreButtonStyle {
     
     let backgroundColorNormal: Color? = nil
     

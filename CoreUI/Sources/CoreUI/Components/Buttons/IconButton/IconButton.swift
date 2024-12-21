@@ -8,7 +8,7 @@
 import SwiftUI
 import FoundationUI
 
-public struct IconButton<Icon: View>: ButtonCore, IconButtonEnvProtocol, Loadable {
+public struct IconButton<Icon: View>: CoreButton, IconButtonEnvProtocol, Loadable {
     
     let text: String? = nil
     
@@ -28,7 +28,7 @@ public struct IconButton<Icon: View>: ButtonCore, IconButtonEnvProtocol, Loadabl
     var isEnabled: Bool
     
     @Environment(\.buttonBorderShape)
-    var borderShape: ButtonCoreBorderShape
+    var borderShape: CoreButtonBorderShape
     
     // MARK: - Loadable
     
