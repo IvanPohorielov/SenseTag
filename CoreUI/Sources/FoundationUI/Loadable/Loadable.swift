@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-public protocol Loadable: View {
+public protocol Loadable {
     
     var isLoading: Bool { get }
     
