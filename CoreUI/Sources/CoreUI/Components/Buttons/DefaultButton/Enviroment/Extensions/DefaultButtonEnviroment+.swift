@@ -18,7 +18,4 @@ public extension EnvironmentValues {
     @Entry
     var buttonStyle: DefaultButtonStyle = .primary
     
-    @Entry
-    var buttonBorderShape: ButtonCoreBorderShape = .roundedRectangle
-    
 }
