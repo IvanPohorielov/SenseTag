@@ -10,19 +10,19 @@ import SwiftUI
 public extension View {
     
     func defaultButtonFullWidth(_ fullWidth: Bool) -> some View {
-        environment(\.defaultButtonFullWidth, fullWidth)
+        environment(\.buttonFullWidth, fullWidth)
     }
     
     func defaultButtonSize(_ size: DefaultButtonSize) -> some View {
-        environment(\.defaultButtonSize, size)
+        environment(\.buttonSize, size)
     }
     
     func defaultButtonStyle(_ style: DefaultButtonStyle) -> some View {
-        environment(\.defaultButtonStyle, style)
+        environment(\.buttonStyle, style)
     }
     
     func defaultButtonBorderShape(_ style: ButtonCoreBorderShape) -> some View {
-        environment(\.defaultButtonBorderShape, style)
+        environment(\.buttonBorderShape, style)
     }
     
 }

@@ -10,15 +10,15 @@ import SwiftUI
 public extension EnvironmentValues {
     
     @Entry
-    var defaultButtonFullWidth: Bool = false
+    var buttonFullWidth: Bool = false
     
     @Entry
-    var defaultButtonSize: DefaultButtonSize = .regular
+    var buttonSize: DefaultButtonSize = .regular
     
     @Entry
-    var defaultButtonStyle: DefaultButtonStyle = .primary
+    var buttonStyle: DefaultButtonStyle = .primary
     
     @Entry
-    var defaultButtonBorderShape: ButtonCoreBorderShape = .roundedRectangle
+    var buttonBorderShape: ButtonCoreBorderShape = .roundedRectangle
     
 }

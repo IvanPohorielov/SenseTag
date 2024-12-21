@@ -20,19 +20,19 @@ public struct DefaultButton<Icon: View>: View, DefaultButtonEnvProtocol, Loadabl
     
     // MARK: - Properties
     
-    @Environment(\.defaultButtonStyle)
+    @Environment(\.buttonStyle)
     var style: DefaultButtonStyle
     
-    @Environment(\.defaultButtonSize)
+    @Environment(\.buttonSize)
     var size: DefaultButtonSize
     
-    @Environment(\.defaultButtonFullWidth)
+    @Environment(\.buttonFullWidth)
     var isFullWidth: Bool
     
     @Environment(\.isEnabled)
     var isEnabled: Bool
     
-    @Environment(\.defaultButtonBorderShape)
+    @Environment(\.buttonBorderShape)
     var borderShape: ButtonCoreBorderShape
     
     // MARK: - Loadable
