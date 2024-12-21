@@ -10,11 +10,11 @@ import FoundationUI
 
 public struct DefaultButtonStyle: ButtonCoreStyle {
     
-    let backgroundColorNormal: Color
+    let backgroundColorNormal: Color?
     
-    let backgroundColorPressed: Color
+    let backgroundColorPressed: Color?
     
-    let backgroundColorDisabled: Color
+    let backgroundColorDisabled: Color?
     
     let foregroundColorNormal: Color
     
@@ -83,4 +83,14 @@ public extension DefaultButtonStyle {
         foregroundColorDisabled: .blue.shade100
     )
     
+}
+
+extension DefaultButtonStyle {
+    public static var allCases: [Self] {
+        [
+            Self.primary,
+            Self.secondary,
+            Self.tertiary
+        ]
+    }
 }

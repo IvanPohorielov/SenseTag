@@ -1,5 +1,5 @@
 //
-//  DefaultButton.swift
+//  LinkButton.swift
 //  CoreUI
 //
 //  Created by Ivan Pohorielov on 20.12.2024.
@@ -8,9 +8,7 @@
 import SwiftUI
 import FoundationUI
 
-
-
-public struct DefaultButton<Icon: View>: ButtonCore, DefaultButtonEnvProtocol, Loadable {
+public struct LinkButton<Icon: View>: ButtonCore, LinkButtonEnvProtocol, Loadable {
     
     let text: String
     
@@ -18,22 +16,16 @@ public struct DefaultButton<Icon: View>: ButtonCore, DefaultButtonEnvProtocol, L
     
     let action: () -> Void
     
-    // MARK: - Configuration
+    // MARK: - Properties
     
-    @Environment(\.buttonStyle)
-    var style: DefaultButtonStyle
+    @Environment(\.linkButtonStyle)
+    var style: LinkButtonStyle
     
-    @Environment(\.buttonSize)
-    var size: DefaultButtonSize
+    @Environment(\.linkButtonSize)
+    var size: LinkButtonSize
     
     @Environment(\.isEnabled)
     var isEnabled: Bool
-    
-    @Environment(\.buttonFullWidth)
-    var isFullWidth: Bool
-    
-    @Environment(\.buttonBorderShape)
-    var borderShape: ButtonCoreBorderShape
     
     // MARK: - Loadable
     
@@ -46,16 +38,13 @@ public struct DefaultButton<Icon: View>: ButtonCore, DefaultButtonEnvProtocol, L
     // MARK: - Views
     
     public var body : some View {
-        body(
-            borderShape: borderShape,
-            isFullWidth: isFullWidth
-        )
+        body()
     }
 }
 
 // MARK: - Init
 
-public extension DefaultButton {
+public extension LinkButton {
     
     init(
         text: String,
@@ -82,7 +71,7 @@ public extension DefaultButton {
     
 }
 
-public extension DefaultButton where Icon == Image {
+public extension LinkButton where Icon == Image {
     
     init(
         _ content: ButtonCoreContent,
@@ -114,8 +103,8 @@ public extension DefaultButton where Icon == Image {
 
 #if DEBUG
 
-#Preview("DefaultButtonPreview") {
-    DefaultButtonPreview()
-}
+//#Preview("LinkButtonPreview") {
+//    LinkButtonPreview()
+//}
 
 #endif

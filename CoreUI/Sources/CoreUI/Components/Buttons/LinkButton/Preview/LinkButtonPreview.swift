@@ -1,5 +1,5 @@
 //
-//  DefaultButtonPreview.swift
+//  LinkButtonPreview.swift
 //  PromUI
 //
 //  Created by Ivan Pohorielov on 21.10.2024.
@@ -11,7 +11,7 @@ import FoundationUI
 #if DEBUG
 
 @_spi(Preview)
-public struct DefaultButtonPreview: View {
+public struct LinkButtonPreview: View {
     
     // MARK: - State
     
@@ -28,10 +28,10 @@ public struct DefaultButtonPreview: View {
     // MARK: - Configuration
     
     @State
-    private var size: DefaultButtonSize = .regular
+    private var size: LinkButtonSize = .regular
     
     @State
-    private var style: DefaultButtonStyle = .secondary
+    private var style: LinkButtonStyle = .regular
     
     @State
     private var borderShage: ButtonCoreBorderShape = .roundedRectangle
@@ -48,7 +48,7 @@ public struct DefaultButtonPreview: View {
     public var body: some View {
         VStack(spacing: 0.0) {
             VStack {
-                Text("DefaultButton")
+                Text("LinkButton")
                     .font(.senseHOne)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -65,10 +65,8 @@ public struct DefaultButtonPreview: View {
                 
                 Spacer() // Buffer
             }
-            .defaultButtonSize(size)
-            .defaultButtonStyle(style)
-            .defaultButtonBorderShape(borderShage)
-            .defaultButtonFullWidth(isFullWidht)
+            .linkButtonSize(size)
+            .linkButtonStyle(style)
             .isLoading(isLoading)
             .disabled(isDisabled)
             .frame(height: 200.0)
@@ -90,7 +88,7 @@ public struct DefaultButtonPreview: View {
     
     @ViewBuilder
     private var button: some View {
-        DefaultButton(
+        LinkButton(
             text: "Button",
             icon: isShowIcon ? .systemImage("xmark") : nil
         ) {
@@ -117,24 +115,6 @@ public struct DefaultButtonPreview: View {
     private var configurationSection: some View {
         Section("Configuration") {
             
-            Toggle("Make full width", isOn: $isFullWidht)
-            
-            VStack {
-                Text("Bornder shape")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Picker("", selection: $borderShage) {
-                    ForEach(ButtonCoreBorderShape.allCases, id: \.self) {
-                        switch $0 {
-                        case .roundedRectangle:
-                            Text("Rounded rectangle")
-                        case .capsule:
-                            Text("Capsule")
-                        }
-                    }
-                }
-                .pickerStyle(.segmented)
-            }
-            
             VStack {
                 HStack {
                     Text("Style")
@@ -144,14 +124,10 @@ public struct DefaultButtonPreview: View {
                 }
                 HStack {
                     Picker("", selection: $style) {
-                        ForEach(DefaultButtonStyle.allCases, id: \.self) {
+                        ForEach(LinkButtonStyle.allCases, id: \.self) {
                             switch $0 {
-                            case .primary:
-                                Text("Primary")
-                            case .secondary:
-                                Text("Secondary")
-                            case .tertiary:
-                                Text("Tertiary")
+                            case .regular:
+                                Text("Regular")
                             default:
                                 Text("None")
                             }
@@ -160,7 +136,7 @@ public struct DefaultButtonPreview: View {
                     .pickerStyle(.wheel)
                     
                     Picker("", selection: $size) {
-                        ForEach(DefaultButtonSize.allCases, id: \.self) {
+                        ForEach(LinkButtonSize.allCases, id: \.self) {
                             switch $0 {
                             case .large:
                                 Text("Large")
@@ -182,7 +158,7 @@ public struct DefaultButtonPreview: View {
 }
 
 #Preview {
-    DefaultButtonPreview()
+    LinkButtonPreview()
 }
 
 #endif

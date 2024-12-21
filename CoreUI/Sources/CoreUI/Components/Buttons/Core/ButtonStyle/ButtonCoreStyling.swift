@@ -12,16 +12,16 @@ struct ButtonCoreStyling<Style: ButtonCoreStyle, Size: ButtonCoreSize>: ButtonSt
     
     private var style: Style
     private var size: Size
-    private var borderShape: ButtonCoreBorderShape
+    private var borderShape: ButtonCoreBorderShape?
     private var isEnabled: Bool
-    private var isFullWidth: Bool
+    private var isFullWidth: Bool?
     
     init(
         style: Style,
         size: Size,
-        borderShape: ButtonCoreBorderShape,
+        borderShape: ButtonCoreBorderShape?,
         isEnabled: Bool,
-        isFullWidth: Bool
+        isFullWidth: Bool?
     ) {
         self.style = style
         self.size = size
@@ -43,16 +43,24 @@ struct ButtonCoreStyling<Style: ButtonCoreStyle, Size: ButtonCoreSize>: ButtonSt
             .padding(.vertical, size.contentVerticalPadding)
             .padding(.horizontal, size.contentHorizontalPadding)
             .frame(
-                maxWidth: isFullWidth ? .infinity : nil,
+                maxWidth: (isFullWidth ?? false) ? .infinity : nil,
                 minHeight: size.idealContentHeight
             )
             .background {
-                borderShape.shape(coreRadius: size.cornerRadius)
-                    .fill(style.backgroundColor(for: state))
+                if
+                    let backgroundColor = style.backgroundColor(for: state),
+                    let borderShape = borderShape?.shape(coreRadius: size.cornerRadius)
+                {
+                    borderShape
+                        .fill(backgroundColor)
+                }
             }
             .overlay {
-                if let borderColor = style.borderColor(for: state) {
-                    borderShape.shape(coreRadius: size.cornerRadius)
+                if
+                    let borderColor = style.borderColor(for: state),
+                    let borderShape = borderShape?.shape(coreRadius: size.cornerRadius)
+                {
+                    borderShape
                         .stroke(
                             borderColor,
                             lineWidth: size.borderWidth

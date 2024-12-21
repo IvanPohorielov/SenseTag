@@ -10,9 +10,9 @@ import struct FoundationUI.DefaultPaletteSwiftUIProxy
 
 protocol ButtonCoreStyle: Hashable, Sendable, CaseIterable {
     
-    var backgroundColorNormal: Color { get }
-    var backgroundColorPressed: Color { get }
-    var backgroundColorDisabled: Color { get }
+    var backgroundColorNormal: Color? { get }
+    var backgroundColorPressed: Color? { get }
+    var backgroundColorDisabled: Color? { get }
     
     var foregroundColorNormal: Color { get }
     var foregroundColorPressed: Color { get }
@@ -22,26 +22,11 @@ protocol ButtonCoreStyle: Hashable, Sendable, CaseIterable {
     var borderColorPressed: Color? { get }
     var borderColorDisabled: Color? { get }
     
-    // MARK: - Default styles
-    
-    static var primary: Self { get }
-    static var secondary: Self { get }
-    static var tertiary: Self { get }
-}
-
-extension ButtonCoreStyle {
-    public static var allCases: [Self] {
-        [
-            Self.primary,
-            Self.secondary,
-            Self.tertiary
-        ]
-    }
 }
 
 extension ButtonCoreStyle {
     
-    func backgroundColor(for state: ButtonCoreState) -> Color {
+    func backgroundColor(for state: ButtonCoreState) -> Color? {
         switch state {
         case .idle:
             return backgroundColorNormal
