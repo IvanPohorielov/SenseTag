@@ -12,7 +12,7 @@ import FoundationUI
 
 public struct DefaultButton<Icon: View>: ButtonCore, DefaultButtonEnvProtocol, Loadable {
     
-    let text: String
+    let text: String?
     
     let icon: Icon?
     

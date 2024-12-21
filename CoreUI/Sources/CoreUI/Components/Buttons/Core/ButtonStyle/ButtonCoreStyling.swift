@@ -14,7 +14,7 @@ struct ButtonCoreStyling<Style: ButtonCoreStyle, Size: ButtonCoreSize>: ButtonSt
     private var size: Size
     private var borderShape: ButtonCoreBorderShape?
     private var isEnabled: Bool
-    private var isFullWidth: Bool?
+    private var isFullWidth: Bool
     
     init(
         style: Style,
@@ -27,7 +27,7 @@ struct ButtonCoreStyling<Style: ButtonCoreStyle, Size: ButtonCoreSize>: ButtonSt
         self.size = size
         self.borderShape = borderShape
         self.isEnabled = isEnabled
-        self.isFullWidth = isFullWidth
+        self.isFullWidth = isFullWidth ?? false
     }
     
     public func makeBody(configuration: Configuration) -> some View {
@@ -43,7 +43,7 @@ struct ButtonCoreStyling<Style: ButtonCoreStyle, Size: ButtonCoreSize>: ButtonSt
             .padding(.vertical, size.contentVerticalPadding)
             .padding(.horizontal, size.contentHorizontalPadding)
             .frame(
-                maxWidth: (isFullWidth ?? false) ? .infinity : nil,
+                maxWidth: isFullWidth ? .infinity : nil,
                 minHeight: size.idealContentHeight
             )
             .background {

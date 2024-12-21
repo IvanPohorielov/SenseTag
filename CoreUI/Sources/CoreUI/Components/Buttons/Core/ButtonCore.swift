@@ -13,7 +13,7 @@ protocol ButtonCore: View {
     associatedtype Style: ButtonCoreStyle
     associatedtype Size: ButtonCoreSize
     
-    var text: String { get }
+    var text: String? { get }
     var icon: Icon? { get }
     var action: () -> Void { get }
     
@@ -88,9 +88,11 @@ extension ButtonCore {
     
     @ViewBuilder
     private var textView: some View {
-        Text(text)
-            .font(size.font)
-            .accessibilityIdentifier(ButtonCoreAccessibility.textView.rawValue)
+        if let text {
+            Text(text)
+                .font(size.font)
+                .accessibilityIdentifier(ButtonCoreAccessibility.textView.rawValue)
+        }
     }
     
     @ViewBuilder

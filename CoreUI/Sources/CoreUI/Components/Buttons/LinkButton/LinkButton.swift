@@ -10,7 +10,7 @@ import FoundationUI
 
 public struct LinkButton<Icon: View>: ButtonCore, LinkButtonEnvProtocol, Loadable {
     
-    let text: String
+    let text: String?
     
     let icon: Icon?
     
@@ -103,8 +103,8 @@ public extension LinkButton where Icon == Image {
 
 #if DEBUG
 
-//#Preview("LinkButtonPreview") {
-//    LinkButtonPreview()
-//}
+#Preview("LinkButtonPreview") {
+    LinkButtonPreview()
+}
 
 #endif
