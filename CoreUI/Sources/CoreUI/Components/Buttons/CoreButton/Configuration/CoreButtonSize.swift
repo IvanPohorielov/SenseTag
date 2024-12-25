@@ -15,7 +15,7 @@ protocol CoreButtonSize: Hashable, Sendable, CaseIterable {
     var iconSize: CGFloat { get }
     var borderWidth: CGFloat { get }
     var cornerRadius: CGFloat { get }
-    var idealContentHeight: CGFloat { get }
+    var contentIdealHeight: CGFloat { get }
     var contentVerticalPadding: CGFloat { get }
     var contentHorizontalPadding: CGFloat { get }
     var mainStackSpacing: CGFloat { get }

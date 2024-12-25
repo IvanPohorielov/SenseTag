@@ -44,7 +44,7 @@ struct CoreButtonStyling<Style: CoreButtonStyle, Size: CoreButtonSize>: ButtonSt
             .padding(.horizontal, size.contentHorizontalPadding)
             .frame(
                 maxWidth: isFullWidth ? .infinity : nil,
-                minHeight: size.idealContentHeight
+                minHeight: size.contentIdealHeight
             )
             .background {
                 if

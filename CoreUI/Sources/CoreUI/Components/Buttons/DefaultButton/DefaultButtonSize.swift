@@ -21,7 +21,7 @@ public struct DefaultButtonSize: CoreButtonSize {
     
     let cornerRadius: CGFloat
     
-    let idealContentHeight: CGFloat
+    let contentIdealHeight: CGFloat
     
     let contentVerticalPadding: CGFloat
     
@@ -35,7 +35,7 @@ public struct DefaultButtonSize: CoreButtonSize {
         iconSize: CGFloat,
         borderWidth: CGFloat,
         cornerRadius: CGFloat,
-        idealContentHeight: CGFloat,
+        contentIdealHeight: CGFloat,
         contentVerticalPadding: CGFloat,
         contentHorizontalPadding: CGFloat,
         mainStackSpacing: CGFloat
@@ -45,7 +45,7 @@ public struct DefaultButtonSize: CoreButtonSize {
         self.iconSize = iconSize
         self.borderWidth = borderWidth
         self.cornerRadius = cornerRadius
-        self.idealContentHeight = idealContentHeight
+        self.contentIdealHeight = contentIdealHeight
         self.contentVerticalPadding = contentVerticalPadding
         self.contentHorizontalPadding = contentHorizontalPadding
         self.mainStackSpacing = mainStackSpacing
@@ -61,7 +61,7 @@ public extension DefaultButtonSize {
         iconSize: .icon24,
         borderWidth: .border1,
         cornerRadius: .radius16,
-        idealContentHeight: 56.0,
+        contentIdealHeight: 56.0,
         contentVerticalPadding: .spacer16,
         contentHorizontalPadding: .spacer24,
         mainStackSpacing: .spacer16
@@ -73,7 +73,7 @@ public extension DefaultButtonSize {
         iconSize: .icon24,
         borderWidth: .border1,
         cornerRadius: .radius8,
-        idealContentHeight: 40.0,
+        contentIdealHeight: 40.0,
         contentVerticalPadding: .spacer8,
         contentHorizontalPadding: .spacer16,
         mainStackSpacing: .spacer8
@@ -85,7 +85,7 @@ public extension DefaultButtonSize {
         iconSize: .icon16,
         borderWidth: .border1,
         cornerRadius: .radius8 ,
-        idealContentHeight: 32.0,
+        contentIdealHeight: 32.0,
         contentVerticalPadding: .spacer8,
         contentHorizontalPadding: .spacer16,
         mainStackSpacing: .spacer4
