@@ -25,6 +25,10 @@ public extension View {
         environment(\.inputClearButtonEnabled, enabled)
     }
     
+    func inputClearButtonAction(_ action: @escaping @MainActor () -> Void) -> some View {
+        environment(\.inputClearButtonAction, CoreInputClearAction(action))
+    }
+    
     func inputRequired(_ required: Bool) -> some View {
         environment(\.inputRequired, required)
     }

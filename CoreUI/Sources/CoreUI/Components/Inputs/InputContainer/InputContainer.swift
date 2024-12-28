@@ -23,10 +23,6 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
     private let caption: String?
     private let error: String?
     
-    private var isError: Bool {
-        error != nil
-    }
-    
     // MARK: - Properties
     
     @Environment(\.inputContainerSize)
@@ -48,6 +44,10 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
     
     @State
     private var counterError: Bool = false
+    
+    private var captionProxy: String? {
+        state == .error ? error : caption
+    }
     
     private var isAppearenceLimit: Bool? {
         guard let appearenceLimit = characterLimitConfiguration?.appearenceLimit else {
@@ -73,11 +73,7 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
         }
         .animation(
             .easeInOut(duration: 0.2),
-            value: [
-                label,
-                caption,
-                error
-            ]
+            value: caption != nil ? [label, caption] : [label, captionProxy]
         )
         .animation(
             .easeInOut(duration: 0.2),
@@ -115,12 +111,12 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
     @ViewBuilder
     private var captionView: some View {
         
-        if caption != nil || counterText != nil {
+        if captionProxy != nil || counterText != nil {
             HStack(
                 alignment: .top,
                 spacing: size.captionStackSpacing
             ) {
-                if let caption = caption {
+                if let caption = captionProxy {
                     Text(caption)
                         .font(size.captionFont)
                         .foregroundColor(style.captionForegroundColor(for: state))
@@ -134,7 +130,7 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
                     
                     Text(characterCounter)
                         .font(size.counterFont)
-                        .foregroundColor(style.counterForegroundColor(for: state))
+                        .foregroundColor(style.counterForegroundColor(for: self.counterError ? .error : state))
                         .accessibilityIdentifier(Accessibility.characterCounterView.rawValue)
                 }
             }
@@ -161,8 +157,13 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
                     text = processedTextData.limitedText
                 }
                 
-                counterText = makeCharactersCounterText(newValue)
+                self.counterText = makeCharactersCounterText(newValue)
                 self.counterError = processedTextData.isLimit
+            }
+            .onChange(of: self.counterError) { _, newValue in
+                if newValue {
+                    DefaultHaptics.sendHapticFeedback(.notification(.warning))
+                }
             }
             .padding(.vertical, size.contentVerticalPadding)
             .padding(.horizontal, size.contentHorizontalPadding)

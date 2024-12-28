@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public extension EnvironmentValues {
+extension EnvironmentValues {
     
     @Entry
     var inputSize: CoreInputSize = .regular
@@ -28,6 +28,9 @@ public extension EnvironmentValues {
     
     @Entry
     var inputClearButtonEnabled: Bool = false
+    
+    @Entry
+    var inputClearButtonAction: CoreInputClearAction?
     
     @Entry
     var inputRequired: Bool = false

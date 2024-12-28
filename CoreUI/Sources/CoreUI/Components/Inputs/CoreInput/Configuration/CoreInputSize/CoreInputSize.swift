@@ -18,6 +18,7 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
     
     let containerStackSpacing: CGFloat
     
+    let fontStyle: Font.TextStyle
     let font: Font
     let labelFont: Font
     let captionFont: Font
@@ -39,6 +40,7 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
         containerCornerRadius: CGFloat,
         containerBorderWidth: CGFloat,
         containerStackSpacing: CGFloat,
+        fontStyle: Font.TextStyle,
         font: Font,
         labelFont: Font,
         captionFont: Font,
@@ -54,7 +56,41 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
         self.containerCornerRadius = containerCornerRadius
         self.containerBorderWidth = containerBorderWidth
         self.containerStackSpacing = containerStackSpacing
+        self.fontStyle = fontStyle
         self.font = font
+        self.labelFont = labelFont
+        self.captionFont = captionFont
+        self.counterFont = counterFont
+        self.contentIdealHeight = contentIdealHeight
+        self.contentVerticalPadding = contentVerticalPadding
+        self.contentHorizontalPadding = contentHorizontalPadding
+        self.captionStackSpacing = captionStackSpacing
+        self.inputStackSpacing = inputStackSpacing
+        self.leftViewSize = leftViewSize
+        self.rightViewSize = rightViewSize
+    }
+    
+    init(
+        containerCornerRadius: CGFloat,
+        containerBorderWidth: CGFloat,
+        containerStackSpacing: CGFloat,
+        font: DefaultFont,
+        labelFont: Font,
+        captionFont: Font,
+        counterFont: Font,
+        contentIdealHeight: CGFloat,
+        contentVerticalPadding: CGFloat,
+        contentHorizontalPadding: CGFloat,
+        captionStackSpacing: CGFloat,
+        inputStackSpacing: CGFloat,
+        leftViewSize: CGFloat,
+        rightViewSize: CGFloat
+    ) {
+        self.containerCornerRadius = containerCornerRadius
+        self.containerBorderWidth = containerBorderWidth
+        self.containerStackSpacing = containerStackSpacing
+        self.fontStyle = font.textStyle
+        self.font = font.font
         self.labelFont = labelFont
         self.captionFont = captionFont
         self.counterFont = counterFont
@@ -76,7 +112,7 @@ public extension CoreInputSize {
         containerCornerRadius: .radius8,
         containerBorderWidth: .border1,
         containerStackSpacing: .spacer4,
-        font: .senseBody,
+        font: .body,
         labelFont: .senseBody,
         captionFont: .senseBody,
         counterFont: .senseBody,

@@ -53,7 +53,6 @@ struct InputContainerModifier: ViewModifier {
 
 extension View {
     
-    @warn_unqualified_access
     func inputContainer(
         text: Binding<String>,
         state: CoreInputState,
