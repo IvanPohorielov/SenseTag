@@ -124,5 +124,4 @@ public extension CoreInputSize {
         leftViewSize: .icon24,
         rightViewSize: .icon24
     )
-    
 }
