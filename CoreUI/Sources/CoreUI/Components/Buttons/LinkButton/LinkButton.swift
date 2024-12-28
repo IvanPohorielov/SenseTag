@@ -35,6 +35,11 @@ public struct LinkButton<Icon: View>: CoreButton, LinkButtonEnvProtocol, Loadabl
     @Environment(\.isLoadingEnabled)
     public var isLoadingEnabled: Bool
     
+    // MARK: - Properties
+    
+    @ScaledMetric
+    var iconSize: CGFloat = 0.0
+    
     // MARK: - Views
     
     public var body : some View {
@@ -54,6 +59,8 @@ public extension LinkButton {
         self.text = text
         self.icon = iconBuilder()
         self.action = action
+        
+        self._iconSize = ScaledMetric(wrappedValue: size.iconSize, relativeTo: size.fontStyle)
     }
     
     init(
@@ -67,6 +74,8 @@ public extension LinkButton {
         self.text = content.text
         self.icon = iconBuilder(content.icon)
         self.action = action
+        
+        self._iconSize = ScaledMetric(wrappedValue: size.iconSize, relativeTo: size.fontStyle)
     }
     
 }
@@ -84,6 +93,8 @@ public extension LinkButton where Icon == Image {
             self.icon = nil
         }
         self.action = action
+        
+        self._iconSize = ScaledMetric(wrappedValue: size.iconSize, relativeTo: size.fontStyle)
     }
     
     init(
@@ -98,6 +109,8 @@ public extension LinkButton where Icon == Image {
             self.icon = nil
         }
         self.action = action
+        
+        self._iconSize = ScaledMetric(wrappedValue: size.iconSize, relativeTo: size.fontStyle)
     }
 }
 

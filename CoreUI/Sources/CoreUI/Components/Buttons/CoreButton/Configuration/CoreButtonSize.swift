@@ -12,6 +12,7 @@ protocol CoreButtonSize: Hashable, Sendable, CaseIterable {
     
     var lineLimit: Int? { get }
     var font: Font { get }
+    var fontStyle: Font.TextStyle { get }
     var iconSize: CGFloat { get }
     var borderWidth: CGFloat { get }
     var cornerRadius: CGFloat { get }

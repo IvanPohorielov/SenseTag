@@ -10,10 +10,12 @@ import struct SwiftUI.Font
 import FoundationUI
 
 public struct DefaultButtonSize: CoreButtonSize {
-    
+
     let lineLimit: Int?
     
     let font: Font
+    
+    let fontStyle: Font.TextStyle
     
     let iconSize: CGFloat
     
@@ -32,6 +34,7 @@ public struct DefaultButtonSize: CoreButtonSize {
     public init(
         lineLimit: Int?,
         font: Font,
+        fontStyle: Font.TextStyle,
         iconSize: CGFloat,
         borderWidth: CGFloat,
         cornerRadius: CGFloat,
@@ -42,6 +45,30 @@ public struct DefaultButtonSize: CoreButtonSize {
     ) {
         self.lineLimit = lineLimit
         self.font = font
+        self.fontStyle = fontStyle
+        self.iconSize = iconSize
+        self.borderWidth = borderWidth
+        self.cornerRadius = cornerRadius
+        self.contentIdealHeight = contentIdealHeight
+        self.contentVerticalPadding = contentVerticalPadding
+        self.contentHorizontalPadding = contentHorizontalPadding
+        self.mainStackSpacing = mainStackSpacing
+    }
+    
+    public init(
+        lineLimit: Int?,
+        font: DefaultFont,
+        iconSize: CGFloat,
+        borderWidth: CGFloat,
+        cornerRadius: CGFloat,
+        contentIdealHeight: CGFloat,
+        contentVerticalPadding: CGFloat,
+        contentHorizontalPadding: CGFloat,
+        mainStackSpacing: CGFloat
+    ) {
+        self.lineLimit = lineLimit
+        self.font = font.font
+        self.fontStyle = font.textStyle
         self.iconSize = iconSize
         self.borderWidth = borderWidth
         self.cornerRadius = cornerRadius
@@ -57,7 +84,7 @@ public extension DefaultButtonSize {
 
     static let large: DefaultButtonSize = DefaultButtonSize(
         lineLimit: 1,
-        font: .senseLabelM,
+        font: .labelM,
         iconSize: .icon24,
         borderWidth: .border1,
         cornerRadius: .radius16,
@@ -69,7 +96,7 @@ public extension DefaultButtonSize {
     
     static let regular: DefaultButtonSize = DefaultButtonSize(
         lineLimit: 1,
-        font: .senseLabelM,
+        font: .labelM,
         iconSize: .icon24,
         borderWidth: .border1,
         cornerRadius: .radius8,
@@ -81,7 +108,7 @@ public extension DefaultButtonSize {
     
     static let compact: DefaultButtonSize = DefaultButtonSize(
         lineLimit: 1,
-        font: .senseLabelM,
+        font: .labelM,
         iconSize: .icon16,
         borderWidth: .border1,
         cornerRadius: .radius8 ,

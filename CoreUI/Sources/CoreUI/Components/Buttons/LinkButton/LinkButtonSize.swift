@@ -15,6 +15,8 @@ public struct LinkButtonSize: CoreButtonSize {
     
     let font: Font
     
+    let fontStyle: Font.TextStyle
+    
     let iconSize: CGFloat
     
     let borderWidth: CGFloat = .zero
@@ -32,12 +34,29 @@ public struct LinkButtonSize: CoreButtonSize {
     public init(
         lineLimit: Int?,
         font: Font,
+        fontStyle: Font.TextStyle,
         iconSize: CGFloat,
         contentIdealHeight: CGFloat,
         mainStackSpacing: CGFloat
     ) {
         self.lineLimit = lineLimit
         self.font = font
+        self.fontStyle = fontStyle
+        self.iconSize = iconSize
+        self.contentIdealHeight = contentIdealHeight
+        self.mainStackSpacing = mainStackSpacing
+    }
+    
+    public init(
+        lineLimit: Int?,
+        font: DefaultFont,
+        iconSize: CGFloat,
+        contentIdealHeight: CGFloat,
+        mainStackSpacing: CGFloat
+    ) {
+        self.lineLimit = lineLimit
+        self.font = font.font
+        self.fontStyle = font.textStyle
         self.iconSize = iconSize
         self.contentIdealHeight = contentIdealHeight
         self.mainStackSpacing = mainStackSpacing
@@ -49,7 +68,7 @@ public extension LinkButtonSize {
 
     static let large: LinkButtonSize = LinkButtonSize(
         lineLimit: 1,
-        font: .senseBodyL,
+        font: .bodyL,
         iconSize: .icon24,
         contentIdealHeight: 32.0,
         mainStackSpacing: .spacer16
@@ -57,7 +76,7 @@ public extension LinkButtonSize {
     
     static let regular: LinkButtonSize = LinkButtonSize(
         lineLimit: 1,
-        font: .senseBody,
+        font: .body,
         iconSize: .icon24,
         contentIdealHeight: 24.0,
         mainStackSpacing: .spacer8
@@ -65,7 +84,7 @@ public extension LinkButtonSize {
     
     static let compact: LinkButtonSize = LinkButtonSize(
         lineLimit: 1,
-        font: .senseCaption,
+        font: .caption,
         iconSize: .icon16,
         contentIdealHeight: 16.0,
         mainStackSpacing: .spacer4

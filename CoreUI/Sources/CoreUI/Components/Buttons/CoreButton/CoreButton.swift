@@ -27,6 +27,10 @@ protocol CoreButton: View {
     
     var isLoading: Bool { get }
     var isLoadingEnabled: Bool { get }
+    
+    // MARK: - Properties
+    
+    var iconSize: CGFloat { get } // Scaled metric
 }
 
 extension CoreButton {
@@ -66,8 +70,8 @@ extension CoreButton {
     private var progress: some View {
         ProgressView()
             .frame(
-                width: size.iconSize,
-                height: size.iconSize
+                width: iconSize,
+                height: iconSize
             )
             .progressViewStyle(
                 .circular
@@ -80,8 +84,8 @@ extension CoreButton {
     private var iconView: some View {
         icon
             .frame(
-                width: size.iconSize,
-                height: size.iconSize
+                width: iconSize,
+                height: iconSize
             )
             .accessibilityIdentifier(CoreButtonAccessibility.iconView.rawValue)
     }

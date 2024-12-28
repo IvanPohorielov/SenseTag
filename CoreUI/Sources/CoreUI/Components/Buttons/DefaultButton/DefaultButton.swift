@@ -43,6 +43,11 @@ public struct DefaultButton<Icon: View>: CoreButton, DefaultButtonEnvProtocol, L
     @Environment(\.isLoadingEnabled)
     public var isLoadingEnabled: Bool
     
+    // MARK: - Properties
+    
+    @ScaledMetric
+    var iconSize: CGFloat = 0.0
+    
     // MARK: - Views
     
     public var body : some View {
@@ -65,6 +70,8 @@ public extension DefaultButton {
         self.text = text
         self.icon = iconBuilder()
         self.action = action
+        
+        self._iconSize = ScaledMetric(wrappedValue: size.iconSize, relativeTo: size.fontStyle)
     }
     
     init(
@@ -78,6 +85,8 @@ public extension DefaultButton {
         self.text = content.text
         self.icon = iconBuilder(content.icon)
         self.action = action
+        
+        self._iconSize = ScaledMetric(wrappedValue: size.iconSize, relativeTo: size.fontStyle)
     }
     
 }
@@ -95,6 +104,8 @@ public extension DefaultButton where Icon == Image {
             self.icon = nil
         }
         self.action = action
+        
+        self._iconSize = ScaledMetric(wrappedValue: size.iconSize, relativeTo: size.fontStyle)
     }
     
     init(
@@ -109,6 +120,8 @@ public extension DefaultButton where Icon == Image {
             self.icon = nil
         }
         self.action = action
+        
+        self._iconSize = ScaledMetric(wrappedValue: size.iconSize, relativeTo: size.fontStyle)
     }
 }
 
