@@ -93,7 +93,7 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
                 if isRequired {
                     Text("*")
                         .font(size.labelFont)
-                        .foregroundColor(.red.shade900)
+                        .foregroundColor(.red.primary)
                         .accessibilityIdentifier(Accessibility.requiredView.rawValue)
                 }
             }

@@ -42,7 +42,7 @@ public struct LinkButtonStyle: CoreButtonStyle {
 public extension LinkButtonStyle {
     
     static let regular: LinkButtonStyle = LinkButtonStyle(
-        foregroundColorNormal: .blue.shade500,
+        foregroundColorNormal: .blue.primary,
         foregroundColorPressed: .blue.shade700,
         foregroundColorDisabled: .blue.shade100
     )

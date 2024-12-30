@@ -109,26 +109,26 @@ extension CoreInputStyle {
 public extension CoreInputStyle {
     
     static let regular: CoreInputStyle = CoreInputStyle(
-        foregroundColorNormal: .black.shade900,
-        foregroundColorActive: .black.shade900,
-        foregroundColorError: .black.shade900,
+        foregroundColorNormal: .black.primary,
+        foregroundColorActive: .black.primary,
+        foregroundColorError: .black.primary,
         foregroundColorDisabled: .black.shade700,
         backgroundColorNormal: .absoluteWhite,
         backgroundColorActive: .absoluteWhite,
         backgroundColorError: .absoluteWhite,
         backgroundColorDisabled: .black.shade100,
-        labelForegroundColor: .black.shade900,
+        labelForegroundColor: .black.primary,
         captionForegroundColorNormal: .black.shade700,
         captionForegroundColorActive: .black.shade700,
-        captionForegroundColorError: .red.shade900,
+        captionForegroundColorError: .red.primary,
         captionForegroundColorDisabled: .black.shade700,
         counterForegroundColorNormal: .black.shade700,
         counterForegroundColorActive: .black.shade700,
-        counterForegroundColorError: .red.shade900,
+        counterForegroundColorError: .red.primary,
         counterForegroundColorDisabled: .black.shade700,
         outlineColorNormal: .black.shade400,
-        outlineColorActive: .yellow.shade500,
-        outlineColorError: .red.shade900,
+        outlineColorActive: .orange.shade500,
+        outlineColorError: .red.primary,
         outlineColorDisabled: .black.shade400
     )
 }

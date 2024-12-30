@@ -54,7 +54,7 @@ public struct DefaultButtonStyle: CoreButtonStyle {
 public extension DefaultButtonStyle {
     
     static let primary: DefaultButtonStyle = DefaultButtonStyle(
-        backgroundColorNormal: .blue.shade500,
+        backgroundColorNormal: .blue.primary,
         backgroundColorPressed: .blue.shade400,
         backgroundColorDisabled: .blue.shade100,
         foregroundColorNormal: .absoluteWhite,
@@ -66,11 +66,11 @@ public extension DefaultButtonStyle {
         backgroundColorNormal: .absoluteWhite,
         backgroundColorPressed: .blue.shade50,
         backgroundColorDisabled: .absoluteWhite,
-        foregroundColorNormal: .blue.shade500,
-        foregroundColorPressed: .blue.shade500,
+        foregroundColorNormal: .blue.primary,
+        foregroundColorPressed: .blue.primary,
         foregroundColorDisabled: .blue.shade100,
-        borderColorNormal: .blue.shade500,
-        borderColorPressed: .blue.shade500,
+        borderColorNormal: .blue.primary,
+        borderColorPressed: .blue.primary,
         borderColorDisabled: .blue.shade100
     )
     
@@ -78,7 +78,7 @@ public extension DefaultButtonStyle {
         backgroundColorNormal: .clear,
         backgroundColorPressed: .blue.shade50,
         backgroundColorDisabled: .clear,
-        foregroundColorNormal: .blue.shade500,
+        foregroundColorNormal: .blue.primary,
         foregroundColorPressed: .blue.shade700,
         foregroundColorDisabled: .blue.shade100
     )

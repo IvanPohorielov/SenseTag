@@ -91,7 +91,7 @@ public struct DefaultColors: Hashable, Sendable {
         shade900: DefaultColor("red900")
     )
     public static let blue: DefaultPalette = DefaultPalette(
-        primary: \.shade900,
+        primary: \.shade500,
         shade50: DefaultColor("blue50"),
         shade100: DefaultColor("blue100"),
         shade200: DefaultColor("blue200"),
