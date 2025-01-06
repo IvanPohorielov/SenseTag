@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA4A6F782D0757BE004DDC46 /* NFCNDEFManager in Frameworks */ = {isa = PBXBuildFile; productRef = FA4A6F772D0757BE004DDC46 /* NFCNDEFManager */; };
+		FA9DC2632D2BDE0B00359E58 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FA9DC2622D2BDE0B00359E58 /* ComposableArchitecture */; };
 		FAB708A72D0EFADA009B20B0 /* CoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAB708A62D0EFADA009B20B0 /* CoreUI */; };
 		FAB708A92D0EFADA009B20B0 /* FoundationUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAB708A82D0EFADA009B20B0 /* FoundationUI */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 			files = (
 				FA4A6F782D0757BE004DDC46 /* NFCNDEFManager in Frameworks */,
 				FAB708A92D0EFADA009B20B0 /* FoundationUI in Frameworks */,
+				FA9DC2632D2BDE0B00359E58 /* ComposableArchitecture in Frameworks */,
 				FAB708A72D0EFADA009B20B0 /* CoreUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +129,7 @@
 				FA4A6F772D0757BE004DDC46 /* NFCNDEFManager */,
 				FAB708A62D0EFADA009B20B0 /* CoreUI */,
 				FAB708A82D0EFADA009B20B0 /* FoundationUI */,
+				FA9DC2622D2BDE0B00359E58 /* ComposableArchitecture */,
 			);
 			productName = SenseTag;
 			productReference = FA4A6F472D074F10004DDC46 /* SenseTag.app */;
@@ -183,6 +186,9 @@
 			);
 			mainGroup = FA4A6F3E2D074F10004DDC46;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FA9DC2612D2BDE0B00359E58 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FA4A6F482D074F10004DDC46 /* Products */;
 			projectDirPath = "";
@@ -508,10 +514,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		FA9DC2612D2BDE0B00359E58 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.17.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		FA4A6F772D0757BE004DDC46 /* NFCNDEFManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NFCNDEFManager;
+		};
+		FA9DC2622D2BDE0B00359E58 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA9DC2612D2BDE0B00359E58 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 		FAB708A62D0EFADA009B20B0 /* CoreUI */ = {
 			isa = XCSwiftPackageProductDependency;
