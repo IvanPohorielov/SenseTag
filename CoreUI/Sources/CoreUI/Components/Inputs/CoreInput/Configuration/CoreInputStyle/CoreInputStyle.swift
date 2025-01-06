@@ -127,7 +127,7 @@ public extension CoreInputStyle {
         counterForegroundColorError: .red.primary,
         counterForegroundColorDisabled: .black.shade700,
         outlineColorNormal: .black.shade400,
-        outlineColorActive: .orange.shade500,
+        outlineColorActive: .violet.shade500,
         outlineColorError: .red.primary,
         outlineColorDisabled: .black.shade400
     )
