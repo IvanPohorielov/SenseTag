@@ -7,16 +7,17 @@
 
 import SwiftUI
 import NFCNDEFManager
-import AVFoundation
+import ComposableArchitecture
 
 struct ContentView: View {
     // MARK: - You can use either Reader / Writer or both in your application.
     
+    @Bindable var store: StoreOf<MainFeature>
+
+    
     @State var msg: String = String(localized: "Scan to read or Edit here to write...")
     
     @State var type: NFCNDEFWellKnownPayloadType = .text
-    
-    private let synthesizer = AVSpeechSynthesizer()
     
     @FocusState
     var isFocused: Bool
@@ -44,6 +45,8 @@ struct ContentView: View {
             action
                 .frame(height: 75)
         }
+        .alert($store.scope(state: \.alert, action: \.alert))
+        .confirmationDialog($store.scope(state: \.confirmationDialog, action: \.confirmationDialog))
     }
     
     // MARK: - Select NFC Option(s)
@@ -66,26 +69,16 @@ struct ContentView: View {
     // MARK: - Action Buttons
     var action: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                Button (action: { lock() }) {
-                    ZStack {
-                        Color.black.opacity(0.85)
-                        Label("Lock NFC", systemImage: "lock.circle.fill")
-                            .foregroundColor(.white)
-                            .padding(.vertical, 10)
-                    }
-                }
-                Button (action: { clear() }) {
-                    ZStack {
-                        Color.red.opacity(0.85)
-                        Label("Clear NFC", systemImage: "trash.circle.fill")
-                            .foregroundColor(.white)
-                            .padding(.vertical, 10)
-                    }
+            Button (action: { store.send(.otherTapped) }) {
+                ZStack {
+                    Color.black.opacity(0.85)
+                    Label("Other actions", systemImage: "lock.circle.fill")
+                        .foregroundColor(.white)
+                        .padding(.vertical, 10)
                 }
             }
             HStack(spacing: 0) {
-                Button (action: { read() }) {
+                Button (action: { store.send(.readTapped) }) {
                     ZStack {
                         Color.green.opacity(0.85)
                         Label("Read NFC", systemImage: "wave.3.left.circle.fill")
@@ -94,7 +87,23 @@ struct ContentView: View {
                             .padding(.bottom, 35)
                     }
                 }
-                Button (action: { write() }) {
+                Button (action: {
+                    var payload: NFCNDEFManagerPayload? {
+                        switch type {
+                        case .text:
+                            return .wellKnown(.text(msg, Locale.current))
+                        case .url:
+                            guard let url = URL(string: msg) else {
+                                return nil
+                            }
+                            return .wellKnown(.url(url))
+                        }
+                    }
+                    
+                    guard let payload else { return }
+                    
+                    store.send(.writeTapped)
+                }) {
                     ZStack {
                         Color.blue.opacity(0.85)
                         Label("Write NFC", systemImage: "wave.3.left.circle.fill")
@@ -106,85 +115,13 @@ struct ContentView: View {
             }
         }
     }
-    
-    // MARK: - Sample I/O Functions
-    func read() {
-        Task {
-            do {
-                let data = try await NFCNDEFManager().read()
-                
-                if let payload = data.first {
-                    
-                    switch payload {
-                    case .wellKnown(let wellKnownPayload):
-                        switch wellKnownPayload {
-                        case .text(let text, let locale):
-                            
-                            self.msg = text
-                            
-                            let utterance = AVSpeechUtterance(string: msg)
-                            utterance.prefersAssistiveTechnologySettings = true
-                            utterance.voice = AVSpeechSynthesisVoice(identifier: locale.identifier)
-                            synthesizer.speak(utterance)
-                            
-                        case .url(let url):
-                            self.msg = url.absoluteString
-                        }
-                    case .empty:
-                        self.msg = "TAG IS EMPTY"
-                    case .other:
-                        break
-                    }
-                }
-            } catch {
-                print("Error: \(error)")
-            }
-            
-        }
-    }
-    func write() {
-        Task {
-            var payload: NFCNDEFManagerPayload? {
-                switch type {
-                case .text:
-                    return .wellKnown(.text(msg, Locale.current))
-                case .url:
-                    guard let url = URL(string: msg) else {
-                        return nil
-                    }
-                    return .wellKnown(.url(url))
-                }
-            }
-            
-            guard let payload else { return }
-            try? await NFCNDEFManager().write([payload])
-        }
-    }
-    
-    func clear() {
-        Task {
-            do {
-                try await NFCNDEFManager().clear()
-            } catch {
-                print("Error: \(error)")
-            }
-            
-        }
-    }
-    
-    func lock() {
-        Task {
-            do {
-                try await NFCNDEFManager().lock()
-            } catch {
-                print("Error: \(error)")
-            }
-            
-        }
-    }
 }
 
 
 #Preview {
-    ContentView()
+    ContentView(
+        store: Store(initialState: MainFeature.State()) {
+            MainFeature()
+        }
+      )
 }

@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct SenseTagApp: App {
+    
+    static let store = Store(initialState: MainFeature.State()) {
+        MainFeature()
+      }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: SenseTagApp.store)
         }
     }
 }
