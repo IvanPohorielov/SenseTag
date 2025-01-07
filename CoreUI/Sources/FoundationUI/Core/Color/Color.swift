@@ -169,7 +169,7 @@ extension Palette {
 
 public struct DefaultPalette: Hashable, Sendable, Palette {
     
-    private let _primary: KeyPath<DefaultPalette, DefaultColor>
+    private nonisolated(unsafe) let _primary: KeyPath<DefaultPalette, DefaultColor>
     public var primary: DefaultColor {
         self[keyPath: _primary]
     }
@@ -223,10 +223,6 @@ extension DefaultPalette {
         DefaultPaletteSwiftUIProxy(self)
     }
 }
-
-// MARK: - Sendable KeyPath for DefaultPalette
-
-extension KeyPath: @unchecked @retroactive Sendable where Root == DefaultPalette, Value == DefaultColor {}
 
 // MARK: - DefaultColor
 

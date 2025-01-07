@@ -9,6 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 @preconcurrency import AVFoundation
 import NFCNDEFManager
+import CoreUI
 
 @Reducer
 struct MainFeature {
