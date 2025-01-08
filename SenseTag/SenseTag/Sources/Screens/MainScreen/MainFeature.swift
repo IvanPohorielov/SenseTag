@@ -53,16 +53,14 @@ struct MainFeature {
                     TextState("Other actions")
                 } actions: {
                     ButtonState(
-                        role: .destructive,
                         action: .lock
                     ) {
-                        TextState("Lock")
+                        TextState("Lock Tag")
                     }
                     ButtonState(
-                        role: .destructive,
                         action: .clear
                     ) {
-                        TextState("Clear")
+                        TextState("Clear Tag")
                     }
                 }
                 
@@ -75,6 +73,7 @@ struct MainFeature {
                         TextState(self.getAlertTitle(action))
                     } actions: {
                         ButtonState(
+                            role: .destructive,
                             action: self.getAlertAction(action)
                         ) {
                             TextState("Confirm")
