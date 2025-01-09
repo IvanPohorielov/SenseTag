@@ -99,7 +99,7 @@ public extension LinkButton where Icon == Image {
     
     init(
         text: String,
-        icon: ImageContent? = nil,
+        icon: ImageContent?,
         action: @escaping @MainActor () -> Void
     ) {
         self.text = text

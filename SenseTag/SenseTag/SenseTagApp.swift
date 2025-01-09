@@ -17,7 +17,7 @@ struct SenseTagApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(store: SenseTagApp.store)
+            MainScreen(store: SenseTagApp.store)
         }
     }
 }

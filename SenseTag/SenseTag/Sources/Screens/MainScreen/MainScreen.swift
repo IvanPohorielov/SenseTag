@@ -58,6 +58,16 @@ struct MainScreen: View {
         .confirmationDialog(
             $store.scope(state: \.confirmationDialog, action: \.confirmationDialog)
         )
+        .sheet(
+            item: $store.scope(state: \.readTag, action: \.readTag)
+        ) { readTagStore in
+            NavigationStack {
+                ReadTagSheet(store: readTagStore)
+            }
+            .presentationCornerRadius(40.0)
+            .presentationDetents([.medium, .large])
+            .presentationBackground(Material.regular)
+        }
         
     }
     

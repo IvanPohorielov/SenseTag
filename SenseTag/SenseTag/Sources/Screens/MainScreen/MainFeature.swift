@@ -18,14 +18,17 @@ struct MainFeature {
     struct State {
         @Presents var confirmationDialog: ConfirmationDialogState<Action.ConfirmationDialog>?
         @Presents var alert: AlertState<Action.Alert>?
+        @Presents var readTag: ReadTagFeature.State?
     }
     
     enum Action {
         case readTapped
+        case openReadSheet([NFCNDEFManagerPayload])
         case writeTapped
         case otherTapped
         case confirmationDialog(PresentationAction<ConfirmationDialog>)
         case alert(PresentationAction<Alert>)
+        case readTag(PresentationAction<ReadTagFeature.Action>)
         
         enum ConfirmationDialog: Equatable {
             case clear
@@ -44,6 +47,13 @@ struct MainFeature {
             
             switch action {
             case .readTapped:
+                return .run { send in
+                    guard let payloads = try? await nfcClient.read() else { return }
+                    await send(.openReadSheet(payloads))
+                }
+            case .openReadSheet(let payloads):
+                state.readTag = ReadTagFeature.State(payloads: payloads)
+                
                 return .none
             case .writeTapped:
                 return .none
@@ -65,49 +75,50 @@ struct MainFeature {
                 }
                 
                 return .none
-            case .confirmationDialog(let action):
+            case .confirmationDialog(.presented(let action)):
                 
-                switch action {
-                case .presented(let action):
-                    state.alert = AlertState {
-                        TextState(self.getAlertTitle(action))
-                    } actions: {
-                        ButtonState(
-                            role: .destructive,
-                            action: self.getAlertAction(action)
-                        ) {
-                            TextState("Confirm")
-                        }
-                    } message: {
-                        TextState(self.getAlertMessage(action))
+                state.alert = AlertState {
+                    TextState(self.getAlertTitle(action))
+                } actions: {
+                    ButtonState(
+                        role: .destructive,
+                        action: self.getAlertAction(action)
+                    ) {
+                        TextState("Confirm")
                     }
-                        
-                default:
-                    break
+                } message: {
+                    TextState(self.getAlertMessage(action))
                 }
                 
                 return .none
-            case .alert(let action):
-                
+            case .alert(.presented(let action)):
                 switch action {
-                case .presented(let action):
-                    switch action {
-                    case .clear:
-                        return .run { send in
-                            try? await nfcClient.clear()
-                        }
-                    case .lock:
-                        return .run { send in
-                            try? await nfcClient.lock()
-                        }
+                case .clear:
+                    return .run { send in
+                        try? await nfcClient.clear()
                     }
-                case .dismiss:
-                    return .none
+                case .lock:
+                    return .run { send in
+                        try? await nfcClient.lock()
+                    }
                 }
+            case .readTag(.presented(.dismiss)):
+                state.readTag = nil
+                return .none
+                
+            case .confirmationDialog:
+                return .none
+            case .alert:
+                return .none
+            case .readTag:
+                return .none
             }
         }
         .ifLet(\.confirmationDialog, action: \.confirmationDialog)
         .ifLet(\.alert, action: \.alert)
+        .ifLet(\.$readTag, action: \.readTag) {
+            ReadTagFeature()
+        }
     }
 }
 
