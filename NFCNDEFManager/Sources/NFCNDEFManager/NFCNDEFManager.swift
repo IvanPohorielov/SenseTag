@@ -31,11 +31,12 @@ public final actor NFCNDEFManager {
                 // Close sesion after first tag readed
                 self.invalidateSession()
             }
+            // Close sesion if user cancelled session
+            self.invalidateSession()
         } catch {
             self.invalidateSession(with: error.localizedDescription)
             throw error
         }
-        
         return payloads
     }
     
@@ -53,6 +54,8 @@ public final actor NFCNDEFManager {
                 // Close sesion after first tag readed
                 self.invalidateSession()
             }
+            // Close sesion if user cancelled session
+            self.invalidateSession()
         } catch {
             self.invalidateSession(with: error.localizedDescription)
             throw error
@@ -73,6 +76,8 @@ public final actor NFCNDEFManager {
                 // Close sesion after first tag readed
                 self.invalidateSession()
             }
+            // Close sesion if user cancelled session
+            self.invalidateSession()
         } catch {
             self.invalidateSession(with: error.localizedDescription)
             throw error
@@ -93,6 +98,8 @@ public final actor NFCNDEFManager {
                 // Close sesion after first tag readed
                 self.invalidateSession()
             }
+            // Close sesion if user cancelled session
+            self.invalidateSession()
         } catch {
             self.invalidateSession(with: error.localizedDescription)
             throw error
