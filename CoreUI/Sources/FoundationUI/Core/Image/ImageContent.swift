@@ -19,4 +19,8 @@ public enum ImageContent: Identifiable, Hashable, Sendable {
             return "image" + name
         }
     }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
 }
