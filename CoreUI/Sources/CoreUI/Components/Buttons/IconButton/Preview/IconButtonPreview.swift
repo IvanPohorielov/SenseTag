@@ -77,7 +77,7 @@ import SwiftUI
             IconButton(
                 icon: .systemImage("microphone")
             ) {
-                DefaultHaptics.sendHapticFeedback(.selection)
+                
             }
         }
 

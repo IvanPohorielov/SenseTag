@@ -89,7 +89,7 @@ import SwiftUI
                 text: "Button",
                 icon: isShowIcon ? .systemImage("xmark") : nil
             ) {
-                DefaultHaptics.sendHapticFeedback(.selection)
+                
             }
         }
 

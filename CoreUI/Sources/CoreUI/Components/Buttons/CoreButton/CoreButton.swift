@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FoundationUI
 
 protocol CoreButton: View {
     associatedtype Icon: View
@@ -42,6 +43,7 @@ extension CoreButton {
         isFullWidth: Bool? = nil
     ) -> some View {
         Button {
+            DefaultHaptics.sendHapticFeedback(.selection)
             self.action()
         } label: {
             ZStack {

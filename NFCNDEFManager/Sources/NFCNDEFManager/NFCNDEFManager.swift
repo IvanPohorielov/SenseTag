@@ -5,7 +5,7 @@ public final actor NFCNDEFManager {
 
     private var session: NFCNDEFReaderSession?
     private let sessionDelegate: NFCNDEFReaderSessionDelegateWrapper =
-        .init()
+        NFCNDEFReaderSessionDelegateWrapper()
 
     // MARK: - Init
 
@@ -45,7 +45,7 @@ public final actor NFCNDEFManager {
     // MARK: - Private Methods
 
     private func detectTag(handle: @Sendable @escaping (NFCNDEFTag) async throws -> Void) async throws {
-        try startSession(
+        try self.startSession(
             alertMessage: "Hold your iPhone near the NFC tag to lock."
         )
 
@@ -56,9 +56,9 @@ public final actor NFCNDEFManager {
                 // Exit after first tag readed
                 break
             }
-            invalidateSession()
+            self.invalidateSession()
         } catch {
-            invalidateSession(with: error.localizedDescription)
+            self.invalidateSession(with: error.localizedDescription)
             throw error
         }
     }
@@ -72,7 +72,7 @@ public final actor NFCNDEFManager {
             throw NFCError.sessionAlreadyRunning
         }
 
-        session = NFCNDEFReaderSession(
+        self.session = NFCNDEFReaderSession(
             delegate: sessionDelegate,
             queue: nil,
             // Set to false
@@ -81,23 +81,23 @@ public final actor NFCNDEFManager {
             // See NFCNDEFReaderSessionDelegateWrapper
             invalidateAfterFirstRead: false
         )
-        session?.alertMessage = alertMessage
-        session?.begin()
+        self.session?.alertMessage = alertMessage
+        self.session?.begin()
     }
 
     private func invalidateSession(with error: String? = nil) {
         if let error {
             // Invalidate session with error message displayed
-            session?.invalidate(errorMessage: error)
+            self.session?.invalidate(errorMessage: error)
         } else {
-            session?.invalidate()
+            self.session?.invalidate()
         }
 
-        clearSession()
+        self.clearSession()
     }
 
     private func clearSession() {
-        session = nil
+        self.session = nil
     }
 }
 
@@ -109,7 +109,7 @@ extension NFCNDEFManager {
     private func handleRead(_ tag: NFCNDEFTag) async throws
         -> [NFCNDEFManagerPayload]
     {
-        let message = try await tag.readNDEF()
+        let message = try await { try await tag.readNDEF() }()
         return getPayloads(message)
     }
 
@@ -124,25 +124,28 @@ extension NFCNDEFManager {
     private func handleWrite(
         to tag: NFCNDEFTag, payloads: [NFCNDEFManagerPayload]
     ) async throws {
-        try await handleTagStatus(tag)
+
+        try await self.handleTagStatus(tag)
 
         let records = payloads.map { $0.mapped() }
 
         let message = NFCNDEFMessage(records: records)
 
-        try await tag.writeNDEF(message)
+        try await { try await tag.writeNDEF(message) }()
     }
 
     private func handleLock(_ tag: NFCNDEFTag) async throws {
-        try await handleTagStatus(tag)
 
-        try await tag.writeLock()
+        try await self.handleTagStatus(tag)
+
+        try await { try await tag.writeLock() }()
     }
 
     // MARK: - Common
 
     private func handleTagStatus(_ tag: NFCNDEFTag) async throws {
-        let (status, _) = try await tag.queryNDEFStatus()
+
+        let (status, _) = try await { try await tag.queryNDEFStatus() }()
 
         switch status {
         case .readOnly:
