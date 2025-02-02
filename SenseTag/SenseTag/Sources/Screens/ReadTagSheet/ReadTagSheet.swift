@@ -12,14 +12,17 @@ import NFCNDEFManager
 import SwiftUI
 
 struct ReadTagSheet: View {
+
     var store: StoreOf<ReadTagFeature>
 
-    @Environment(\.openURL) var openURL
+    // MARK: - Body
 
     var body: some View {
         ScrollView {
             LazyVStack(spacing: .spacer8) {
-                ForEach(Array(zip(store.payloads.indices, store.payloads)), id: \.1) { index, payload in
+                ForEach(
+                    Array(zip(store.payloads.indices, store.payloads)), id: \.1
+                ) { index, payload in
                     recordItem(payload, number: index + 1)
                 }
             }
@@ -31,12 +34,16 @@ struct ReadTagSheet: View {
                 Button {
                     store.send(.dismiss)
                 } label: {
-                    Image(systemName: "xmark")
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(Color.secondary)
+                        .font(.system(size: 20))
+                        .opacity(0.8)
                 }
-                .foregroundStyle(Color.black.primary)
             }
         }
     }
+
+    // MARK: - Views
 
     @ViewBuilder
     private func recordItem(
@@ -99,8 +106,10 @@ struct ReadTagSheet: View {
     }
 }
 
-private extension ReadTagSheet {
-    func getText(from payload: NFCNDEFManagerPayload) -> LocalizedStringKey {
+extension ReadTagSheet {
+    fileprivate func getText(from payload: NFCNDEFManagerPayload)
+        -> LocalizedStringKey
+    {
         switch payload {
         case let .wellKnown(wellKnownPayload):
             switch wellKnownPayload {

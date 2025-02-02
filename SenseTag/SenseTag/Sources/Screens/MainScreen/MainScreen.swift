@@ -11,6 +11,7 @@ import FoundationUI
 import SwiftUI
 
 struct MainScreen: View {
+    
     @Bindable var store: StoreOf<MainFeature>
 
     @State
