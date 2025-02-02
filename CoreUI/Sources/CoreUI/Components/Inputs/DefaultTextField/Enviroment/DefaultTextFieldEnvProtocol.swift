@@ -9,8 +9,7 @@ import SwiftUI
 
 @MainActor
 protocol DefaultTextFieldEnvProtocol: CoreInputEnvProtocol {
-    
     var clearButtonEnabled: Bool { get }
-    
+
     var clearButtonAction: CoreInputClearAction? { get }
 }

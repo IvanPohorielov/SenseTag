@@ -9,9 +9,7 @@ import SwiftUI
 
 @MainActor
 protocol CoreInputEnvProtocol {
-    
     var size: CoreInputSize { get }
-    
+
     var style: CoreInputStyle { get }
-    
 }

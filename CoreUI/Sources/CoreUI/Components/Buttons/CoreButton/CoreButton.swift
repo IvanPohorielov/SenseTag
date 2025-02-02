@@ -8,37 +8,35 @@
 import SwiftUI
 
 protocol CoreButton: View {
-    
     associatedtype Icon: View
     associatedtype Style: CoreButtonStyle
     associatedtype Size: CoreButtonSize
-    
+
     var text: String? { get }
     var icon: Icon? { get }
     var action: () -> Void { get }
-    
+
     // MARK: - Configuration
-    
+
     var style: Style { get }
     var size: Size { get }
     var isEnabled: Bool { get }
-    
+
     // MARK: - Loadable
-    
+
     var isLoading: Bool { get }
     var isLoadingEnabled: Bool { get }
-    
+
     // MARK: - Properties
-    
+
     var iconSize: CGFloat { get } // Scaled metric
 }
 
 extension CoreButton {
-    
     var iconSize: CGFloat {
         UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(for: size.iconSize)
     }
-    
+
     func body(
         borderShape: CoreButtonBorderShape? = nil,
         isFullWidth: Bool? = nil
@@ -46,7 +44,7 @@ extension CoreButton {
         Button {
             self.action()
         } label: {
-            ZStack{
+            ZStack {
                 label
                     .opacity(isLoadingEnabled && isLoading ? 0 : 1)
                 progress
@@ -69,7 +67,7 @@ extension CoreButton {
         .contentShape(Rectangle())
         .accessibilityIdentifier(CoreButtonAccessibility.CoreButton.rawValue)
     }
-    
+
     @ViewBuilder
     private var progress: some View {
         ProgressView()
@@ -83,7 +81,7 @@ extension CoreButton {
             .tint(style.foregroundColorNormal)
             .accessibilityIdentifier(CoreButtonAccessibility.progressView.rawValue)
     }
-    
+
     @ViewBuilder
     private var iconView: some View {
         icon
@@ -93,7 +91,7 @@ extension CoreButton {
             )
             .accessibilityIdentifier(CoreButtonAccessibility.iconView.rawValue)
     }
-    
+
     @ViewBuilder
     private var textView: some View {
         if let text {
@@ -102,7 +100,7 @@ extension CoreButton {
                 .accessibilityIdentifier(CoreButtonAccessibility.textView.rawValue)
         }
     }
-    
+
     @ViewBuilder
     private var label: some View {
         HStack(spacing: size.mainStackSpacing) {
@@ -110,5 +108,4 @@ extension CoreButton {
             textView
         }
     }
-    
 }

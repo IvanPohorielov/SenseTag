@@ -6,65 +6,64 @@
 //  Copyright © 2024 Evo.company. All rights reserved.
 //
 
-import SwiftUI
 import FoundationUI
+import SwiftUI
 
 public struct DefaultTextField<LeftView: View, RightView: View>: View, DefaultTextFieldEnvProtocol {
-    
     // MARK: - Properties
-    
+
     private let leftView: LeftView?
-    
+
     private let rightView: RightView?
-    
+
     @Binding
     private var text: String
     private let placeholder: String
-    
+
     private let label: String?
     private let caption: String?
     private let error: String?
-    
+
     private var isError: Bool {
         error != nil
     }
-    
+
     // MARK: - Env
-    
+
     @Environment(\.isEnabled)
     private var isEnabled
-    
+
     @Environment(\.inputClearButtonEnabled)
     var clearButtonEnabled: Bool
-    
+
     @Environment(\.inputClearButtonAction)
     var clearButtonAction: CoreInputClearAction?
-    
+
     @Environment(\.inputSize)
     var size: CoreInputSize
-    
+
     @Environment(\.inputStyle)
     var style: CoreInputStyle
-    
+
     // MARK: - State
-    
+
     @State
     private var inputState: CoreInputState = .idle
-    
+
     @FocusState
     private var isFocused: Bool
-    
+
     private var leftViewSize: CGFloat {
         UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(for: size.leftViewSize)
     }
-    
+
     private var rightViewSize: CGFloat {
         UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(for: size.rightViewSize)
     }
-    
+
     // MARK: - Views
-    
-    public var body : some View {
+
+    public var body: some View {
         HStack(spacing: size.inputStackSpacing) {
             leftView
                 .frame(
@@ -90,19 +89,19 @@ public struct DefaultTextField<LeftView: View, RightView: View>: View, DefaultTe
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier(Accessibility.DefaultTextField.rawValue)
     }
-    
+
     private var textField: some View {
         HStack {
-            
             TextField(
                 self.placeholder,
                 text: self.$text
             )
             .accessibilityIdentifier(Accessibility.textFieldView.rawValue)
-            
+
             if self.clearButtonEnabled,
                !self.text.isEmpty,
-               self.inputState == .active {
+               self.inputState == .active
+            {
                 Button {
                     if let clearButtonAction {
                         clearButtonAction()
@@ -123,9 +122,9 @@ public struct DefaultTextField<LeftView: View, RightView: View>: View, DefaultTe
         .focused($isFocused)
         .onChange(
             of: CoreInputStateWrapper(
-                isEnabled: self.isEnabled,
-                isFocused: self.isFocused,
-                isError: self.isError
+                isEnabled: isEnabled,
+                isFocused: isFocused,
+                isError: isError
             )
         ) { _, wrapper in
             self.inputState = wrapper.getState()
@@ -152,7 +151,7 @@ public extension DefaultTextField {
         @ViewBuilder leftView: () -> (LeftView) = { EmptyView?(nil) },
         @ViewBuilder rightView: () -> (RightView) = { EmptyView?(nil) }
     ) {
-        self._text = text
+        _text = text
         self.placeholder = placeholder ?? ""
         self.label = label
         self.caption = caption
@@ -164,8 +163,8 @@ public extension DefaultTextField {
 
 #if DEBUG
 
-#Preview {
-    DefaultTextFieldPreview()
-}
+    #Preview {
+        DefaultTextFieldPreview()
+    }
 
 #endif

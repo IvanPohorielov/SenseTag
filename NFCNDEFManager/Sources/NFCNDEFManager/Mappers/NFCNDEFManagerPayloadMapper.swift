@@ -7,19 +7,19 @@
 
 @preconcurrency import CoreNFC
 
-extension NFCNDEFManagerPayload  {
+extension NFCNDEFManagerPayload {
     func mapped() -> NFCNDEFPayload {
         switch self {
-        case .wellKnown(let wellKnownPayload):
+        case let .wellKnown(wellKnownPayload):
             switch wellKnownPayload {
-            case .text(let text, let locale):
+            case let .text(text, locale):
                 return NFCNDEFPayload.wellKnownTypeTextPayload(string: text, locale: locale) ?? NFCNDEFPayload.empty()
-            case .url(let url):
+            case let .url(url):
                 return NFCNDEFPayload.wellKnownTypeURIPayload(url: url) ?? NFCNDEFPayload.empty()
             }
         case .empty:
             return NFCNDEFPayload.empty()
-        case .other(let payload):
+        case let .other(payload):
             return payload
         }
     }

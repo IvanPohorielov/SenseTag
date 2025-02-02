@@ -8,9 +8,9 @@
 import Foundation
 
 public struct DefaultBorder: Sendable {
-    static public let border05: CGFloat = 0.5
-    static public let border1: CGFloat = 1
-    static public let border2: CGFloat = 2
+    public static let border05: CGFloat = 0.5
+    public static let border1: CGFloat = 1
+    public static let border2: CGFloat = 2
 }
 
 public extension CGFloat {
@@ -20,7 +20,7 @@ public extension CGFloat {
 }
 
 public extension Double {
-    static let border05: Double = Double(DefaultBorder.border05)
-    static let border1:  Double = Double(DefaultBorder.border1)
-    static let border2: Double = Double(DefaultBorder.border2)
+    static let border05: Double = .init(DefaultBorder.border05)
+    static let border1: Double = .init(DefaultBorder.border1)
+    static let border2: Double = .init(DefaultBorder.border2)
 }

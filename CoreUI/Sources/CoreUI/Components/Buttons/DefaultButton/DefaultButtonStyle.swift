@@ -5,29 +5,28 @@
 //  Created by Ivan Pohorielov on 20.12.2024.
 //
 
-import SwiftUI
 import FoundationUI
+import SwiftUI
 
 public struct DefaultButtonStyle: CoreButtonStyle {
-    
     let backgroundColorNormal: Color?
-    
+
     let backgroundColorPressed: Color?
-    
+
     let backgroundColorDisabled: Color?
-    
+
     let foregroundColorNormal: Color
-    
+
     let foregroundColorPressed: Color
-    
+
     let foregroundColorDisabled: Color
-    
+
     let borderColorNormal: Color?
-    
+
     let borderColorPressed: Color?
-    
+
     let borderColorDisabled: Color?
-    
+
     public init(
         backgroundColorNormal: Color,
         backgroundColorPressed: Color,
@@ -52,8 +51,7 @@ public struct DefaultButtonStyle: CoreButtonStyle {
 }
 
 public extension DefaultButtonStyle {
-    
-    static let primary: DefaultButtonStyle = DefaultButtonStyle(
+    static let primary: DefaultButtonStyle = .init(
         backgroundColorNormal: .blue.primary,
         backgroundColorPressed: .blue.shade400,
         backgroundColorDisabled: .blue.shade100,
@@ -61,8 +59,8 @@ public extension DefaultButtonStyle {
         foregroundColorPressed: .absoluteWhite,
         foregroundColorDisabled: .absoluteWhite
     )
-    
-    static let secondary: DefaultButtonStyle = DefaultButtonStyle(
+
+    static let secondary: DefaultButtonStyle = .init(
         backgroundColorNormal: .absoluteWhite,
         backgroundColorPressed: .blue.shade50,
         backgroundColorDisabled: .absoluteWhite,
@@ -73,8 +71,8 @@ public extension DefaultButtonStyle {
         borderColorPressed: .blue.primary,
         borderColorDisabled: .blue.shade100
     )
-    
-    static let tertiary: DefaultButtonStyle = DefaultButtonStyle(
+
+    static let tertiary: DefaultButtonStyle = .init(
         backgroundColorNormal: .clear,
         backgroundColorPressed: .blue.shade50,
         backgroundColorDisabled: .clear,
@@ -82,15 +80,14 @@ public extension DefaultButtonStyle {
         foregroundColorPressed: .blue.shade700,
         foregroundColorDisabled: .blue.shade100
     )
-    
 }
 
-extension DefaultButtonStyle {
-    public static var allCases: [Self] {
+public extension DefaultButtonStyle {
+    static var allCases: [Self] {
         [
-            Self.primary,
-            Self.secondary,
-            Self.tertiary
+            primary,
+            secondary,
+            tertiary,
         ]
     }
 }

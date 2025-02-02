@@ -11,7 +11,6 @@ import Foundation
 public final class NFCNDEFReaderSessionDelegateWrapper: NSObject,
     NFCNDEFReaderSessionDelegate
 {
-
     // MARK: - Properties
 
     private var streamContinuation:
@@ -28,26 +27,25 @@ public final class NFCNDEFReaderSessionDelegateWrapper: NSObject,
     // MARK: - NFCNDEFReaderSessionDelegate
 
     // Implemented to silence console warning
-    public func readerSessionDidBecomeActive(_ session: NFCNDEFReaderSession) {}
+    public func readerSessionDidBecomeActive(_: NFCNDEFReaderSession) {}
 
     // Never called because (didDetect tags:) implemented
     public func readerSession(
-        _ session: NFCNDEFReaderSession,
-        didDetectNDEFs messages: [NFCNDEFMessage]
+        _: NFCNDEFReaderSession,
+        didDetectNDEFs _: [NFCNDEFMessage]
     ) {}
 
     public func readerSession(
-        _ session: NFCNDEFReaderSession, didDetect tags: [any NFCNDEFTag]
+        _: NFCNDEFReaderSession, didDetect tags: [any NFCNDEFTag]
     ) {
         for tag in tags {
-            self.streamContinuation?.yield(tag)
+            streamContinuation?.yield(tag)
         }
     }
 
     public func readerSession(
-        _ session: NFCNDEFReaderSession, didInvalidateWithError error: any Error
+        _: NFCNDEFReaderSession, didInvalidateWithError error: any Error
     ) {
-
         let nsError = error as NSError
 
         if let continuation = streamContinuation {
@@ -66,7 +64,7 @@ public final class NFCNDEFReaderSessionDelegateWrapper: NSObject,
                 continuation.finish(throwing: error)
             }
 
-            self.streamContinuation = nil
+            streamContinuation = nil
         }
     }
 }

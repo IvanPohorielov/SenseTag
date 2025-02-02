@@ -10,13 +10,13 @@ import struct SwiftUI.Image
 public extension Image {
     init(_ content: ImageContent) {
         switch content {
-        case .systemImage(let systemName):
+        case let .systemImage(systemName):
             self.init(systemName: systemName)
-        case .image(let name, let bundle):
+        case let .image(name, bundle):
             self.init(name, bundle: bundle)
         }
     }
-    
+
     init?(_ content: ImageContent?) {
         if let content {
             self.init(content)

@@ -5,42 +5,41 @@
 //  Created by Ivan Pohorielov on 02.05.2024.
 //
 
-import SwiftUI
 import FoundationUI
+import SwiftUI
 
 public struct CoreInputStyle: Hashable, Sendable, CoreInputContainerStyleProtocol {
-
     // MARK: - Properties
-    
+
     private let foregroundColorNormal: Color
     private let foregroundColorActive: Color
     private let foregroundColorError: Color
     private let foregroundColorDisabled: Color
-    
+
     let backgroundColorNormal: Color
     let backgroundColorActive: Color
     let backgroundColorError: Color
     let backgroundColorDisabled: Color
-    
+
     let labelForegroundColor: Color
-    
+
     let captionForegroundColorNormal: Color
     let captionForegroundColorActive: Color
     let captionForegroundColorError: Color
     let captionForegroundColorDisabled: Color
-    
+
     let counterForegroundColorNormal: Color
     let counterForegroundColorActive: Color
     let counterForegroundColorError: Color
     let counterForegroundColorDisabled: Color
-    
+
     let outlineColorNormal: Color
     let outlineColorActive: Color
     let outlineColorError: Color
     let outlineColorDisabled: Color
-    
+
     // MARK: - LifeCycle
-    
+
     init(
         foregroundColorNormal: Color,
         foregroundColorActive: Color,
@@ -89,7 +88,6 @@ public struct CoreInputStyle: Hashable, Sendable, CoreInputContainerStyleProtoco
 }
 
 extension CoreInputStyle {
-    
     func foregroundColor(for state: CoreInputState) -> Color {
         switch state {
         case .idle:
@@ -107,8 +105,7 @@ extension CoreInputStyle {
 // MARK: - Catalog values
 
 public extension CoreInputStyle {
-    
-    static let regular: CoreInputStyle = CoreInputStyle(
+    static let regular: CoreInputStyle = .init(
         foregroundColorNormal: .black.primary,
         foregroundColorActive: .black.primary,
         foregroundColorError: .black.primary,

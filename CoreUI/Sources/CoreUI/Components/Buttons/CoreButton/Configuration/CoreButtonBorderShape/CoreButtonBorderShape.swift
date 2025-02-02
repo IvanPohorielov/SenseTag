@@ -5,8 +5,8 @@
 //  Created by Ivan Pohorielov on 18.12.2024.
 //
 
-import SwiftUI
 import FoundationUI
+import SwiftUI
 
 public enum CoreButtonBorderShape: String, Hashable, Sendable, CaseIterable {
     case roundedRectangle

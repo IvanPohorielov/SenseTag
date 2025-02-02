@@ -8,18 +8,18 @@
 import Foundation
 
 public struct DefaultRadius: Sendable {
-    static public let radius2: CGFloat = 2
-    static public let radius4: CGFloat = 4
-    static public let radius6: CGFloat = 6
-    static public let radius8: CGFloat = 8
-    static public let radius10: CGFloat = 10
-    static public let radius12: CGFloat = 12
-    static public let radius14: CGFloat = 14
-    static public let radius16: CGFloat = 16
-    static public let radius18: CGFloat = 18
-    static public let radius20: CGFloat = 20
-    static public let radius22: CGFloat = 22
-    static public let radius24: CGFloat = 24
+    public static let radius2: CGFloat = 2
+    public static let radius4: CGFloat = 4
+    public static let radius6: CGFloat = 6
+    public static let radius8: CGFloat = 8
+    public static let radius10: CGFloat = 10
+    public static let radius12: CGFloat = 12
+    public static let radius14: CGFloat = 14
+    public static let radius16: CGFloat = 16
+    public static let radius18: CGFloat = 18
+    public static let radius20: CGFloat = 20
+    public static let radius22: CGFloat = 22
+    public static let radius24: CGFloat = 24
 }
 
 public extension CGFloat {

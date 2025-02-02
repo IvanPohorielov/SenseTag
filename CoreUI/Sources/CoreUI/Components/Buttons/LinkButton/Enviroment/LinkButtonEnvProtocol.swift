@@ -9,9 +9,7 @@ import SwiftUI
 
 @MainActor
 protocol LinkButtonEnvProtocol {
-
     var size: LinkButtonSize { get }
-    
+
     var style: LinkButtonStyle { get }
-    
 }

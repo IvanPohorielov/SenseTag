@@ -1,5 +1,5 @@
 //
-//  Accessibility.swift
+//  InputContainerAccessibility.swift
 //
 //
 //  Created by Ivan Pohorielov on 02.09.2024.

@@ -6,32 +6,31 @@
 //
 
 import Foundation
+import FoundationUI
 import struct SwiftUI.Font
 import class UIKit.UIFont
-import FoundationUI
 
 public struct LinkButtonSize: CoreButtonSize {
-    
     let lineLimit: Int?
-    
+
     let font: Font
-    
+
     let fontStyle: UIFont.TextStyle
-    
+
     let iconSize: CGFloat
-    
+
     let borderWidth: CGFloat = .zero
-    
+
     let cornerRadius: CGFloat = .zero
-    
+
     let contentIdealHeight: CGFloat
-    
+
     let contentVerticalPadding: CGFloat = .zero
-    
+
     let contentHorizontalPadding: CGFloat = .zero
-    
+
     let mainStackSpacing: CGFloat
-    
+
     public init(
         lineLimit: Int?,
         font: Font,
@@ -47,7 +46,7 @@ public struct LinkButtonSize: CoreButtonSize {
         self.contentIdealHeight = contentIdealHeight
         self.mainStackSpacing = mainStackSpacing
     }
-    
+
     public init(
         lineLimit: Int?,
         font: DefaultFont,
@@ -57,38 +56,35 @@ public struct LinkButtonSize: CoreButtonSize {
     ) {
         self.lineLimit = lineLimit
         self.font = font.font
-        self.fontStyle = font.uiTextStyle
+        fontStyle = font.uiTextStyle
         self.iconSize = iconSize
         self.contentIdealHeight = contentIdealHeight
         self.mainStackSpacing = mainStackSpacing
     }
-    
 }
 
 public extension LinkButtonSize {
-
-    static let large: LinkButtonSize = LinkButtonSize(
+    static let large: LinkButtonSize = .init(
         lineLimit: 1,
         font: .bodyL,
         iconSize: .icon24,
         contentIdealHeight: 32.0,
         mainStackSpacing: .spacer16
     )
-    
-    static let regular: LinkButtonSize = LinkButtonSize(
+
+    static let regular: LinkButtonSize = .init(
         lineLimit: 1,
         font: .body,
         iconSize: .icon24,
         contentIdealHeight: 24.0,
         mainStackSpacing: .spacer8
     )
-    
-    static let compact: LinkButtonSize = LinkButtonSize(
+
+    static let compact: LinkButtonSize = .init(
         lineLimit: 1,
         font: .caption,
         iconSize: .icon16,
         contentIdealHeight: 16.0,
         mainStackSpacing: .spacer4
     )
-    
 }

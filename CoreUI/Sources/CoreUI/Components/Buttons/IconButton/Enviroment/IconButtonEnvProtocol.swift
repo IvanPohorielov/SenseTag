@@ -9,11 +9,9 @@ import SwiftUI
 
 @MainActor
 protocol IconButtonEnvProtocol {
-
     var size: IconButtonSize { get }
-    
+
     var style: IconButtonStyle { get }
-    
+
     var borderShape: CoreButtonBorderShape { get }
-    
 }

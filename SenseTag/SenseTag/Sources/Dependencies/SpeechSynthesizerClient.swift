@@ -19,24 +19,23 @@ struct SpeechSynthesizerClient {
 
 private enum SpeechSynthesizerClientKey: DependencyKey {
     static let liveValue: SpeechSynthesizerClient = {
-        
         nonisolated(unsafe) let synthesizer = AVSpeechSynthesizer()
 
         return SpeechSynthesizerClient(
             speak: { utterance in
-                    synthesizer.speak(utterance)
+                synthesizer.speak(utterance)
             },
             stopSpeaking: { boundary in
-                    synthesizer.stopSpeaking(at: boundary)
+                synthesizer.stopSpeaking(at: boundary)
             },
             pauseSpeaking: { boundary in
-                    synthesizer.pauseSpeaking(at: boundary)
+                synthesizer.pauseSpeaking(at: boundary)
             },
             continueSpeaking: {
-                    synthesizer.continueSpeaking()
+                synthesizer.continueSpeaking()
             },
             isSpeaking: {
-                    synthesizer.isSpeaking
+                synthesizer.isSpeaking
             }
         )
     }()

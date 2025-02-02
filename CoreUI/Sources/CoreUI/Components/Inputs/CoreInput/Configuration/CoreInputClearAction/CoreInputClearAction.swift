@@ -7,7 +7,6 @@
 
 @MainActor
 struct CoreInputClearAction {
-    
     private let action: () -> Void
 
     init(_ action: @escaping @MainActor () -> Void) {

@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 
 public struct DefaultImage: Sendable {
-    static public let image40: CGFloat = 40
-    static public let image56: CGFloat = 56
-    static public let image120: CGFloat = 120
-    static public let image160: CGFloat = 160
+    public static let image40: CGFloat = 40
+    public static let image56: CGFloat = 56
+    public static let image120: CGFloat = 120
+    public static let image160: CGFloat = 160
 }
 
 public extension CGFloat {
@@ -23,28 +23,27 @@ public extension CGFloat {
 }
 
 public extension View {
-    
     func frameImage40() -> some View {
         frame(
             width: .image40,
             height: .image40
         )
     }
-    
+
     func frameImage56() -> some View {
         frame(
             width: .image56,
             height: .image56
         )
     }
-    
+
     func frameImage120() -> some View {
         frame(
             width: .image120,
             height: .image120
         )
     }
-    
+
     func frameImage160() -> some View {
         frame(
             width: .image160,

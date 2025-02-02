@@ -8,7 +8,6 @@
 import SwiftUI
 
 public struct CoreInputCharacterLimitConfiguration: Hashable, Sendable {
-    
     let limit: Int
     let appearenceLimit: Int?
 

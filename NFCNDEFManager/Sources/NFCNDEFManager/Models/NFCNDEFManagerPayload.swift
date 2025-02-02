@@ -5,8 +5,8 @@
 //  Created by Ivan Pohorielov on 10.12.2024.
 //
 
-import Foundation
 @preconcurrency import CoreNFC
+import Foundation
 
 public enum NFCNDEFManagerPayload: Hashable, Sendable {
     case wellKnown(WellKnownPayload)

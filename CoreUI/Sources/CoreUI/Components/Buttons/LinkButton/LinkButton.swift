@@ -5,39 +5,38 @@
 //  Created by Ivan Pohorielov on 20.12.2024.
 //
 
-import SwiftUI
 import FoundationUI
+import SwiftUI
 
 public struct LinkButton<Icon: View>: CoreButton, LinkButtonEnvProtocol, Loadable {
-    
     let text: String?
-    
+
     let icon: Icon?
-    
+
     let action: () -> Void
-    
+
     // MARK: - Properties
-    
+
     @Environment(\.linkButtonStyle)
     var style: LinkButtonStyle
-    
+
     @Environment(\.linkButtonSize)
     var size: LinkButtonSize
-    
+
     @Environment(\.isEnabled)
     var isEnabled: Bool
-    
+
     // MARK: - Loadable
-    
+
     @Environment(\.isLoading)
     public var isLoading: Bool
-    
+
     @Environment(\.isLoadingEnabled)
     public var isLoadingEnabled: Bool
-    
+
     // MARK: - Views
-    
-    public var body : some View {
+
+    public var body: some View {
         body()
     }
 }
@@ -45,17 +44,16 @@ public struct LinkButton<Icon: View>: CoreButton, LinkButtonEnvProtocol, Loadabl
 // MARK: - Init
 
 public extension LinkButton {
-    
     init(
         text: String,
         @ViewBuilder iconBuilder: () -> Icon = { EmptyView?(nil) },
         action: @escaping @MainActor () -> Void
     ) {
         self.text = text
-        self.icon = iconBuilder()
+        icon = iconBuilder()
         self.action = action
     }
-    
+
     init(
         _ content: CoreButtonContent,
         @ViewBuilder iconBuilder: (ImageContent?) -> Icon = { content in
@@ -64,28 +62,26 @@ public extension LinkButton {
         },
         action: @escaping @MainActor () -> Void
     ) {
-        self.text = content.text
-        self.icon = iconBuilder(content.icon)
+        text = content.text
+        icon = iconBuilder(content.icon)
         self.action = action
     }
-    
 }
 
 public extension LinkButton where Icon == Image {
-    
     init(
         _ content: CoreButtonContent,
         action: @escaping @MainActor () -> Void
     ) {
-        self.text = content.text
+        text = content.text
         if let icon = content.icon {
             self.icon = Image(icon)
         } else {
-            self.icon = nil
+            icon = nil
         }
         self.action = action
     }
-    
+
     init(
         text: String,
         icon: ImageContent?,
@@ -103,8 +99,8 @@ public extension LinkButton where Icon == Image {
 
 #if DEBUG
 
-#Preview("LinkButtonPreview") {
-    LinkButtonPreview()
-}
+    #Preview("LinkButtonPreview") {
+        LinkButtonPreview()
+    }
 
 #endif

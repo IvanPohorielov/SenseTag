@@ -10,17 +10,17 @@ import Foundation
 public enum ImageContent: Identifiable, Hashable, Sendable {
     case systemImage(String)
     case image(String, Bundle? = nil)
-    
+
     public var id: String {
         switch self {
-        case .systemImage(let name):
+        case let .systemImage(name):
             return "systemImage" + name
-        case .image(let name, _):
+        case let .image(name, _):
             return "image" + name
         }
     }
-    
+
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
+        hasher.combine(id)
     }
 }

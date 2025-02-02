@@ -8,11 +8,10 @@
 import Foundation
 
 struct CoreInputStateWrapper: Hashable, Sendable {
-    
     let isEnabled: Bool
     let isFocused: Bool
     let isError: Bool
-    
+
     init(
         isEnabled: Bool,
         isFocused: Bool,
@@ -26,11 +25,10 @@ struct CoreInputStateWrapper: Hashable, Sendable {
 
 extension CoreInputStateWrapper {
     func getState() -> CoreInputState {
-        
-        guard self.isEnabled else { return .disabled }
-        guard !self.isError else { return .error }
-        
-        if self.isFocused {
+        guard isEnabled else { return .disabled }
+        guard !isError else { return .error }
+
+        if isFocused {
             return .active
         } else {
             return .idle

@@ -1,18 +1,17 @@
 //
-//  Colors.swift
+//  Color.swift
 //  CoreUI
 //
 //  Created by Ivan Pohorielov on 15.12.2024.
 //
 
 import Foundation
+import SwiftUI
 import class UIKit.UIColor
 import class UIKit.UITraitCollection
-import SwiftUI
 
 public struct DefaultColors: Hashable, Sendable {
-    
-    public static let black: DefaultPalette = DefaultPalette(
+    public static let black: DefaultPalette = .init(
         primary: \.shade900,
         shade50: DefaultColor("black50"),
         shade100: DefaultColor("black100"),
@@ -25,7 +24,7 @@ public struct DefaultColors: Hashable, Sendable {
         shade800: DefaultColor("black800"),
         shade900: DefaultColor("black900")
     )
-    public static let violet: DefaultPalette = DefaultPalette(
+    public static let violet: DefaultPalette = .init(
         primary: \.shade500,
         shade50: DefaultColor("violet50"),
         shade100: DefaultColor("violet100"),
@@ -38,7 +37,7 @@ public struct DefaultColors: Hashable, Sendable {
         shade800: DefaultColor("violet800"),
         shade900: DefaultColor("violet900")
     )
-    public static let green: DefaultPalette = DefaultPalette(
+    public static let green: DefaultPalette = .init(
         primary: \.shade700,
         shade50: DefaultColor("green50"),
         shade100: DefaultColor("green100"),
@@ -51,7 +50,7 @@ public struct DefaultColors: Hashable, Sendable {
         shade800: DefaultColor("green800"),
         shade900: DefaultColor("green900")
     )
-    public static let yellow: DefaultPalette = DefaultPalette(
+    public static let yellow: DefaultPalette = .init(
         primary: \.shade500,
         shade50: DefaultColor("yellow50"),
         shade100: DefaultColor("yellow100"),
@@ -64,7 +63,7 @@ public struct DefaultColors: Hashable, Sendable {
         shade800: DefaultColor("yellow800"),
         shade900: DefaultColor("yellow900")
     )
-    public static let orange: DefaultPalette = DefaultPalette(
+    public static let orange: DefaultPalette = .init(
         primary: \.shade900,
         shade50: DefaultColor("orange50"),
         shade100: DefaultColor("orange100"),
@@ -77,7 +76,7 @@ public struct DefaultColors: Hashable, Sendable {
         shade800: DefaultColor("orange800"),
         shade900: DefaultColor("orange900")
     )
-    public static let red: DefaultPalette = DefaultPalette(
+    public static let red: DefaultPalette = .init(
         primary: \.shade900,
         shade50: DefaultColor("red50"),
         shade100: DefaultColor("red100"),
@@ -90,7 +89,7 @@ public struct DefaultColors: Hashable, Sendable {
         shade800: DefaultColor("red800"),
         shade900: DefaultColor("red900")
     )
-    public static let blue: DefaultPalette = DefaultPalette(
+    public static let blue: DefaultPalette = .init(
         primary: \.shade500,
         shade50: DefaultColor("blue50"),
         shade100: DefaultColor("blue100"),
@@ -103,35 +102,33 @@ public struct DefaultColors: Hashable, Sendable {
         shade800: DefaultColor("blue800"),
         shade900: DefaultColor("blue900")
     )
-    
-    public static let white: DefaultColor = DefaultColor("absoluteWhite")
-    
+
+    public static let white: DefaultColor = .init("absoluteWhite")
+
     public static var allPalettas: [DefaultPalette] {
         [
-            Self.black,
-            Self.violet,
-            Self.green,
-            Self.yellow,
-            Self.orange,
-            Self.red,
-            Self.blue
+            black,
+            violet,
+            green,
+            yellow,
+            orange,
+            red,
+            blue,
         ]
     }
-    
+
     public static var allColors: [DefaultColor] {
-        [Self.white]
-        +
-        allPalettas.flatMap { $0.allShades }
+        [white]
+            +
+            allPalettas.flatMap { $0.allShades }
     }
 }
 
 // MARK: - Palette
 
-
 protocol Palette {
-    
     associatedtype T
-    
+
     var primary: T { get }
     var shade50: T { get }
     var shade100: T { get }
@@ -143,24 +140,23 @@ protocol Palette {
     var shade700: T { get }
     var shade800: T { get }
     var shade900: T { get }
-    
-    
+
     var allShades: [T] { get }
 }
 
 extension Palette {
     var allShades: [T] {
         [
-            self.shade50,
-            self.shade100,
-            self.shade200,
-            self.shade300,
-            self.shade400,
-            self.shade500,
-            self.shade600,
-            self.shade700,
-            self.shade800,
-            self.shade900
+            shade50,
+            shade100,
+            shade200,
+            shade300,
+            shade400,
+            shade500,
+            shade600,
+            shade700,
+            shade800,
+            shade900,
         ]
     }
 }
@@ -168,11 +164,11 @@ extension Palette {
 // MARK: - DefaultPalette
 
 public struct DefaultPalette: Hashable, Sendable, Palette {
-    
     private nonisolated(unsafe) let _primary: KeyPath<DefaultPalette, DefaultColor>
     public var primary: DefaultColor {
         self[keyPath: _primary]
     }
+
     public let shade50: DefaultColor
     public let shade100: DefaultColor
     public let shade200: DefaultColor
@@ -183,7 +179,7 @@ public struct DefaultPalette: Hashable, Sendable, Palette {
     public let shade700: DefaultColor
     public let shade800: DefaultColor
     public let shade900: DefaultColor
-    
+
     fileprivate init(
         primary: KeyPath<DefaultPalette, DefaultColor>,
         shade50: DefaultColor,
@@ -197,7 +193,7 @@ public struct DefaultPalette: Hashable, Sendable, Palette {
         shade800: DefaultColor,
         shade900: DefaultColor
     ) {
-        self._primary = primary
+        _primary = primary
         self.shade50 = shade50
         self.shade100 = shade100
         self.shade200 = shade200
@@ -214,11 +210,10 @@ public struct DefaultPalette: Hashable, Sendable, Palette {
 // MARK: - DefaultPalette Proxy
 
 extension DefaultPalette {
-    
     var uiKit: DefaultPaletteUIKitProxy {
         DefaultPaletteUIKitProxy(self)
     }
-    
+
     var swiftUI: DefaultPaletteSwiftUIProxy {
         DefaultPaletteSwiftUIProxy(self)
     }
@@ -227,37 +222,36 @@ extension DefaultPalette {
 // MARK: - DefaultColor
 
 public struct DefaultColor: Sendable {
-    
     public let name: String
-    
+
     // MARK: - LifeCycle
-    
+
     fileprivate init(_ name: String) {
         self.name = name
-        self.uiColor = UIColor(
+        uiColor = UIColor(
             named: name,
             in: .module,
             compatibleWith: nil
         )!
-        self.color = SwiftUI.Color(
+        color = SwiftUI.Color(
             name,
             bundle: .module
         )
     }
-    
+
     // MARK: - UIKit
-    
+
     public let uiColor: UIColor
-    
+
     public func uiColor(compatibleWith traitCollection: UITraitCollection) -> UIColor {
         guard let color = UIColor(named: name, in: .main, compatibleWith: traitCollection) else {
             fatalError("Unable to load color asset named \(name).")
         }
         return color
     }
-    
+
     // MARK: - SwiftUI
-    
+
     public let color: SwiftUI.Color
 }
 
@@ -267,7 +261,7 @@ extension DefaultColor: Hashable {
     public func hash(into hasher: inout Hasher) {
         return hasher.combine(name)
     }
-    
+
     public static func == (lhs: DefaultColor, rhs: DefaultColor) -> Bool {
         return lhs.name == rhs.name
     }
@@ -299,24 +293,24 @@ public extension SwiftUI.Color {
 // MARK: - Preview
 
 #if DEBUG
-#Preview {
-    ScrollView {
-        LazyVStack {
-            ForEach(DefaultColors.allColors, id: \.self) { item in
-                RoundedRectangle(cornerRadius: .radius8)
-                    .fill(item.color)
-                    .frame(height: 100)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: .radius8)
-                            .stroke(.blue, lineWidth: .border1)
-                    }
-                    .overlay {
-                        Text(item.name)
-                            .font(.title2)
-                    }
-                    .padding(.horizontal)
+    #Preview {
+        ScrollView {
+            LazyVStack {
+                ForEach(DefaultColors.allColors, id: \.self) { item in
+                    RoundedRectangle(cornerRadius: .radius8)
+                        .fill(item.color)
+                        .frame(height: 100)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: .radius8)
+                                .stroke(.blue, lineWidth: .border1)
+                        }
+                        .overlay {
+                            Text(item.name)
+                                .font(.title2)
+                        }
+                        .padding(.horizontal)
+                }
             }
         }
     }
-}
 #endif

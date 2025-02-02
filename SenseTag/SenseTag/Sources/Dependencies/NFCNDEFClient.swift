@@ -1,13 +1,13 @@
 //
-//  NFCNDEFManager.swift
+//  NFCNDEFClient.swift
 //  SenseTag
 //
 //  Created by Ivan Pohorielov on 06.01.2025.
 //
 
 import ComposableArchitecture
-import SwiftUI
 import NFCNDEFManager
+import SwiftUI
 
 @DependencyClient
 struct NFCNDEFClient {
@@ -18,15 +18,15 @@ struct NFCNDEFClient {
 }
 
 extension NFCNDEFClient: DependencyKey {
-  static var liveValue: Self {
-    let nfcManager = NFCNDEFManager()
-    return Self(
-        read: { try await nfcManager.read() },
-        write: { payloads in try await nfcManager.write(payloads) },
-        clear: { try await nfcManager.clear() },
-        lock: { try await nfcManager.lock() }
-    )
-  }
+    static var liveValue: Self {
+        let nfcManager = NFCNDEFManager()
+        return Self(
+            read: { try await nfcManager.read() },
+            write: { payloads in try await nfcManager.write(payloads) },
+            clear: { try await nfcManager.clear() },
+            lock: { try await nfcManager.lock() }
+        )
+    }
 }
 
 extension DependencyValues {

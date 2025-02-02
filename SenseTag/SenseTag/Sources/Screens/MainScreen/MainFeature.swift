@@ -5,22 +5,22 @@
 //  Created by Ivan Pohorielov on 06.01.2025.
 //
 
-import ComposableArchitecture
-import SwiftUI
 @preconcurrency import AVFoundation
-import NFCNDEFManager
+import ComposableArchitecture
 import CoreUI
+import NFCNDEFManager
+import SwiftUI
 
 @Reducer
 struct MainFeature {
-    
     @ObservableState
     struct State {
-        @Presents var confirmationDialog: ConfirmationDialogState<Action.ConfirmationDialog>?
+        @Presents var confirmationDialog:
+            ConfirmationDialogState<Action.ConfirmationDialog>?
         @Presents var alert: AlertState<Action.Alert>?
         @Presents var readTag: ReadTagFeature.State?
     }
-    
+
     enum Action {
         case readTapped
         case openReadSheet([NFCNDEFManagerPayload])
@@ -29,36 +29,39 @@ struct MainFeature {
         case confirmationDialog(PresentationAction<ConfirmationDialog>)
         case alert(PresentationAction<Alert>)
         case readTag(PresentationAction<ReadTagFeature.Action>)
-        
+
         enum ConfirmationDialog: Equatable {
             case clear
             case lock
         }
+
         enum Alert: Equatable {
             case clear
             case lock
         }
     }
-    
+
     @Dependency(\.nfcClient) var nfcClient
-    
+
     var body: some ReducerOf<Self> {
         Reduce { state, action in
-            
+
             switch action {
             case .readTapped:
                 return .run { send in
-                    guard let payloads = try? await nfcClient.read() else { return }
+                    guard let payloads = try? await nfcClient.read() else {
+                        return
+                    }
                     await send(.openReadSheet(payloads))
                 }
-            case .openReadSheet(let payloads):
+            case let .openReadSheet(payloads):
                 state.readTag = ReadTagFeature.State(payloads: payloads)
-                
+
                 return .none
             case .writeTapped:
                 return .none
             case .otherTapped:
-                
+
                 state.confirmationDialog = ConfirmationDialogState {
                     TextState("Other actions")
                 } actions: {
@@ -73,10 +76,10 @@ struct MainFeature {
                         TextState("Clear Tag")
                     }
                 }
-                
+
                 return .none
-            case .confirmationDialog(.presented(let action)):
-                
+            case let .confirmationDialog(.presented(action)):
+
                 state.alert = AlertState {
                     TextState(self.getAlertTitle(action))
                 } actions: {
@@ -89,23 +92,22 @@ struct MainFeature {
                 } message: {
                     TextState(self.getAlertMessage(action))
                 }
-                
+
                 return .none
-            case .alert(.presented(let action)):
+            case let .alert(.presented(action)):
                 switch action {
                 case .clear:
-                    return .run { send in
+                    return .run { _ in
                         try? await nfcClient.clear()
                     }
                 case .lock:
-                    return .run { send in
+                    return .run { _ in
                         try? await nfcClient.lock()
                     }
                 }
             case .readTag(.presented(.dismiss)):
                 state.readTag = nil
                 return .none
-                
             case .confirmationDialog:
                 return .none
             case .alert:
@@ -123,7 +125,9 @@ struct MainFeature {
 }
 
 private extension MainFeature {
-    func getAlertTitle(_ action: Action.ConfirmationDialog) -> LocalizedStringKey {
+    func getAlertTitle(_ action: Action.ConfirmationDialog)
+        -> LocalizedStringKey
+    {
         switch action {
         case .clear:
             return "Clear tag?"
@@ -131,7 +135,10 @@ private extension MainFeature {
             return "Lock tag?"
         }
     }
-    func getAlertMessage(_ action: Action.ConfirmationDialog) -> LocalizedStringKey {
+
+    func getAlertMessage(_ action: Action.ConfirmationDialog)
+        -> LocalizedStringKey
+    {
         switch action {
         case .clear:
             return "Clear action cannot be undone. Are you sure?"
@@ -139,7 +146,10 @@ private extension MainFeature {
             return "Lock action cannot be undone. Are you sure?"
         }
     }
-    func getAlertAction(_ action: Action.ConfirmationDialog) -> Action.Alert {
+
+    func getAlertAction(_ action: Action.ConfirmationDialog)
+        -> Action.Alert
+    {
         switch action {
         case .clear:
             return .clear

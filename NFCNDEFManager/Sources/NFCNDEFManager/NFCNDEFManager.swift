@@ -1,12 +1,11 @@
 @preconcurrency import CoreNFC
 
 public final actor NFCNDEFManager {
-
     // MARK: - Properties
 
     private var session: NFCNDEFReaderSession?
     private let sessionDelegate: NFCNDEFReaderSessionDelegateWrapper =
-        NFCNDEFReaderSessionDelegateWrapper()
+        .init()
 
     // MARK: - Init
 
@@ -16,14 +15,14 @@ public final actor NFCNDEFManager {
 
     public func read() async throws -> [NFCNDEFManagerPayload] {
         var payloads: [NFCNDEFManagerPayload] = []
-        
+
         try await detectTag { tag in
             let tagPayloads = try await self.handleRead(tag)
             await MainActor.run {
                 payloads.append(contentsOf: tagPayloads)
             }
         }
-        
+
         return payloads
     }
 
@@ -46,27 +45,25 @@ public final actor NFCNDEFManager {
     // MARK: - Private Methods
 
     private func detectTag(handle: @Sendable @escaping (NFCNDEFTag) async throws -> Void) async throws {
-        try self.startSession(
+        try startSession(
             alertMessage: "Hold your iPhone near the NFC tag to lock."
         )
 
         do {
             for try await tag in sessionDelegate.detect() {
-
                 try await handle(tag)
 
                 // Exit after first tag readed
                 break
             }
-            self.invalidateSession()
+            invalidateSession()
         } catch {
-            self.invalidateSession(with: error.localizedDescription)
+            invalidateSession(with: error.localizedDescription)
             throw error
         }
     }
 
     private func startSession(alertMessage: String) throws {
-
         guard NFCNDEFReaderSession.readingAvailable else {
             throw NFCError.readerNFCUnsupported
         }
@@ -75,7 +72,7 @@ public final actor NFCNDEFManager {
             throw NFCError.sessionAlreadyRunning
         }
 
-        self.session = NFCNDEFReaderSession(
+        session = NFCNDEFReaderSession(
             delegate: sessionDelegate,
             queue: nil,
             // Set to false
@@ -84,36 +81,35 @@ public final actor NFCNDEFManager {
             // See NFCNDEFReaderSessionDelegateWrapper
             invalidateAfterFirstRead: false
         )
-        self.session?.alertMessage = alertMessage
-        self.session?.begin()
+        session?.alertMessage = alertMessage
+        session?.begin()
     }
 
     private func invalidateSession(with error: String? = nil) {
         if let error {
             // Invalidate session with error message displayed
-            self.session?.invalidate(errorMessage: error)
+            session?.invalidate(errorMessage: error)
         } else {
-            self.session?.invalidate()
+            session?.invalidate()
         }
 
-        self.clearSession()
+        clearSession()
     }
 
     private func clearSession() {
-        self.session = nil
+        session = nil
     }
 }
 
 // MARK: - Handler methods
 
 extension NFCNDEFManager {
-
     // MARK: - Reading
 
     private func handleRead(_ tag: NFCNDEFTag) async throws
         -> [NFCNDEFManagerPayload]
     {
-        let message = try await { try await tag.readNDEF() }()
+        let message = try await tag.readNDEF()
         return getPayloads(message)
     }
 
@@ -128,28 +124,25 @@ extension NFCNDEFManager {
     private func handleWrite(
         to tag: NFCNDEFTag, payloads: [NFCNDEFManagerPayload]
     ) async throws {
-
-        try await self.handleTagStatus(tag)
+        try await handleTagStatus(tag)
 
         let records = payloads.map { $0.mapped() }
 
         let message = NFCNDEFMessage(records: records)
 
-        try await { try await tag.writeNDEF(message) }()
+        try await tag.writeNDEF(message)
     }
 
     private func handleLock(_ tag: NFCNDEFTag) async throws {
+        try await handleTagStatus(tag)
 
-        try await self.handleTagStatus(tag)
-
-        try await { try await tag.writeLock() }()
+        try await tag.writeLock()
     }
 
     // MARK: - Common
 
     private func handleTagStatus(_ tag: NFCNDEFTag) async throws {
-
-        let (status, _) = try await { try await tag.queryNDEFStatus() }()
+        let (status, _) = try await tag.queryNDEFStatus()
 
         switch status {
         case .readOnly:

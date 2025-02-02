@@ -1,65 +1,64 @@
 //
-//  PromInputContainerView.swift
+//  InputContainer.swift
 //
 //
 //  Created Ivan Pohorielov on 23.01.2024.
 //  Copyright © 2024 Evo.company. All rights reserved.
 //
 
-import SwiftUI
 import Combine
 import FoundationUI
+import SwiftUI
 
 struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
-    
     private let input: Input
-    
+
     @Binding
     private var text: String
-    
+
     private let state: CoreInputState
-    
+
     private let label: String?
     private let caption: String?
     private let error: String?
-    
+
     // MARK: - Properties
-    
+
     @Environment(\.inputContainerSize)
     var size: any CoreInputContainerSizeProtocol
-    
+
     @Environment(\.inputContainerStyle)
     var style: any CoreInputContainerStyleProtocol
-    
+
     @Environment(\.inputCharacterLimitConfiguration)
     var characterLimitConfiguration: CoreInputCharacterLimitConfiguration?
-    
+
     @Environment(\.inputRequired)
     var isRequired: Bool
-    
+
     // MARK: - State
-    
+
     @State
     private var counterText: String?
-    
+
     @State
     private var counterError: Bool = false
-    
+
     private var captionProxy: String? {
         state == .error ? error : caption
     }
-    
+
     private var isAppearenceLimit: Bool? {
         guard let appearenceLimit = characterLimitConfiguration?.appearenceLimit else {
             return nil
         }
-        
+
         return appearenceLimit <= text.count
     }
-    
+
     // MARK: - Views
-    
-    var body : some View {
+
+    var body: some View {
         VStack(
             alignment: .leading,
             spacing: size.containerStackSpacing
@@ -80,7 +79,7 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
             value: isAppearenceLimit
         )
     }
-    
+
     @ViewBuilder
     private var labelView: some View {
         if let label = label {
@@ -89,7 +88,7 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
                     .font(size.labelFont)
                     .foregroundColor(style.labelForegroundColor)
                     .accessibilityIdentifier(Accessibility.labelView.rawValue)
-                
+
                 if isRequired {
                     Text("*")
                         .font(size.labelFont)
@@ -107,10 +106,9 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
             )
         }
     }
-    
+
     @ViewBuilder
     private var captionView: some View {
-        
         if captionProxy != nil || counterText != nil {
             HStack(
                 alignment: .top,
@@ -122,12 +120,12 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
                         .foregroundColor(style.captionForegroundColor(for: state))
                         .accessibilityIdentifier(Accessibility.captionView.rawValue)
                 }
-                
+
                 if let characterCounter = counterText,
-                   (isAppearenceLimit ?? true) {
-                    
+                   isAppearenceLimit ?? true
+                {
                     Spacer(minLength: 0.0)
-                    
+
                     Text(characterCounter)
                         .font(size.counterFont)
                         .foregroundColor(style.counterForegroundColor(for: self.counterError ? .error : state))
@@ -144,7 +142,7 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
             )
         }
     }
-    
+
     private var inputView: some View {
         input
             .onReceive(Just(text)) { newValue in
@@ -152,15 +150,15 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
                     limit: characterLimitConfiguration?.limit,
                     text: newValue
                 )
-                
+
                 if processedTextData.isLimit {
                     text = processedTextData.limitedText
                 }
-                
+
                 self.counterText = makeCharactersCounterText(newValue)
                 self.counterError = processedTextData.isLimit
             }
-            .onChange(of: self.counterError) { _, newValue in
+            .onChange(of: counterError) { _, newValue in
                 if newValue {
                     DefaultHaptics.sendHapticFeedback(.notification(.warning))
                 }
@@ -186,21 +184,22 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
             }
             .contentShape(Rectangle())
     }
-    
+
     // MARK: - Private
-    
+
     private func makeCharactersCounterText(_ text: String) -> String? {
         guard let characterLimit = characterLimitConfiguration?.limit else { return nil }
-        
+
         return "\(text.count)/\(characterLimit)"
     }
-    
+
     private func truncateIfLimit(
         limit: Int?,
         text: String
     ) -> (limitedText: String, isLimit: Bool) {
         if let characterLimit = limit,
-           text.count >= characterLimit {
+           text.count >= characterLimit
+        {
             let limitedText = String(text.prefix(characterLimit))
             return (limitedText: limitedText, isLimit: true)
         } else {
@@ -212,7 +211,6 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
 // MARK: - Init
 
 extension InputContainer {
-    
     init(
         text: Binding<String>,
         state: CoreInputState,
@@ -221,12 +219,11 @@ extension InputContainer {
         error: String?,
         @ViewBuilder input: () -> Input
     ) {
-        self._text = text
+        _text = text
         self.state = state
         self.label = label
         self.caption = caption
         self.error = error
         self.input = input()
     }
-    
 }

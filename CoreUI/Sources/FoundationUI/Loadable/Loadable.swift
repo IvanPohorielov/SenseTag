@@ -9,8 +9,7 @@ import SwiftUI
 
 @MainActor
 public protocol Loadable {
-    
     var isLoading: Bool { get }
-    
+
     var isLoadingEnabled: Bool { get }
 }

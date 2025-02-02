@@ -5,8 +5,8 @@
 //  Created by Ivan Pohorielov on 08.01.2025.
 //
 
-import UIKit
 import ComposableArchitecture
+import UIKit
 
 @DependencyClient
 struct PasteboardClient {

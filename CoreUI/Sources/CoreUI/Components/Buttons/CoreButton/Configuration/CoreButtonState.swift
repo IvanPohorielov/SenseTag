@@ -7,7 +7,6 @@
 
 import protocol SwiftUI.ButtonStyle
 
-
 enum CoreButtonState: String, Hashable, CaseIterable, Sendable {
     case idle
     case pressed

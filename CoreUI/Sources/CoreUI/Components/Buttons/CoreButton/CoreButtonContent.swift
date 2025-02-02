@@ -8,10 +8,9 @@
 import FoundationUI
 
 public struct CoreButtonContent: Hashable, Sendable {
-    
     public var text: String
     public var icon: ImageContent?
-    
+
     public init(
         text: String,
         icon: ImageContent? = nil

@@ -5,17 +5,15 @@
 //  Created by Ivan Pohorielov on 18.12.2024.
 //
 
-
 import SwiftUI
 
 struct CoreButtonStyling<Style: CoreButtonStyle, Size: CoreButtonSize>: ButtonStyle {
-    
     private var style: Style
     private var size: Size
     private var borderShape: CoreButtonBorderShape?
     private var isEnabled: Bool
     private var isFullWidth: Bool
-    
+
     init(
         style: Style,
         size: Size,
@@ -29,14 +27,13 @@ struct CoreButtonStyling<Style: CoreButtonStyle, Size: CoreButtonSize>: ButtonSt
         self.isEnabled = isEnabled
         self.isFullWidth = isFullWidth ?? false
     }
-    
+
     public func makeBody(configuration: Configuration) -> some View {
-        
-        let state: CoreButtonState = CoreButtonState.getState(
+        let state = CoreButtonState.getState(
             from: configuration,
             isEnabled: isEnabled
         )
-        
+
         configuration
             .label
             .lineLimit(size.lineLimit)

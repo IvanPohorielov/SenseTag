@@ -13,4 +13,3 @@ enum CoreButtonAccessibility: String {
     case iconView
     case textView
 }
-

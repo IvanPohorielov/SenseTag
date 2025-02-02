@@ -1,16 +1,15 @@
 //
-//  Fonts.swift
+//  Font.swift
 //  CoreUI
 //
 //  Created by Ivan Pohorielov on 15.12.2024.
 //
 
 import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
 public enum DefaultFont: String, Hashable, Sendable, CaseIterable {
-    
     /// 36 Bold
     case hZero
     /// 24 Bold
@@ -31,9 +30,9 @@ public enum DefaultFont: String, Hashable, Sendable, CaseIterable {
     case body
     /// 12 Regular
     case caption
-    
+
     // MARK: - Properties
-    
+
     public var size: CGFloat {
         switch self {
         case .hZero: return 36.0
@@ -48,7 +47,7 @@ public enum DefaultFont: String, Hashable, Sendable, CaseIterable {
         case .caption: return 12.0
         }
     }
-    
+
     public var uiWeight: UIFont.Weight {
         switch self {
         case .hZero, .hOne: return .bold
@@ -57,7 +56,7 @@ public enum DefaultFont: String, Hashable, Sendable, CaseIterable {
         case .bodyL, .body, .caption: return .regular
         }
     }
-    
+
     public var weight: Font.Weight {
         switch self {
         case .hZero, .hOne: return .bold
@@ -66,7 +65,7 @@ public enum DefaultFont: String, Hashable, Sendable, CaseIterable {
         case .bodyL, .body, .caption: return .regular
         }
     }
-    
+
     public var uiTextStyle: UIFont.TextStyle {
         switch self {
         case .hZero: return .largeTitle
@@ -80,7 +79,7 @@ public enum DefaultFont: String, Hashable, Sendable, CaseIterable {
         case .caption: return .caption2
         }
     }
-    
+
     public var textStyle: Font.TextStyle {
         switch self {
         case .hZero: return .largeTitle
@@ -94,53 +93,53 @@ public enum DefaultFont: String, Hashable, Sendable, CaseIterable {
         case .caption: return .caption2
         }
     }
-    
+
     // MARK: - UIFont
-    
+
     public var uiFont: UIFont {
-        UIFontMetrics(forTextStyle: self.uiTextStyle)
+        UIFontMetrics(forTextStyle: uiTextStyle)
             .scaledFont(
                 for: UIFont.systemFont(
-                    ofSize: self.size,
-                    weight: self.uiWeight
+                    ofSize: size,
+                    weight: uiWeight
                 )
             )
     }
-    
+
     // MARK: - Font
-    
+
     public var font: Font {
         Font
             .custom(
                 "HelveticaNeue", // workaround scalable font
-                size: self.size,
-                relativeTo: self.textStyle
+                size: size,
+                relativeTo: textStyle
             )
-            .weight(self.weight)
+            .weight(weight)
     }
 }
 
 // MARK: - Preview
 
 #if DEBUG
-#Preview {
-    ScrollView {
-        LazyVStack {
-            ForEach(DefaultFont.allCases, id: \.self) { item in
-                RoundedRectangle(cornerRadius: .radius8)
-                    .fill(.clear)
-                    .frame(height: 100)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: .radius8)
-                            .stroke(.blue, lineWidth: .border1)
-                    }
-                    .overlay {
-                        Text(item.rawValue)
-                            .font(item.font)
-                    }
-                    .padding(.horizontal)
+    #Preview {
+        ScrollView {
+            LazyVStack {
+                ForEach(DefaultFont.allCases, id: \.self) { item in
+                    RoundedRectangle(cornerRadius: .radius8)
+                        .fill(.clear)
+                        .frame(height: 100)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: .radius8)
+                                .stroke(.blue, lineWidth: .border1)
+                        }
+                        .overlay {
+                            Text(item.rawValue)
+                                .font(item.font)
+                        }
+                        .padding(.horizontal)
+                }
             }
         }
     }
-}
 #endif

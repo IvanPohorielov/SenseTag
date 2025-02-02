@@ -9,31 +9,31 @@
 
 public extension NFCNDEFPayload {
     func mapped() -> NFCNDEFManagerPayload {
-        switch self.typeNameFormat {
+        switch typeNameFormat {
         case .nfcWellKnown:
-            
+
             let wellKnownPayloadType = NFCNDEFWellKnownPayloadType(
                 rawValue: String(
-                    decoding: self.type,
+                    decoding: type,
                     as: UTF8.self
                 )
             )
-            
+
             switch wellKnownPayloadType {
             case .text:
-                
-                let (text, locale) = self.wellKnownTypeTextPayload()
-                
+
+                let (text, locale) = wellKnownTypeTextPayload()
+
                 guard let text, let locale else {
                     return .other(self)
                 }
-                
+
                 return .wellKnown(.text(text, locale))
             case .url:
-                guard let url = self.wellKnownTypeURIPayload() else {
+                guard let url = wellKnownTypeURIPayload() else {
                     return .other(self)
                 }
-                
+
                 return .wellKnown(.url(url))
             default:
                 return .other(self)

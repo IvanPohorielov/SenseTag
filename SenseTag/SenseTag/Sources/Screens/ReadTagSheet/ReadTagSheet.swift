@@ -5,18 +5,17 @@
 //  Created by Ivan Pohorielov on 08.01.2025.
 //
 
-import SwiftUI
-import FoundationUI
-import CoreUI
 import ComposableArchitecture
+import CoreUI
+import FoundationUI
 import NFCNDEFManager
+import SwiftUI
 
 struct ReadTagSheet: View {
-    
     var store: StoreOf<ReadTagFeature>
-    
+
     @Environment(\.openURL) var openURL
-    
+
     var body: some View {
         ScrollView {
             LazyVStack(spacing: .spacer8) {
@@ -35,11 +34,10 @@ struct ReadTagSheet: View {
                     Image(systemName: "xmark")
                 }
                 .foregroundStyle(Color.black.primary)
-                
             }
         }
     }
-    
+
     @ViewBuilder
     private func recordItem(
         _ payload: NFCNDEFManagerPayload,
@@ -64,15 +62,15 @@ struct ReadTagSheet: View {
             .rect(cornerRadius: .radius8)
         )
     }
-    
+
     @ViewBuilder
     private func recordActions(
         _ payload: NFCNDEFManagerPayload
     ) -> some View {
         switch payload {
-        case .wellKnown(let wellKnownPayload):
+        case let .wellKnown(wellKnownPayload):
             switch wellKnownPayload {
-            case .text(let text, let locale):
+            case let .text(text, locale):
                 IconButton {
                     Image(systemName: "waveform")
                 } action: {
@@ -83,7 +81,7 @@ struct ReadTagSheet: View {
                 } action: {
                     store.send(.copyToClipboard(text))
                 }
-            case .url(let url):
+            case let .url(url):
                 IconButton {
                     Image(systemName: "link")
                 } action: {
@@ -104,11 +102,11 @@ struct ReadTagSheet: View {
 private extension ReadTagSheet {
     func getText(from payload: NFCNDEFManagerPayload) -> LocalizedStringKey {
         switch payload {
-        case .wellKnown(let wellKnownPayload):
+        case let .wellKnown(wellKnownPayload):
             switch wellKnownPayload {
-            case .text(let text, _):
+            case let .text(text, _):
                 LocalizedStringKey(text)
-            case .url(let url):
+            case let .url(url):
                 LocalizedStringKey(url.absoluteString)
             }
         case .empty:
@@ -126,7 +124,7 @@ private extension ReadTagSheet {
                 initialState: ReadTagFeature.State(
                     payloads: [
                         .wellKnown(.text("Hello, Preview", .current)),
-                        .wellKnown(.url(URL(string: "https://www.apple.com")!))
+                        .wellKnown(.url(URL(string: "https://www.apple.com")!)),
                     ]
                 )
             ) {

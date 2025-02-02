@@ -8,7 +8,6 @@
 import CoreNFC
 
 public extension NFCNDEFPayload {
-    
     static func empty() -> NFCNDEFPayload {
         return NFCNDEFPayload(
             format: .empty,

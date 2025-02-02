@@ -6,32 +6,31 @@
 //
 
 import Foundation
+import FoundationUI
 import struct SwiftUI.Font
 import class UIKit.UIFont
-import FoundationUI
 
 public struct DefaultButtonSize: CoreButtonSize {
-
     let lineLimit: Int?
-    
+
     let font: Font
-    
+
     let fontStyle: UIFont.TextStyle
-    
+
     let iconSize: CGFloat
-    
+
     let borderWidth: CGFloat
-    
+
     let cornerRadius: CGFloat
-    
+
     let contentIdealHeight: CGFloat
-    
+
     let contentVerticalPadding: CGFloat
-    
+
     let contentHorizontalPadding: CGFloat
-    
+
     let mainStackSpacing: CGFloat
-    
+
     public init(
         lineLimit: Int?,
         font: Font,
@@ -55,7 +54,7 @@ public struct DefaultButtonSize: CoreButtonSize {
         self.contentHorizontalPadding = contentHorizontalPadding
         self.mainStackSpacing = mainStackSpacing
     }
-    
+
     public init(
         lineLimit: Int?,
         font: DefaultFont,
@@ -69,7 +68,7 @@ public struct DefaultButtonSize: CoreButtonSize {
     ) {
         self.lineLimit = lineLimit
         self.font = font.font
-        self.fontStyle = font.uiTextStyle
+        fontStyle = font.uiTextStyle
         self.iconSize = iconSize
         self.borderWidth = borderWidth
         self.cornerRadius = cornerRadius
@@ -78,12 +77,10 @@ public struct DefaultButtonSize: CoreButtonSize {
         self.contentHorizontalPadding = contentHorizontalPadding
         self.mainStackSpacing = mainStackSpacing
     }
-    
 }
 
 public extension DefaultButtonSize {
-
-    static let large: DefaultButtonSize = DefaultButtonSize(
+    static let large: DefaultButtonSize = .init(
         lineLimit: 1,
         font: .labelM,
         iconSize: .icon24,
@@ -94,8 +91,8 @@ public extension DefaultButtonSize {
         contentHorizontalPadding: .spacer24,
         mainStackSpacing: .spacer16
     )
-    
-    static let regular: DefaultButtonSize = DefaultButtonSize(
+
+    static let regular: DefaultButtonSize = .init(
         lineLimit: 1,
         font: .labelM,
         iconSize: .icon24,
@@ -106,17 +103,16 @@ public extension DefaultButtonSize {
         contentHorizontalPadding: .spacer16,
         mainStackSpacing: .spacer8
     )
-    
-    static let compact: DefaultButtonSize = DefaultButtonSize(
+
+    static let compact: DefaultButtonSize = .init(
         lineLimit: 1,
         font: .labelM,
         iconSize: .icon16,
         borderWidth: .border1,
-        cornerRadius: .radius8 ,
+        cornerRadius: .radius8,
         contentIdealHeight: 32.0,
         contentVerticalPadding: .spacer8,
         contentHorizontalPadding: .spacer16,
         mainStackSpacing: .spacer4
     )
-    
 }

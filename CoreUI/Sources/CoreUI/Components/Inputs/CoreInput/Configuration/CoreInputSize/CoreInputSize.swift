@@ -7,37 +7,36 @@
 //
 
 import Foundation
+import FoundationUI
 import struct SwiftUI.Font
 import class UIKit.UIFont
-import FoundationUI
 
 public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol {
-    
     // MARK: - Properties
-    
+
     let containerCornerRadius: CGFloat
     let containerBorderWidth: CGFloat
-    
+
     let containerStackSpacing: CGFloat
-    
+
     let fontStyle: UIFont.TextStyle
     let font: Font
     let labelFont: Font
     let captionFont: Font
     let counterFont: Font
-    
+
     let contentIdealHeight: CGFloat
     let contentVerticalPadding: CGFloat
     let contentHorizontalPadding: CGFloat
-    
+
     let captionStackSpacing: CGFloat
     let inputStackSpacing: CGFloat
-    
+
     let leftViewSize: CGFloat
     let rightViewSize: CGFloat
-    
+
     // MARK: - LifeCycle
-    
+
     init(
         containerCornerRadius: CGFloat,
         containerBorderWidth: CGFloat,
@@ -71,7 +70,7 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
         self.leftViewSize = leftViewSize
         self.rightViewSize = rightViewSize
     }
-    
+
     init(
         containerCornerRadius: CGFloat,
         containerBorderWidth: CGFloat,
@@ -91,7 +90,7 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
         self.containerCornerRadius = containerCornerRadius
         self.containerBorderWidth = containerBorderWidth
         self.containerStackSpacing = containerStackSpacing
-        self.fontStyle = font.uiTextStyle
+        fontStyle = font.uiTextStyle
         self.font = font.font
         self.labelFont = labelFont
         self.captionFont = captionFont
@@ -109,8 +108,7 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
 // MARK: - Catalog values
 
 public extension CoreInputSize {
-    
-    static let regular: CoreInputSize = CoreInputSize(
+    static let regular: CoreInputSize = .init(
         containerCornerRadius: .radius8,
         containerBorderWidth: .border1,
         containerStackSpacing: .spacer4,

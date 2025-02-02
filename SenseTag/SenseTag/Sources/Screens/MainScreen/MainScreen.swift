@@ -5,25 +5,23 @@
 //  Created by Ivan Pohorielov on 06.01.2025.
 //
 
-import SwiftUI
-import FoundationUI
-import CoreUI
 import ComposableArchitecture
+import CoreUI
+import FoundationUI
+import SwiftUI
 
 struct MainScreen: View {
-    
     @Bindable var store: StoreOf<MainFeature>
-    
+
     @State
     private var animate = false
     @ScaledMetric(relativeTo: DefaultFont.hZero.textStyle)
     private var largeImageSize: CGFloat = .image56
-    
+
     var body: some View {
         DefaultBackground {
-            
             backgroundAnimation
-            
+
             VStack(spacing: .spacer16) {
                 tile(
                     "Other",
@@ -68,9 +66,8 @@ struct MainScreen: View {
             .presentationDetents([.medium, .large])
             .presentationBackground(Material.regular)
         }
-        
     }
-    
+
     private func tile(
         _ title: LocalizedStringKey,
         image: String,
@@ -81,7 +78,7 @@ struct MainScreen: View {
                 .resizable()
                 .frame(width: largeImageSize, height: largeImageSize)
                 .foregroundStyle(Color.blue.primary)
-            
+
             Text(title)
                 .font(.senseHZero)
                 .frame(maxWidth: .infinity)
@@ -98,11 +95,10 @@ struct MainScreen: View {
         .clipShape(
             .rect(cornerRadius: .radius24)
         )
-        
     }
-    
+
     private var backgroundAnimation: some View {
-        ForEach(0..<5) { index in
+        ForEach(0 ..< 5) { index in
             Circle()
                 .stroke(lineWidth: 12.0)
                 .foregroundStyle(Color.blue.primary)
