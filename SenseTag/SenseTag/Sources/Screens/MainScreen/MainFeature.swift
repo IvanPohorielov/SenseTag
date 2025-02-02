@@ -49,14 +49,15 @@ struct MainFeature {
             switch action {
             case .readTapped:
                 return .run { send in
-                    guard let payloads = try? await nfcClient.read() else {
+                    guard let payloads = try? await nfcClient.read(),
+                        !payloads.isEmpty
+                    else {
                         return
                     }
                     await send(.openReadSheet(payloads))
                 }
             case let .openReadSheet(payloads):
                 state.readTag = ReadTagFeature.State(payloads: payloads)
-
                 return .none
             case .writeTapped:
                 return .none
@@ -124,8 +125,8 @@ struct MainFeature {
     }
 }
 
-private extension MainFeature {
-    func getAlertTitle(_ action: Action.ConfirmationDialog)
+extension MainFeature {
+    fileprivate func getAlertTitle(_ action: Action.ConfirmationDialog)
         -> LocalizedStringKey
     {
         switch action {
@@ -136,7 +137,7 @@ private extension MainFeature {
         }
     }
 
-    func getAlertMessage(_ action: Action.ConfirmationDialog)
+    fileprivate func getAlertMessage(_ action: Action.ConfirmationDialog)
         -> LocalizedStringKey
     {
         switch action {
@@ -147,7 +148,7 @@ private extension MainFeature {
         }
     }
 
-    func getAlertAction(_ action: Action.ConfirmationDialog)
+    fileprivate func getAlertAction(_ action: Action.ConfirmationDialog)
         -> Action.Alert
     {
         switch action {

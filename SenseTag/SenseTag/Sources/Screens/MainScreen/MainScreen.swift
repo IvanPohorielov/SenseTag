@@ -28,24 +28,21 @@ struct MainScreen: View {
                     "Other",
                     image: "ellipsis.circle.fill",
                     span: 2
-                )
-                .onTapGesture {
+                ) {
                     store.send(.otherTapped)
                 }
                 tile(
                     "Read Tag",
                     image: "magnifyingglass.circle.fill",
                     span: 4
-                )
-                .onTapGesture {
+                ) {
                     store.send(.readTapped)
                 }
                 tile(
                     "Create Tag",
                     image: "plus.circle.fill",
                     span: 4
-                )
-                .onTapGesture {
+                ) {
                     store.send(.writeTapped)
                 }
             }
@@ -72,7 +69,8 @@ struct MainScreen: View {
     private func tile(
         _ title: LocalizedStringKey,
         image: String,
-        span: Int
+        span: Int,
+        action: @MainActor @escaping () -> Void
     ) -> some View {
         VStack {
             Image(systemName: image)
@@ -96,6 +94,10 @@ struct MainScreen: View {
         .clipShape(
             .rect(cornerRadius: .radius24)
         )
+        .onTapGesture {
+            DefaultHaptics.sendHapticFeedback(.selection)
+            action()
+        }
     }
 
     private var backgroundAnimation: some View {
