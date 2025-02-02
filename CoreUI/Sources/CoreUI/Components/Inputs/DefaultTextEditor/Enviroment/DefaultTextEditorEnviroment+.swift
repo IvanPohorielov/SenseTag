@@ -9,5 +9,5 @@ import SwiftUI
 
 extension EnvironmentValues {
     @Entry
-    var defaultTextEditorHeight: CGFloat = 280.0
+    var defaultTextEditorHeight: CGFloat? = 280.0
 }

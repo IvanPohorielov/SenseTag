@@ -11,7 +11,7 @@ import FoundationUI
 import SwiftUI
 
 struct MainScreen: View {
-    
+
     @Bindable var store: StoreOf<MainFeature>
 
     @State
@@ -52,13 +52,28 @@ struct MainScreen: View {
             $store.scope(state: \.alert, action: \.alert)
         )
         .confirmationDialog(
-            $store.scope(state: \.confirmationDialog, action: \.confirmationDialog)
+            $store.scope(
+                state: \.confirmationDialog, action: \.confirmationDialog)
         )
         .sheet(
             item: $store.scope(state: \.readTag, action: \.readTag)
         ) { readTagStore in
             NavigationStack {
                 ReadTagSheet(store: readTagStore)
+            }
+            .presentationCornerRadius(40.0)
+            .presentationDetents([.medium, .large])
+            .presentationBackground(Material.regular)
+        }
+        .sheet(
+            isPresented: Binding {
+                store.writeSheetIsPresented
+            } set: { newValue in
+                store.send(.closeSheet(newValue))
+            }
+        ) {
+            NavigationStack {
+                WriteTagSheet()
             }
             .presentationCornerRadius(40.0)
             .presentationDetents([.medium, .large])
@@ -101,7 +116,7 @@ struct MainScreen: View {
     }
 
     private var backgroundAnimation: some View {
-        ForEach(0 ..< 5) { index in
+        ForEach(0..<5) { index in
             Circle()
                 .stroke(lineWidth: 12.0)
                 .foregroundStyle(Color.blue.primary)

@@ -19,6 +19,7 @@ struct MainFeature {
             ConfirmationDialogState<Action.ConfirmationDialog>?
         @Presents var alert: AlertState<Action.Alert>?
         @Presents var readTag: ReadTagFeature.State?
+        var writeSheetIsPresented: Bool = false
     }
 
     enum Action {
@@ -29,6 +30,7 @@ struct MainFeature {
         case confirmationDialog(PresentationAction<ConfirmationDialog>)
         case alert(PresentationAction<Alert>)
         case readTag(PresentationAction<ReadTagFeature.Action>)
+        case closeSheet(Bool)
 
         enum ConfirmationDialog: Equatable {
             case clear
@@ -60,6 +62,7 @@ struct MainFeature {
                 state.readTag = ReadTagFeature.State(payloads: payloads)
                 return .none
             case .writeTapped:
+                state.writeSheetIsPresented = true
                 return .none
             case .otherTapped:
 
@@ -108,6 +111,9 @@ struct MainFeature {
                 }
             case .readTag(.presented(.dismiss)):
                 state.readTag = nil
+                return .none
+            case let .closeSheet(close):
+                state.writeSheetIsPresented = close
                 return .none
             case .confirmationDialog:
                 return .none

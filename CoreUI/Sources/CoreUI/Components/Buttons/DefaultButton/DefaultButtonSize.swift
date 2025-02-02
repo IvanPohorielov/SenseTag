@@ -82,7 +82,7 @@ public struct DefaultButtonSize: CoreButtonSize {
 public extension DefaultButtonSize {
     static let large: DefaultButtonSize = .init(
         lineLimit: 1,
-        font: .labelM,
+        font: .labelL,
         iconSize: .icon24,
         borderWidth: .border1,
         cornerRadius: .radius16,

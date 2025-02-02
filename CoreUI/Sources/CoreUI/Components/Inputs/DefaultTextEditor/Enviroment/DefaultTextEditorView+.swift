@@ -8,7 +8,7 @@
 import SwiftUI
 
 public extension View {
-    func defaultTextEditorHeight(_ height: CGFloat) -> some View {
+    func defaultTextEditorHeight(_ height: CGFloat?) -> some View {
         environment(\.defaultTextEditorHeight, height)
     }
 }

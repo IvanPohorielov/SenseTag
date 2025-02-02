@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum NFCNDEFWellKnownPayloadType: String, Hashable, CaseIterable, Sendable {
+public enum NFCNDEFWellKnownPayloadType: String, Identifiable, Hashable, CaseIterable, Sendable {
     case text = "T"
     case url = "U"
 
@@ -19,4 +19,6 @@ public enum NFCNDEFWellKnownPayloadType: String, Hashable, CaseIterable, Sendabl
             "URL"
         }
     }
+    
+    public var id: Self { self }
 }

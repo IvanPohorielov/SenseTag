@@ -41,7 +41,7 @@ public struct DefaultTextEditor: View {
     var style: CoreInputStyle
 
     @Environment(\.defaultTextEditorHeight)
-    var editorHeight: CGFloat
+    var editorHeight: CGFloat?
 
     // MARK: - State
 

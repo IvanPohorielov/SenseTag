@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import SwiftUI
+import FoundationUI
 
 @main
 struct SenseTagApp: App {
@@ -17,6 +18,7 @@ struct SenseTagApp: App {
     var body: some Scene {
         WindowGroup {
             MainScreen(store: SenseTagApp.store)
+                .tint(.violet.primary)
         }
     }
 }

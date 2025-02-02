@@ -26,9 +26,11 @@ struct ReadTagSheet: View {
                     recordItem(payload, number: index + 1)
                 }
             }
-            .safeAreaPadding(.spacer16)
+            .safeAreaPadding(.horizontal, .spacer16)
+            .safeAreaPadding(.bottom, .spacer16)
         }
         .navigationTitle("Read Tag")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

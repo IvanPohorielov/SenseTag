@@ -76,9 +76,9 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
         containerBorderWidth: CGFloat,
         containerStackSpacing: CGFloat,
         font: DefaultFont,
-        labelFont: Font,
-        captionFont: Font,
-        counterFont: Font,
+        labelFont: DefaultFont,
+        captionFont: DefaultFont,
+        counterFont: DefaultFont,
         contentIdealHeight: CGFloat,
         contentVerticalPadding: CGFloat,
         contentHorizontalPadding: CGFloat,
@@ -92,9 +92,9 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
         self.containerStackSpacing = containerStackSpacing
         fontStyle = font.uiTextStyle
         self.font = font.font
-        self.labelFont = labelFont
-        self.captionFont = captionFont
-        self.counterFont = counterFont
+        self.labelFont = labelFont.font
+        self.captionFont = captionFont.font
+        self.counterFont = counterFont.font
         self.contentIdealHeight = contentIdealHeight
         self.contentVerticalPadding = contentVerticalPadding
         self.contentHorizontalPadding = contentHorizontalPadding
@@ -112,10 +112,10 @@ public extension CoreInputSize {
         containerCornerRadius: .radius8,
         containerBorderWidth: .border1,
         containerStackSpacing: .spacer4,
-        font: .body,
-        labelFont: .senseBody,
-        captionFont: .senseBody,
-        counterFont: .senseBody,
+        font: .labelM,
+        labelFont: .labelL,
+        captionFont: .labelM,
+        counterFont: .labelM,
         contentIdealHeight: 24.0,
         contentVerticalPadding: .spacer8,
         contentHorizontalPadding: .spacer16,
