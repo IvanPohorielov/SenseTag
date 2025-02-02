@@ -38,11 +38,6 @@ public struct IconButton<Icon: View>: CoreButton, IconButtonEnvProtocol, Loadabl
     @Environment(\.isLoadingEnabled)
     public var isLoadingEnabled: Bool
     
-    // MARK: - Properties
-    
-    @ScaledMetric
-    var iconSize: CGFloat = 0.0
-    
     // MARK: - Views
     
     public var body : some View {
@@ -62,7 +57,6 @@ public extension IconButton {
     ) {
         self.icon = iconBuilder()
         self.action = action
-        self._iconSize = ScaledMetric(wrappedValue: size.iconSize, relativeTo: size.fontStyle)
     }
 }
 

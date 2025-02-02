@@ -6,7 +6,9 @@
 //  Copyright © 2024 Evo.company. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
+import struct SwiftUI.Font
+import class UIKit.UIFont
 import FoundationUI
 
 public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol {
@@ -18,7 +20,7 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
     
     let containerStackSpacing: CGFloat
     
-    let fontStyle: Font.TextStyle
+    let fontStyle: UIFont.TextStyle
     let font: Font
     let labelFont: Font
     let captionFont: Font
@@ -40,7 +42,7 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
         containerCornerRadius: CGFloat,
         containerBorderWidth: CGFloat,
         containerStackSpacing: CGFloat,
-        fontStyle: Font.TextStyle,
+        fontStyle: UIFont.TextStyle,
         font: Font,
         labelFont: Font,
         captionFont: Font,
@@ -89,7 +91,7 @@ public struct CoreInputSize: Hashable, Sendable, CoreInputContainerSizeProtocol 
         self.containerCornerRadius = containerCornerRadius
         self.containerBorderWidth = containerBorderWidth
         self.containerStackSpacing = containerStackSpacing
-        self.fontStyle = font.textStyle
+        self.fontStyle = font.uiTextStyle
         self.font = font.font
         self.labelFont = labelFont
         self.captionFont = captionFont

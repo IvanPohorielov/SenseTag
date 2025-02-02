@@ -7,12 +7,13 @@
 
 import Foundation
 import struct SwiftUI.Font
+import class UIKit.UIFont
 
 protocol CoreButtonSize: Hashable, Sendable, CaseIterable {
     
     var lineLimit: Int? { get }
     var font: Font { get }
-    var fontStyle: Font.TextStyle { get }
+    var fontStyle: UIFont.TextStyle { get }
     var iconSize: CGFloat { get }
     var borderWidth: CGFloat { get }
     var cornerRadius: CGFloat { get }

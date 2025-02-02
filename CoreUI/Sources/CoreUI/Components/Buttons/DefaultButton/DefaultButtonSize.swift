@@ -7,6 +7,7 @@
 
 import Foundation
 import struct SwiftUI.Font
+import class UIKit.UIFont
 import FoundationUI
 
 public struct DefaultButtonSize: CoreButtonSize {
@@ -15,7 +16,7 @@ public struct DefaultButtonSize: CoreButtonSize {
     
     let font: Font
     
-    let fontStyle: Font.TextStyle
+    let fontStyle: UIFont.TextStyle
     
     let iconSize: CGFloat
     
@@ -34,7 +35,7 @@ public struct DefaultButtonSize: CoreButtonSize {
     public init(
         lineLimit: Int?,
         font: Font,
-        fontStyle: Font.TextStyle,
+        fontStyle: UIFont.TextStyle,
         iconSize: CGFloat,
         borderWidth: CGFloat,
         cornerRadius: CGFloat,
@@ -68,7 +69,7 @@ public struct DefaultButtonSize: CoreButtonSize {
     ) {
         self.lineLimit = lineLimit
         self.font = font.font
-        self.fontStyle = font.textStyle
+        self.fontStyle = font.uiTextStyle
         self.iconSize = iconSize
         self.borderWidth = borderWidth
         self.cornerRadius = cornerRadius

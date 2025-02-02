@@ -35,6 +35,10 @@ protocol CoreButton: View {
 
 extension CoreButton {
     
+    var iconSize: CGFloat {
+        UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(for: size.iconSize)
+    }
+    
     func body(
         borderShape: CoreButtonBorderShape? = nil,
         isFullWidth: Bool? = nil

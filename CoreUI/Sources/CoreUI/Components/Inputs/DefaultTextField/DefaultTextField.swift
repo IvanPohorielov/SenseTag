@@ -54,11 +54,13 @@ public struct DefaultTextField<LeftView: View, RightView: View>: View, DefaultTe
     @FocusState
     private var isFocused: Bool
     
-    @ScaledMetric
-    var leftViewSize: CGFloat = 0.0
+    private var leftViewSize: CGFloat {
+        UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(for: size.leftViewSize)
+    }
     
-    @ScaledMetric
-    var rightViewSize: CGFloat = 0.0
+    private var rightViewSize: CGFloat {
+        UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(for: size.rightViewSize)
+    }
     
     // MARK: - Views
     
@@ -157,9 +159,6 @@ public extension DefaultTextField {
         self.error = error
         self.leftView = leftView()
         self.rightView = rightView()
-        
-        self._leftViewSize = ScaledMetric(wrappedValue: self.size.leftViewSize, relativeTo: self.size.fontStyle)
-        self._rightViewSize = ScaledMetric(wrappedValue: self.size.rightViewSize, relativeTo: self.size.fontStyle)
     }
 }
 
