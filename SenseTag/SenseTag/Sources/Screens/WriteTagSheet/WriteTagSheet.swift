@@ -13,13 +13,7 @@ import SwiftUI
 
 struct WriteTagSheet: View {
     
-    //    var store: StoreOf<ReadTagFeature>
-    
-    @State
-    private var selectedPayload: NFCNDEFWellKnownPayloadType = .text
-    
-    @State
-    private var text: String = ""
+    @Bindable var store: StoreOf<WriteTagFeature>
     
     @FocusState
     private var isFocused: Bool
@@ -28,16 +22,16 @@ struct WriteTagSheet: View {
     
     var body: some View {
         VStack {
-            Picker("", selection: $selectedPayload) {
+            Picker("", selection: $store.selectedPayload) {
                 ForEach(NFCNDEFWellKnownPayloadType.allCases) { type in
                     Text(type.title)
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .trailing)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, -.spacer12)
             DefaultTextEditor(
-                text: $text,
+                text: $store.text,
                 placeholder: "Enter text",
-                label: "Label",
                 caption: "Caption",
                 error: nil
             )
@@ -87,18 +81,18 @@ struct WriteTagSheet: View {
     @ViewBuilder
     private var quickActions: some View {
         Group {
-            switch selectedPayload {
+            switch store.selectedPayload {
             case .text:
                 IconButton {
                     Image(systemName: "waveform")
                 } action: {
-                    //                store.send(.speakUp(text, locale))
+                    store.send(.speakUp)
                 }
             case .url:
                 IconButton {
                     Image(systemName: "link")
                 } action: {
-                    //                store.send(.openURL(url))
+                    store.send(.openURL)
                 }
             }
         }
@@ -108,7 +102,7 @@ struct WriteTagSheet: View {
     @ViewBuilder
     private var saveButton: some View {
         DefaultButton(text: "Save", icon: nil) {
-            
+            store.send(.writeToTag)
         }
         .defaultButtonSize(.large)
         .defaultButtonFullWidth(true)
@@ -116,12 +110,14 @@ struct WriteTagSheet: View {
     
 }
 
-extension WriteTagSheet {
-    
-}
-
 #Preview {
     NavigationStack {
-        WriteTagSheet()
+        WriteTagSheet(
+            store: Store(
+                initialState: WriteTagFeature.State()
+            ) {
+                WriteTagFeature()
+            }
+        )
     }
 }

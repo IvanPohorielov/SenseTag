@@ -96,10 +96,10 @@ public struct DefaultTextEditor: View {
 public extension DefaultTextEditor {
     init(
         text: Binding<String>,
-        placeholder: String?,
-        label: String?,
-        caption: String?,
-        error: String?
+        placeholder: String? = nil,
+        label: String? = nil,
+        caption: String? = nil,
+        error: String? = nil
     ) {
         _text = text
         self.placeholder = placeholder ?? ""
