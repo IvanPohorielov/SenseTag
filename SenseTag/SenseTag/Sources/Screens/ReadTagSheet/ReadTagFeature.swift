@@ -19,7 +19,7 @@ struct ReadTagFeature {
 
     enum Action {
         case dismiss
-        case speakUp(String, Locale)
+        case speakUp(String)
         case copyToClipboard(String)
         case openURL(URL)
     }
@@ -34,7 +34,7 @@ struct ReadTagFeature {
             switch action {
             case .dismiss:
                 return .run { _ in await self.dismiss() }
-            case let .speakUp(text, locale):
+            case let .speakUp(text):
                 return .run { _ in
                     await speechSynthesizer.speak(text)
                 }

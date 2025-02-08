@@ -79,11 +79,11 @@ struct ReadTagSheet: View {
         switch payload {
         case let .wellKnown(wellKnownPayload):
             switch wellKnownPayload {
-            case let .text(text, locale):
+            case let .text(text, _):
                 IconButton {
                     Image(systemName: "waveform")
                 } action: {
-                    store.send(.speakUp(text, locale))
+                    store.send(.speakUp(text))
                 }
                 IconButton {
                     Image(systemName: "document.on.document.fill")

@@ -46,7 +46,7 @@ public final actor NFCNDEFManager {
 
     private func detectTag(handle: @Sendable @escaping (NFCNDEFTag) async throws -> Void) async throws {
         try self.startSession(
-            alertMessage: "Hold your iPhone near the NFC tag to lock."
+            alertMessage: "Hold your iPhone near the NFC tag."
         )
 
         do {

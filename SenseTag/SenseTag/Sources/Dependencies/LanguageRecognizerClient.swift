@@ -11,8 +11,7 @@ import ComposableArchitecture
 
 @DependencyClient
 struct LanguageRecognizerClient {
-    
-    var detectLocale: @MainActor @Sendable (String) -> Locale?
+    var detectLocale: @MainActor @Sendable (String) -> Locale = { _ in Locale(identifier: "en-US") }
 }
 
 extension LanguageRecognizerClient: DependencyKey {
@@ -22,7 +21,7 @@ extension LanguageRecognizerClient: DependencyKey {
                 return Locale(identifier: languageCode)
             }
             
-            return nil
+            return Locale(identifier: "en-US")
         }
     )
 }

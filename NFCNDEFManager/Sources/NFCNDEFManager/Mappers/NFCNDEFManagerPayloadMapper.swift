@@ -7,7 +7,7 @@
 
 @preconcurrency import CoreNFC
 
-extension NFCNDEFManagerPayload {
+public extension NFCNDEFManagerPayload {
     func mapped() -> NFCNDEFPayload {
         switch self {
         case let .wellKnown(wellKnownPayload):

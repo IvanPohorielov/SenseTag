@@ -26,7 +26,6 @@ extension SpeechSynthesizerClient: DependencyKey {
             speak: { text in
                 let locale =
                     languageRecognizer.detectLocale(text)
-                    ?? Locale(identifier: "en-US")
 
                 let utterance = AVSpeechUtterance(string: text)
 

@@ -29,15 +29,8 @@ struct WriteTagSheet: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, -.spacer12)
-            DefaultTextEditor(
-                text: $store.text,
-                placeholder: "Enter text",
-                caption: "Caption",
-                error: nil
-            )
-            .scrollDismissesKeyboard(.interactively)
-            .defaultTextEditorHeight(nil)
-            .focused($isFocused)
+            
+            textEditor
         }
         .safeAreaPadding(.horizontal, .spacer16)
         .safeAreaPadding(.bottom, .spacer16)
@@ -46,15 +39,16 @@ struct WriteTagSheet: View {
                 quickActions
                 saveButton
             }
+            .disabled(!store.isButtonsEnabled)
             .safeAreaPadding(.horizontal, .spacer16)
             .safeAreaPadding(.bottom, .spacer16)
         }
-        .navigationTitle("Write Tag")
+        .navigationTitle("Create Tag")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    
+                    store.send(.dismiss)
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundStyle(Color.secondary)
@@ -79,6 +73,34 @@ struct WriteTagSheet: View {
     // MARK: - Views
     
     @ViewBuilder
+    private var textEditor: some View {
+        var placeholder: String {
+            switch store.selectedPayload {
+            case .text:
+                "Enter text"
+            case .url:
+                "Enter URL"
+            }
+        }
+        
+        var caption: String? {
+            guard let bytes = store.payloadBytes else { return nil }
+            
+            return "Bytes: \(bytes)"
+        }
+        
+        DefaultTextEditor(
+            text: $store.text,
+            placeholder: placeholder,
+            caption: caption,
+            error: nil
+        )
+        .scrollDismissesKeyboard(.interactively)
+        .defaultTextEditorHeight(nil)
+        .focused($isFocused)
+    }
+    
+    @ViewBuilder
     private var quickActions: some View {
         Group {
             switch store.selectedPayload {
@@ -101,7 +123,7 @@ struct WriteTagSheet: View {
     
     @ViewBuilder
     private var saveButton: some View {
-        DefaultButton(text: "Save", icon: nil) {
+        DefaultButton(text: "Write", icon: nil) {
             store.send(.writeToTag)
         }
         .defaultButtonSize(.large)
