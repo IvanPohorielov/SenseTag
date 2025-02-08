@@ -26,10 +26,12 @@ struct WriteTagFeature {
         case speakUp
         case openURL
         case updatePayloadBytes(Int?)
+        case updateButtonsEnabled(Bool)
     }
 
     @Dependency(\.openURL) var openURL
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.application) var application
     @Dependency(\.nfcClient) var nfcClient
     @Dependency(\.languageRecognizer) var languageRecognizer
     @Dependency(\.speechSynthesizer) var speechSynthesizer
@@ -40,13 +42,18 @@ struct WriteTagFeature {
         Reduce { state, action in
             switch action {
             case .binding(\.text), .binding(\.selectedPayload):
-                self.checkEnabledButtons(&state)
                 return .run { [state] send in
-                    let bytes = await self.countPayloadBytes(state)
+                    async let _bytes = self.countPayloadBytes(state)
+                    async let _enabled = self.checkEnabledButtons(state)
+                    let (bytes, enabled) = await (_bytes, _enabled)
                     await send(.updatePayloadBytes(bytes))
+                    await send(.updateButtonsEnabled(enabled))
                 }
             case .updatePayloadBytes(let bytes):
                 state.payloadBytes = bytes
+                return .none
+            case .updateButtonsEnabled(let enabled):
+                state.isButtonsEnabled = enabled
                 return .none
             case .dismiss:
                 return .run { _ in await self.dismiss() }
@@ -76,37 +83,35 @@ struct WriteTagFeature {
 }
 
 extension WriteTagFeature {
-    fileprivate func checkEnabledButtons(_ state: inout State) {
+    fileprivate func checkEnabledButtons(_ state: State) async -> Bool {
         switch state.selectedPayload {
         case .text:
-            state.isButtonsEnabled = !state.text.isEmpty
+            return !state.text.isEmpty
         case .url:
-            state.isButtonsEnabled = URL(string: state.text) != nil
+            guard let url = URL(string: state.text) else { return false }
+            return await application.canOpenURL(url)
         }
     }
 
-    @MainActor
-    fileprivate func countPayloadBytes(_ state: State) -> Int? {
-        let payload = self.createPayload(state)?.mapped()
+    fileprivate func countPayloadBytes(_ state: State) async -> Int? {
+        let payload = await self.createPayload(state)?.mapped()
         return payload?.payload.count
     }
-
-    @MainActor
-    fileprivate func createPayload(_ state: State) -> NFCNDEFManagerPayload? {
+    
+    fileprivate func createPayload(_ state: State) async -> NFCNDEFManagerPayload? {
         switch state.selectedPayload {
         case .text:
             let text = state.text
 
             guard !text.isEmpty else { return nil }
 
-            let locale = languageRecognizer.detectLocale(text)
+            let locale = await languageRecognizer.detectLocale(text)
             return .wellKnown(.text(text, locale))
         case .url:
 
             guard let url = URL(string: state.text) else {
                 return nil
             }
-
             return .wellKnown(.url(url))
         }
     }
