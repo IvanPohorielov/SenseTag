@@ -18,10 +18,7 @@ struct LanguageRecognizerClient {
 extension LanguageRecognizerClient: DependencyKey {
     static let liveValue = LanguageRecognizerClient(
         detectLocale: { text in
-            let recognizer = NLLanguageRecognizer()
-            recognizer.processString(text)
-            
-            if let languageCode = recognizer.dominantLanguage?.rawValue {
+            if let languageCode = NLLanguageRecognizer.dominantLanguage(for: text)?.rawValue {
                 return Locale(identifier: languageCode)
             }
             
