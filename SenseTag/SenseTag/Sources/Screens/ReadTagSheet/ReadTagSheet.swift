@@ -43,6 +43,9 @@ struct ReadTagSheet: View {
                 }
             }
         }
+        .onAppear {
+            store.send(.onAppear)
+        }
     }
 
     // MARK: - Views
@@ -83,7 +86,7 @@ struct ReadTagSheet: View {
                 IconButton {
                     Image(systemName: "waveform")
                 } action: {
-                    store.send(.speakUp(text))
+                    store.send(.speakUp(wellKnownPayload))
                 }
                 IconButton {
                     Image(systemName: "document.on.document.fill")

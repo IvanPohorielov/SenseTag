@@ -9,6 +9,7 @@ import AVFoundation
 import ComposableArchitecture
 import Foundation
 import NFCNDEFManager
+import UIKit.UIAccessibility
 
 @Reducer
 struct ReadTagFeature {
@@ -18,8 +19,9 @@ struct ReadTagFeature {
     }
 
     enum Action {
+        case onAppear
         case dismiss
-        case speakUp(String)
+        case speakUp(NFCNDEFManagerPayload.WellKnownPayload)
         case copyToClipboard(String)
         case openURL(URL)
     }
@@ -30,19 +32,43 @@ struct ReadTagFeature {
     @Dependency(\.speechSynthesizer) var speechSynthesizer
 
     var body: some ReducerOf<Self> {
-        Reduce { _, action in
+        Reduce { state, action in
             switch action {
+            case .onAppear:
+                return .run { [payload = state.payloads.first] _ in
+
+                    guard await UIAccessibility.isVoiceOverRunning,
+                        case .wellKnown(let wellKnownPayload) = payload
+                    else {
+                        return
+                    }
+                    
+                    await self.speakUp(wellKnownPayload)
+                }
             case .dismiss:
                 return .run { _ in await self.dismiss() }
-            case let .speakUp(text):
+            case let .speakUp(payload):
                 return .run { _ in
-                    await speechSynthesizer.speak(text)
+                    await self.speakUp(payload)
                 }
             case let .copyToClipboard(text):
                 return .run { _ in await self.pasteboard.setString(text) }
             case let .openURL(url):
                 return .run { _ in await self.openURL(url) }
             }
+        }
+    }
+}
+
+extension ReadTagFeature {
+    fileprivate func speakUp(
+        _ payload: NFCNDEFManagerPayload.WellKnownPayload
+    ) async {
+        switch payload {
+        case let .text(text, _):
+            await speechSynthesizer.speak(text)
+        case let .url(url):
+            await speechSynthesizer.speak("URL: \(url)")
         }
     }
 }
