@@ -36,10 +36,7 @@ struct ReadTagFeature {
                 return .run { _ in await self.dismiss() }
             case let .speakUp(text, locale):
                 return .run { _ in
-                    let utterance = AVSpeechUtterance(string: text)
-                    utterance.prefersAssistiveTechnologySettings = true
-                    utterance.voice = AVSpeechSynthesisVoice(identifier: locale.identifier)
-                    await speechSynthesizer.speak(utterance)
+                    await speechSynthesizer.speak(text)
                 }
             case let .copyToClipboard(text):
                 return .run { _ in await self.pasteboard.setString(text) }

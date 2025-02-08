@@ -15,11 +15,8 @@ import SwiftUI
 struct MainFeature {
     @ObservableState
     struct State {
-        @Presents var confirmationDialog:
-            ConfirmationDialogState<Action.ConfirmationDialog>?
-        @Presents var alert: AlertState<Action.Alert>?
-        @Presents var readTag: ReadTagFeature.State?
-        var writeSheetIsPresented: Bool = false
+        var animate: Bool = false
+        @Presents var destination: Destination.State?
     }
 
     enum Action {
@@ -27,10 +24,8 @@ struct MainFeature {
         case openReadSheet([NFCNDEFManagerPayload])
         case writeTapped
         case otherTapped
-        case confirmationDialog(PresentationAction<ConfirmationDialog>)
-        case alert(PresentationAction<Alert>)
-        case readTag(PresentationAction<ReadTagFeature.Action>)
-        case closeSheet(Bool)
+        case startAnimation
+        case destination(PresentationAction<Destination.Action>)
 
         enum ConfirmationDialog: Equatable {
             case clear
@@ -59,46 +54,51 @@ struct MainFeature {
                     await send(.openReadSheet(payloads))
                 }
             case let .openReadSheet(payloads):
-                state.readTag = ReadTagFeature.State(payloads: payloads)
+                state.destination = .readTag(
+                    ReadTagFeature.State(payloads: payloads))
                 return .none
             case .writeTapped:
-                state.writeSheetIsPresented = true
+                state.destination = .writeTag(WriteTagFeature.State())
                 return .none
             case .otherTapped:
 
-                state.confirmationDialog = ConfirmationDialogState {
-                    TextState("Other actions")
-                } actions: {
-                    ButtonState(
-                        action: .lock
-                    ) {
-                        TextState("Lock Tag")
+                state.destination = .confirmationDialog(
+                    ConfirmationDialogState {
+                        TextState("Other actions")
+                    } actions: {
+                        ButtonState(
+                            action: .lock
+                        ) {
+                            TextState("Lock Tag")
+                        }
+                        ButtonState(
+                            action: .clear
+                        ) {
+                            TextState("Clear Tag")
+                        }
                     }
-                    ButtonState(
-                        action: .clear
-                    ) {
-                        TextState("Clear Tag")
-                    }
-                }
+                )
 
                 return .none
-            case let .confirmationDialog(.presented(action)):
+            case let .destination(.presented(.confirmationDialog(action))):
 
-                state.alert = AlertState {
-                    TextState(self.getAlertTitle(action))
-                } actions: {
-                    ButtonState(
-                        role: .destructive,
-                        action: self.getAlertAction(action)
-                    ) {
-                        TextState("Confirm")
+                state.destination = .alert(
+                    AlertState {
+                        TextState(self.getAlertTitle(action))
+                    } actions: {
+                        ButtonState(
+                            role: .destructive,
+                            action: self.getAlertAction(action)
+                        ) {
+                            TextState("Confirm")
+                        }
+                    } message: {
+                        TextState(self.getAlertMessage(action))
                     }
-                } message: {
-                    TextState(self.getAlertMessage(action))
-                }
+                )
 
                 return .none
-            case let .alert(.presented(action)):
+            case let .destination(.presented(.alert(action))):
                 switch action {
                 case .clear:
                     return .run { _ in
@@ -109,27 +109,29 @@ struct MainFeature {
                         try? await nfcClient.lock()
                     }
                 }
-            case .readTag(.presented(.dismiss)):
-                state.readTag = nil
+            case .startAnimation:
+                state.animate = true
                 return .none
-            case let .closeSheet(close):
-                state.writeSheetIsPresented = close
-                return .none
-            case .confirmationDialog:
-                return .none
-            case .alert:
-                return .none
-            case .readTag:
-                return .none
+            case .destination:
+                    return .none
             }
         }
-        .ifLet(\.confirmationDialog, action: \.confirmationDialog)
-        .ifLet(\.alert, action: \.alert)
-        .ifLet(\.$readTag, action: \.readTag) {
-            ReadTagFeature()
-        }
+        .ifLet(\.$destination, action: \.destination)
     }
 }
+
+extension MainFeature {
+    @Reducer
+    enum Destination {
+        case confirmationDialog(
+            ConfirmationDialogState<MainFeature.Action.ConfirmationDialog>)
+        case alert(AlertState<MainFeature.Action.Alert>)
+        case readTag(ReadTagFeature)
+        case writeTag(WriteTagFeature)
+    }
+}
+
+//extension MainFeature.Destination.State: Equatable {}
 
 extension MainFeature {
     fileprivate func getAlertTitle(_ action: Action.ConfirmationDialog)

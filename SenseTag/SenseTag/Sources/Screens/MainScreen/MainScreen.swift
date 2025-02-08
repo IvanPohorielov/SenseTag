@@ -14,8 +14,6 @@ struct MainScreen: View {
 
     @Bindable var store: StoreOf<MainFeature>
 
-    @State
-    private var animate = false
     @ScaledMetric(relativeTo: DefaultFont.hZero.textStyle)
     private var largeImageSize: CGFloat = .image56
 
@@ -49,35 +47,40 @@ struct MainScreen: View {
             .safeAreaPadding(.spacer16)
         }
         .alert(
-            $store.scope(state: \.alert, action: \.alert)
+            $store.scope(
+                state: \.destination?.alert,
+                action: \.destination.alert
+            )
         )
         .confirmationDialog(
             $store.scope(
-                state: \.confirmationDialog, action: \.confirmationDialog)
+                state: \.destination?.confirmationDialog,
+                action: \.destination.confirmationDialog
+            )
         )
         .sheet(
-            item: $store.scope(state: \.readTag, action: \.readTag)
+            item: $store.scope(
+                state: \.destination?.readTag,
+                action: \.destination.readTag
+            )
         ) { readTagStore in
-            NavigationStack {
-                ReadTagSheet(store: readTagStore)
+            self.sheetBuilder {
+                NavigationStack {
+                    ReadTagSheet(store: readTagStore)
+                }
             }
-            .presentationCornerRadius(40.0)
-            .presentationDetents([.medium, .large])
-            .presentationBackground(Material.regular)
         }
         .sheet(
-            isPresented: Binding {
-                store.writeSheetIsPresented
-            } set: { newValue in
-                store.send(.closeSheet(newValue))
+            item: $store.scope(
+                state: \.destination?.writeTag,
+                action: \.destination.writeTag
+            )
+        ) { writeTagStore in
+            self.sheetBuilder {
+                NavigationStack {
+                    WriteTagSheet(store: writeTagStore)
+                }
             }
-        ) {
-            NavigationStack {
-                WriteTagSheet()
-            }
-            .presentationCornerRadius(40.0)
-            .presentationDetents([.medium, .large])
-            .presentationBackground(Material.regular)
         }
     }
 
@@ -115,22 +118,32 @@ struct MainScreen: View {
         }
     }
 
+    @ViewBuilder
+    private func sheetBuilder(
+        @ViewBuilder sheet: () -> some View
+    ) -> some View {
+        sheet()
+            .presentationCornerRadius(40.0)
+            .presentationDetents([.medium, .large])
+            .presentationBackground(.regularMaterial)
+    }
+
     private var backgroundAnimation: some View {
         ForEach(0..<5) { index in
             Circle()
                 .stroke(lineWidth: 12.0)
                 .foregroundStyle(Color.blue.primary)
-                .opacity(animate ? 0 : 0.5)
-                .scaleEffect(animate ? 2 : 0.1)
+                .opacity(store.animate ? 0 : 0.5)
+                .scaleEffect(store.animate ? 2 : 0.1)
                 .animation(
                     Animation.easeOut(duration: 12)
                         .repeatForever()
                         .delay(Double(index) * 2),
-                    value: animate
+                    value: store.animate
                 )
         }
         .onAppear {
-            animate = true
+            store.send(.startAnimation)
         }
     }
 }

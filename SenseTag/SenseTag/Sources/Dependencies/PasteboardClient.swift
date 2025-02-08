@@ -14,7 +14,7 @@ struct PasteboardClient {
     var setString: @MainActor @Sendable (String) async -> Void
 }
 
-private enum PasteboardClientKey: DependencyKey {
+extension PasteboardClient: DependencyKey {
     static let liveValue = PasteboardClient(
         getString: {
             UIPasteboard.general.string
@@ -27,7 +27,7 @@ private enum PasteboardClientKey: DependencyKey {
 
 extension DependencyValues {
     var pasteboard: PasteboardClient {
-        get { self[PasteboardClientKey.self] }
-        set { self[PasteboardClientKey.self] = newValue }
+        get { self[PasteboardClient.self] }
+        set { self[PasteboardClient.self] = newValue }
     }
 }

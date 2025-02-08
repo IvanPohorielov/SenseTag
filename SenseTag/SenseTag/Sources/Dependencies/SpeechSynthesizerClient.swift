@@ -10,19 +10,25 @@ import ComposableArchitecture
 
 @DependencyClient
 struct SpeechSynthesizerClient {
-    var speak: @MainActor @Sendable (AVSpeechUtterance) async -> Void
+    var speak: @MainActor @Sendable (String) async -> Void
     var stopSpeaking: @MainActor @Sendable (AVSpeechBoundary) async -> Void
     var pauseSpeaking: @MainActor @Sendable (AVSpeechBoundary) async -> Void
     var continueSpeaking: @MainActor @Sendable () async -> Void
     var isSpeaking: @MainActor @Sendable () async -> Bool = { false }
 }
 
-private enum SpeechSynthesizerClientKey: DependencyKey {
+extension SpeechSynthesizerClient: DependencyKey {
     static let liveValue: SpeechSynthesizerClient = {
         nonisolated(unsafe) let synthesizer = AVSpeechSynthesizer()
+        @Dependency(\.languageRecognizer) var languageRecognizer
 
         return SpeechSynthesizerClient(
-            speak: { utterance in
+            speak: { text in
+                let locale = languageRecognizer.detectLocale(text) ?? Locale(identifier: "en-US")
+                let utterance = AVSpeechUtterance(string: text)
+                utterance.prefersAssistiveTechnologySettings = true
+                utterance.voice = AVSpeechSynthesisVoice(identifier: locale.identifier)
+                
                 synthesizer.speak(utterance)
             },
             stopSpeaking: { boundary in
@@ -43,7 +49,7 @@ private enum SpeechSynthesizerClientKey: DependencyKey {
 
 extension DependencyValues {
     var speechSynthesizer: SpeechSynthesizerClient {
-        get { self[SpeechSynthesizerClientKey.self] }
-        set { self[SpeechSynthesizerClientKey.self] = newValue }
+        get { self[SpeechSynthesizerClient.self] }
+        set { self[SpeechSynthesizerClient.self] = newValue }
     }
 }

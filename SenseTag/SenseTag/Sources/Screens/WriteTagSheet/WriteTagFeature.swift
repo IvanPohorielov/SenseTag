@@ -29,23 +29,20 @@ struct WriteTagFeature {
     @Dependency(\.openURL) var openURL
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.pasteboard) var pasteboard
+    @Dependency(\.languageRecognizer) var languageRecognizer
     @Dependency(\.speechSynthesizer) var speechSynthesizer
 
     var body: some ReducerOf<Self> {
         BindingReducer()
         
-        Reduce { _, action in
+        Reduce { state, action in
             switch action {
             case .dismiss:
                 return .run { _ in await self.dismiss() }
             case .speakUp:
-//                return .run { _ in
-//                    let utterance = AVSpeechUtterance(string: text)
-//                    utterance.prefersAssistiveTechnologySettings = true
-//                    utterance.voice = AVSpeechSynthesisVoice(identifier: locale.identifier)
-//                    await speechSynthesizer.speak(utterance)
-//                }
-                return .none
+                return .run { [state] _ in
+                    await speechSynthesizer.speak(state.text)
+                }
             case .openURL:
 //                return .run { _ in await self.openURL(url) }
                 return .none

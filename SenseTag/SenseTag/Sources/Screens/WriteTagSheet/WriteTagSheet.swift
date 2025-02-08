@@ -107,7 +107,6 @@ struct WriteTagSheet: View {
         .defaultButtonSize(.large)
         .defaultButtonFullWidth(true)
     }
-    
 }
 
 #Preview {
