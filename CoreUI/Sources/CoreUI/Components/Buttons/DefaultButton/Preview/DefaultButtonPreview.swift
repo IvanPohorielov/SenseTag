@@ -88,7 +88,7 @@ import SwiftUI
         @ViewBuilder
         private var button: some View {
             DefaultButton(
-                text: "Button",
+                "Button",
                 icon: isShowIcon ? .systemImage("xmark") : nil
             ) {
                 

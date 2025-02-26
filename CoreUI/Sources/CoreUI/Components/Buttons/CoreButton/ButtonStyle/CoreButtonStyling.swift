@@ -36,7 +36,6 @@ struct CoreButtonStyling<Style: CoreButtonStyle, Size: CoreButtonSize>: ButtonSt
 
         configuration
             .label
-            .lineLimit(size.lineLimit)
             .padding(.vertical, size.contentVerticalPadding)
             .padding(.horizontal, size.contentHorizontalPadding)
             .frame(

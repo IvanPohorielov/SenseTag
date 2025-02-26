@@ -8,12 +8,14 @@
 import FoundationUI
 import SwiftUI
 
-public struct LinkButton<Icon: View>: CoreButton, LinkButtonEnvProtocol, Loadable {
-    let text: String?
+public struct LinkButton<Icon: View, Label: View>: CoreButton, LinkButtonEnvProtocol, Loadable {
+    
+    let label: Label?
 
     let icon: Icon?
 
-    let action: () -> Void
+    let action: @MainActor @Sendable () -> Void
+
 
     // MARK: - Properties
 
@@ -45,54 +47,59 @@ public struct LinkButton<Icon: View>: CoreButton, LinkButtonEnvProtocol, Loadabl
 
 public extension LinkButton {
     init(
-        text: String,
+        @ViewBuilder labelBuilder: () -> Label = { EmptyView?(nil) },
         @ViewBuilder iconBuilder: () -> Icon = { EmptyView?(nil) },
-        action: @escaping @MainActor () -> Void
+        action: @escaping @MainActor @Sendable () -> Void
     ) {
-        self.text = text
-        icon = iconBuilder()
-        self.action = action
-    }
-
-    init(
-        _ content: CoreButtonContent,
-        @ViewBuilder iconBuilder: (ImageContent?) -> Icon = { content in
-            Image(content)?
-                .resizable()
-        },
-        action: @escaping @MainActor () -> Void
-    ) {
-        text = content.text
-        icon = iconBuilder(content.icon)
+        self.label = labelBuilder()
+        self.icon = iconBuilder()
         self.action = action
     }
 }
 
-public extension LinkButton where Icon == Image {
+public extension LinkButton where Icon == Image, Label == Text {
+    
+    @_semantics("swiftui.init_with_localization")
     init(
-        _ content: CoreButtonContent,
-        action: @escaping @MainActor () -> Void
+        _ titleKey: LocalizedStringKey,
+        icon: ImageContent?,
+        action: @escaping @MainActor @Sendable () -> Void
     ) {
-        text = content.text
-        if let icon = content.icon {
-            self.icon = Image(icon)
-        } else {
-            icon = nil
-        }
+        self.label = Text(titleKey)
+        self.icon = Image(icon)
         self.action = action
     }
-
-    init(
-        text: String,
+    
+    @_disfavoredOverload
+    init<S>(
+        _ title: S,
         icon: ImageContent?,
-        action: @escaping @MainActor () -> Void
+        action: @escaping @MainActor @Sendable () -> Void
+    ) where S : StringProtocol {
+        self.label = Text(title)
+        self.icon = Image(icon)
+        self.action = action
+    }
+    
+    @_semantics("swiftui.init_with_localization")
+    init(
+        _ titleKey: LocalizedStringKey,
+        icon: ImageResource,
+        action: @escaping @MainActor @Sendable () -> Void
     ) {
-        self.text = text
-        if let icon {
-            self.icon = Image(icon)
-        } else {
-            self.icon = nil
-        }
+        self.label = Text(titleKey)
+        self.icon = Image(icon)
+        self.action = action
+    }
+    
+    @_disfavoredOverload
+    init<S>(
+        _ title: S,
+        icon: ImageResource,
+        action: @escaping @MainActor @Sendable () -> Void
+    ) where S : StringProtocol {
+        self.label = Text(title)
+        self.icon = Image(icon)
         self.action = action
     }
 }

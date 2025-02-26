@@ -86,7 +86,7 @@ import SwiftUI
         @ViewBuilder
         private var button: some View {
             LinkButton(
-                text: "Button",
+                "Button",
                 icon: isShowIcon ? .systemImage("xmark") : nil
             ) {
                 

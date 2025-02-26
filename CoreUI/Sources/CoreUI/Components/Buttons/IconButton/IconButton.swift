@@ -8,12 +8,13 @@
 import FoundationUI
 import SwiftUI
 
-public struct IconButton<Icon: View>: CoreButton, IconButtonEnvProtocol, Loadable {
-    let text: String? = nil
+public struct IconButton<Icon: View, Label: View>: CoreButton, IconButtonEnvProtocol, Loadable {
+    
+    let label: Label?
 
     let icon: Icon?
 
-    let action: () -> Void
+    let action: @MainActor @Sendable () -> Void
 
     // MARK: - Configuration
 
@@ -48,26 +49,34 @@ public struct IconButton<Icon: View>: CoreButton, IconButtonEnvProtocol, Loadabl
 
 // MARK: - Init
 
-public extension IconButton {
+public extension IconButton where Label == EmptyView {
     init(
         @ViewBuilder iconBuilder: () -> Icon = { EmptyView?(nil) },
-        action: @escaping @MainActor () -> Void
+        action: @escaping @MainActor @Sendable () -> Void
     ) {
-        icon = iconBuilder()
+        self.label = EmptyView()
+        self.icon = iconBuilder()
         self.action = action
     }
 }
 
-public extension IconButton where Icon == Image {
+public extension IconButton where Icon == Image, Label == EmptyView {
+    
     init(
-        icon: ImageContent? = nil,
-        action: @escaping @MainActor () -> Void
+        icon: ImageContent?,
+        action: @escaping @MainActor @Sendable () -> Void
     ) {
-        if let icon {
-            self.icon = Image(icon)
-        } else {
-            self.icon = nil
-        }
+        self.label = EmptyView()
+        self.icon = Image(icon)
+        self.action = action
+    }
+    
+    init(
+        icon: ImageResource,
+        action: @escaping @MainActor @Sendable () -> Void
+    ) {
+        self.label = EmptyView()
+        self.icon = Image(icon)
         self.action = action
     }
 }
