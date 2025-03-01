@@ -83,25 +83,17 @@ struct ReadTagSheet: View {
         case let .wellKnown(wellKnownPayload):
             switch wellKnownPayload {
             case let .text(text, _):
-                IconButton {
-                    Image(systemName: "waveform")
-                } action: {
+                IconButton(icon: .systemImage("waveform")) {
                     store.send(.speakUp(wellKnownPayload))
                 }
-                IconButton {
-                    Image(systemName: "document.on.document.fill")
-                } action: {
+                IconButton(icon: .systemImage("document.on.document.fill")) {
                     store.send(.copyToClipboard(text))
                 }
             case let .url(url):
-                IconButton {
-                    Image(systemName: "link")
-                } action: {
+                IconButton(icon: .systemImage("link")) {
                     store.send(.openURL(url))
                 }
-                IconButton {
-                    Image(systemName: "document.on.document.fill")
-                } action: {
+                IconButton(icon: .systemImage("document.on.document.fill")) {
                     store.send(.copyToClipboard(url.absoluteString))
                 }
             }

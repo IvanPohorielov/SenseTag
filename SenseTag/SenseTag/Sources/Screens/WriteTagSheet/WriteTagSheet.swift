@@ -105,15 +105,11 @@ struct WriteTagSheet: View {
         Group {
             switch store.selectedPayload {
             case .text:
-                IconButton {
-                    Image(systemName: "waveform")
-                } action: {
+                IconButton(icon: .systemImage("waveform")) {
                     store.send(.speakUp)
                 }
             case .url:
-                IconButton {
-                    Image(systemName: "link")
-                } action: {
+                IconButton(icon: .systemImage("link")) {
                     store.send(.openURL)
                 }
             }
@@ -123,7 +119,7 @@ struct WriteTagSheet: View {
     
     @ViewBuilder
     private var saveButton: some View {
-        DefaultButton(text: "Write", icon: nil) {
+        DefaultButton("Write") {
             store.send(.writeToTag)
         }
         .defaultButtonSize(.large)
