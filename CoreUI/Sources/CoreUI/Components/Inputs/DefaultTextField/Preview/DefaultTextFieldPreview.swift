@@ -45,8 +45,6 @@ import SwiftUI
 
         @State
         private var showClearButton: Bool = false
-        @State
-        private var showRequiredIndicator: Bool = false
 
         // MARK: - Character Limit Configuration
 
@@ -84,7 +82,6 @@ import SwiftUI
                 }
                 .inputSize(.regular)
                 .inputStyle(.regular)
-                .inputRequired(showRequiredIndicator)
                 .inputClearButtonEnabled(showClearButton)
                 .inputClearButtonAction {
                     self.text = ""
@@ -160,8 +157,6 @@ import SwiftUI
         private var contentConfiguration: some View {
             Section("Configuration") {
                 Toggle("Show clear button", isOn: $showClearButton)
-                Toggle("Show required indicator", isOn: $showRequiredIndicator)
-                    .disabled(!showLabel)
             }
         }
 

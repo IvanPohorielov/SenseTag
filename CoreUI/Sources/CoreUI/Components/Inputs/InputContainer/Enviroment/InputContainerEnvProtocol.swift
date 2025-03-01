@@ -14,6 +14,4 @@ protocol InputContainerEnvProtocol {
     var style: any CoreInputContainerStyleProtocol { get }
 
     var characterLimitConfiguration: CoreInputCharacterLimitConfiguration? { get }
-
-    var isRequired: Bool { get }
 }

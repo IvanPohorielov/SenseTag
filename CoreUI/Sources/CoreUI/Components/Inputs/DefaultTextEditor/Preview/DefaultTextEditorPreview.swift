@@ -34,11 +34,6 @@ import SwiftUI
         @State
         private var showCaption: Bool = false
 
-        // MARK: - Configuration
-
-        @State
-        private var showRequiredIndicator: Bool = false
-
         // MARK: - Character Limit Configuration
 
         @State
@@ -75,7 +70,6 @@ import SwiftUI
                 }
                 .inputSize(.regular)
                 .inputStyle(.regular)
-                .inputRequired(showRequiredIndicator)
                 .inputClearButtonAction {
                     self.text = ""
                 }
@@ -99,8 +93,6 @@ import SwiftUI
                     stateSection
 
                     contentSection
-
-                    contentConfiguration
 
                     characterLimitConfigurationSection
                 }
@@ -132,14 +124,6 @@ import SwiftUI
                 Toggle("Show placeholder", isOn: $showPlaceholder)
                 Toggle("Show label", isOn: $showLabel)
                 Toggle("Show caption", isOn: $showCaption)
-            }
-        }
-
-        @ViewBuilder
-        private var contentConfiguration: some View {
-            Section("Configuration") {
-                Toggle("Show required indicator", isOn: $showRequiredIndicator)
-                    .disabled(!showLabel)
             }
         }
 

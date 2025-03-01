@@ -30,7 +30,4 @@ extension EnvironmentValues {
 
     @Entry
     var inputClearButtonAction: CoreInputClearAction?
-
-    @Entry
-    var inputRequired: Bool = false
 }

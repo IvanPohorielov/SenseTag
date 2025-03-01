@@ -10,17 +10,21 @@ import Combine
 import FoundationUI
 import SwiftUI
 
-struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
+struct InputContainer<
+    Input: View,
+    Label: View,
+    Caption: View,
+    ErrorLabel: View
+>: View, InputContainerEnvProtocol {
     private let input: Input
+    private let label: Label?
+    private let caption: Caption?
+    private let error: ErrorLabel?
 
     @Binding
     private var text: String
 
     private let state: CoreInputState
-
-    private let label: String?
-    private let caption: String?
-    private let error: String?
 
     // MARK: - Properties
 
@@ -33,9 +37,6 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
     @Environment(\.inputCharacterLimitConfiguration)
     var characterLimitConfiguration: CoreInputCharacterLimitConfiguration?
 
-    @Environment(\.inputRequired)
-    var isRequired: Bool
-
     // MARK: - State
 
     @State
@@ -44,8 +45,8 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
     @State
     private var counterError: Bool = false
 
-    private var captionProxy: String? {
-        state == .error ? error : caption
+    private var captionProxy: AnyView? {
+        state == .error ? AnyView(error) : AnyView(caption)
     }
 
     private var isAppearenceLimit: Bool? {
@@ -54,6 +55,24 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
         }
 
         return appearenceLimit <= text.count
+    }
+    
+    // MARK: - Init
+
+    init(
+        _ text: Binding<String>,
+        state: CoreInputState,
+        label: Label,
+        caption: Caption,
+        error: ErrorLabel,
+        input: () -> Input
+    ) {
+        _text = text
+        self.state = state
+        self.label = label
+        self.caption = caption
+        self.error = error
+        self.input = input()
     }
 
     // MARK: - Views
@@ -72,10 +91,6 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
         }
         .animation(
             .easeInOut(duration: 0.2),
-            value: caption != nil ? [label, caption] : [label, captionProxy]
-        )
-        .animation(
-            .easeInOut(duration: 0.2),
             value: isAppearenceLimit
         )
     }
@@ -84,17 +99,10 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
     private var labelView: some View {
         if let label = label {
             HStack(spacing: 0.0) {
-                Text(label)
+                label
                     .font(size.labelFont)
                     .foregroundColor(style.labelForegroundColor)
                     .accessibilityIdentifier(Accessibility.labelView.rawValue)
-
-                if isRequired {
-                    Text("*")
-                        .font(size.labelFont)
-                        .foregroundColor(.red.primary)
-                        .accessibilityIdentifier(Accessibility.requiredView.rawValue)
-                }
             }
             .transition(
                 .move(
@@ -115,7 +123,7 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
                 spacing: size.captionStackSpacing
             ) {
                 if let caption = captionProxy {
-                    Text(caption)
+                    caption
                         .font(size.captionFont)
                         .foregroundColor(style.captionForegroundColor(for: state))
                         .accessibilityIdentifier(Accessibility.captionView.rawValue)
@@ -205,25 +213,5 @@ struct InputContainer<Input: View>: View, InputContainerEnvProtocol {
         } else {
             return (limitedText: text, isLimit: false)
         }
-    }
-}
-
-// MARK: - Init
-
-extension InputContainer {
-    init(
-        text: Binding<String>,
-        state: CoreInputState,
-        label: String?,
-        caption: String?,
-        error: String?,
-        @ViewBuilder input: () -> Input
-    ) {
-        _text = text
-        self.state = state
-        self.label = label
-        self.caption = caption
-        self.error = error
-        self.input = input()
     }
 }
