@@ -84,22 +84,30 @@ public extension LinkButton where Icon == Image, Label == Text {
     @_semantics("swiftui.init_with_localization")
     init(
         _ titleKey: LocalizedStringKey,
-        icon: ImageResource,
+        icon: ImageResource? = nil,
         action: @escaping @MainActor @Sendable () -> Void
     ) {
         self.label = Text(titleKey)
-        self.icon = Image(icon)
+        if let icon  {
+            self.icon = Image(icon)
+        } else {
+            self.icon = nil
+        }
         self.action = action
     }
     
     @_disfavoredOverload
     init<S>(
         _ title: S,
-        icon: ImageResource,
+        icon: ImageResource? = nil,
         action: @escaping @MainActor @Sendable () -> Void
     ) where S : StringProtocol {
         self.label = Text(title)
-        self.icon = Image(icon)
+        if let icon  {
+            self.icon = Image(icon)
+        } else {
+            self.icon = nil
+        }
         self.action = action
     }
 }
