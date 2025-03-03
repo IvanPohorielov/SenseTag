@@ -10,10 +10,13 @@ import SwiftUI
 @_spi(Advanced) import SwiftUIIntrospect
 
 /// Temporary solution, untill Apple add palceholder
-struct TextArea: View {
+struct TextArea<
+    Placeholder: View
+>: View {
     // MARK: - Properties
 
-    private let placeholder: String
+    private let placeholder: Placeholder?
+    private let editor: TextEditor
     private var backgroudColor: Color = .clear
 
     // MARK: - State
@@ -23,17 +26,19 @@ struct TextArea: View {
     // MARK: - Init
 
     init(
-        _ placeholder: String,
+        placeholder: Placeholder?,
+        editor: TextEditor,
         text: Binding<String>
     ) {
         self.placeholder = placeholder
-        _text = text
+        self.editor = editor
+        self._text = text
     }
 
     // MARK: - View
 
     var body: some View {
-        TextEditor(text: $text)
+        editor
             .introspect(
                 .textEditor,
                 on: .iOS(.v15...)
@@ -43,11 +48,11 @@ struct TextArea: View {
             .overlay(
                 VStack {
                     HStack {
-                        text.isEmpty ? Text(placeholder) : Text("")
+                        text.isEmpty ? AnyView(placeholder) : AnyView(EmptyView())
                         Spacer()
                     }
                     .foregroundColor(
-                        .black.primary.opacity(0.38)
+                        Color(UIColor.placeholderText)
                     )
                     .padding(
                         EdgeInsets(
@@ -71,19 +76,15 @@ struct TextArea: View {
 
 #if DEBUG
 
-    // MARK: - TestView
-
-    fileprivate struct TestView: View {
-        @State
-        var text: String = ""
-
-        var body: some View {
-            TextArea("Placeholder", text: $text)
-        }
-    }
-
     #Preview {
-        TestView()
+        @Previewable @State
+        var text: String = ""
+        
+        TextArea(
+            placeholder: Text("Hello"),
+            editor: TextEditor(text: $text),
+            text: $text
+        )
     }
 
 #endif

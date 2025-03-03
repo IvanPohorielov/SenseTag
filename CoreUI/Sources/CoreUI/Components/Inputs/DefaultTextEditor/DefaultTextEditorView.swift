@@ -8,16 +8,23 @@
 
 import SwiftUI
 
-public struct DefaultTextEditor: View {
+public struct DefaultTextEditor<
+    Label: View,
+    Caption: View,
+    ErrorLabel: View,
+    Placeholder: View
+>: View {
     // MARK: - Properties
+
+    private let label: Label?
+    private let caption: Caption?
+    private let error: ErrorLabel?
+    private let placeholder: Placeholder?
+
+    private let editor: TextEditor
 
     @Binding
     private var text: String
-    private let placeholder: String
-
-    private let label: String?
-    private let caption: String?
-    private let error: String?
 
     private var isError: Bool {
         error != nil
@@ -55,7 +62,8 @@ public struct DefaultTextEditor: View {
 
     public var body: some View {
         TextArea(
-            placeholder,
+            placeholder: placeholder,
+            editor: editor,
             text: $text
         )
         .frame(height: editorHeight)
@@ -70,14 +78,14 @@ public struct DefaultTextEditor: View {
             )
         ) { _, wrapper in
             self.inputState = wrapper.getState()
-        } // change state according to focus and disabled state
+        }  // change state according to focus and disabled state
         .onAppear {
             self.inputState = CoreInputStateWrapper(
                 isEnabled: isEnabled,
                 isFocused: isFocused,
                 isError: isError
             ).getState()
-        } // initial setup of input state
+        }  // initial setup of input state
         .accessibilityIdentifier(Accessibility.textAreaView.rawValue)
         .inputContainer(
             text: $text,
@@ -93,19 +101,97 @@ public struct DefaultTextEditor: View {
 
 // MARK: - Init
 
-public extension DefaultTextEditor {
-    init(
+extension DefaultTextEditor {
+    public init(
         text: Binding<String>,
-        placeholder: String? = nil,
-        label: String? = nil,
-        caption: String? = nil,
-        error: String? = nil
+        @ViewBuilder placeholder: () -> Placeholder = { EmptyView?(nil) },
+        @ViewBuilder label: () -> Label = { EmptyView?(nil) },
+        @ViewBuilder caption: () -> Caption = { EmptyView?(nil) },
+        @ViewBuilder error: () -> ErrorLabel = { EmptyView?(nil) }
     ) {
-        _text = text
-        self.placeholder = placeholder ?? ""
-        self.label = label
-        self.caption = caption
-        self.error = error
+        self._text = text
+        self.editor = TextEditor(text: text)
+        self.placeholder = placeholder()
+        self.label = label()
+        self.caption = caption()
+        self.error = error()
+    }
+}
+
+extension DefaultTextEditor
+where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
+
+    @_semantics("swiftui.init_with_localization")
+    public init(
+        text: Binding<String>,
+        axis: Axis? = nil,
+        placeholderKey: LocalizedStringKey? = nil,
+        labelKey: LocalizedStringKey? = nil,
+        captionKey: LocalizedStringKey? = nil,
+        errorKey: LocalizedStringKey? = nil
+    ) {
+        self._text = text
+        self.editor = TextEditor(text: text)
+        if let placeholderKey {
+            self.placeholder = Text(placeholderKey)
+        } else {
+            self.placeholder = nil
+        }
+        if let labelKey {
+            self.label = Text(labelKey)
+        } else {
+            self.label = nil
+        }
+
+        if let captionKey {
+            self.caption = Text(captionKey)
+        } else {
+            self.caption = nil
+        }
+
+        if let errorKey {
+            self.error = Text(errorKey)
+        } else {
+            self.error = nil
+        }
+    }
+
+    @_disfavoredOverload
+    public init<
+        P: StringProtocol, L: StringProtocol, C: StringProtocol,
+        E: StringProtocol
+    >(
+        text: Binding<String>,
+        axis: Axis? = nil,
+        placeholder: P? = nil,
+        label: L? = nil,
+        caption: C? = nil,
+        error: E? = nil
+    ) {
+        self._text = text
+        self.editor = TextEditor(text: text)
+        if let placeholder {
+            self.placeholder = Text(placeholder)
+        } else {
+            self.placeholder = nil
+        }
+        if let label {
+            self.label = Text(label)
+        } else {
+            self.label = nil
+        }
+
+        if let caption {
+            self.caption = Text(caption)
+        } else {
+            self.caption = nil
+        }
+
+        if let error {
+            self.error = Text(error)
+        } else {
+            self.error = nil
+        }
     }
 }
 

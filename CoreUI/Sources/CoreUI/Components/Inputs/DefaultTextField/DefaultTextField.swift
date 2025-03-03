@@ -8,7 +8,7 @@
 
 import FoundationUI
 import SwiftUI
-    
+
 public struct DefaultTextField<
     Label: View,
     Caption: View,
@@ -18,18 +18,18 @@ public struct DefaultTextField<
     RightView: View
 >: View, DefaultTextFieldEnvProtocol {
     // MARK: - Properties
-    
+
     private let label: Label?
     private let caption: Caption?
     private let error: ErrorLabel?
-    
+
     private let input: TextField<Placeholder>
     private let leftView: LeftView?
     private let rightView: RightView?
 
     @Binding
     private var text: String
-    
+
     private var isError: Bool {
         error != nil
     }
@@ -60,11 +60,13 @@ public struct DefaultTextField<
     private var isFocused: Bool
 
     private var leftViewSize: CGFloat {
-        UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(for: size.leftViewSize)
+        UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(
+            for: size.leftViewSize)
     }
 
     private var rightViewSize: CGFloat {
-        UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(for: size.rightViewSize)
+        UIFontMetrics(forTextStyle: size.fontStyle).scaledValue(
+            for: size.rightViewSize)
     }
 
     // MARK: - Views
@@ -99,11 +101,11 @@ public struct DefaultTextField<
     private var textField: some View {
         HStack {
             input
-            .accessibilityIdentifier(Accessibility.textFieldView.rawValue)
+                .accessibilityIdentifier(Accessibility.textFieldView.rawValue)
 
             if self.clearButtonEnabled,
-               !self.text.isEmpty,
-               self.inputState == .active
+                !self.text.isEmpty,
+                self.inputState == .active
             {
                 Button {
                     if let clearButtonAction {
@@ -131,21 +133,21 @@ public struct DefaultTextField<
             )
         ) { _, wrapper in
             self.inputState = wrapper.getState()
-        } // change state according to focus and disabled state
+        }  // change state according to focus and disabled state
         .onAppear {
             self.inputState = CoreInputStateWrapper(
                 isEnabled: isEnabled,
                 isFocused: isFocused,
                 isError: isError
             ).getState()
-        } // initial setup of input state
+        }  // initial setup of input state
     }
 }
 
 // MARK: - Init
 
-public extension DefaultTextField {
-    init(
+extension DefaultTextField {
+    public init(
         text: Binding<String>,
         axis: Axis? = nil,
         @ViewBuilder placeholder: () -> Placeholder = { EmptyView?(nil) },
@@ -169,10 +171,11 @@ public extension DefaultTextField {
     }
 }
 
-public extension DefaultTextField where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
-    
+extension DefaultTextField
+where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
+
     @_semantics("swiftui.init_with_localization")
-    init(
+    public init(
         text: Binding<String>,
         axis: Axis? = nil,
         placeholderKey: LocalizedStringKey? = nil,
@@ -193,13 +196,13 @@ public extension DefaultTextField where Placeholder == Text, Label == Text, Capt
         } else {
             self.label = nil
         }
-        
+
         if let captionKey {
             self.caption = Text(captionKey)
         } else {
             self.caption = nil
         }
-        
+
         if let errorKey {
             self.error = Text(errorKey)
         } else {
@@ -208,9 +211,12 @@ public extension DefaultTextField where Placeholder == Text, Label == Text, Capt
         self.leftView = leftView()
         self.rightView = rightView()
     }
-    
+
     @_disfavoredOverload
-    init<P: StringProtocol, L: StringProtocol, C: StringProtocol, E: StringProtocol>(
+    public init<
+        P: StringProtocol, L: StringProtocol, C: StringProtocol,
+        E: StringProtocol
+    >(
         text: Binding<String>,
         axis: Axis? = nil,
         placeholder: P? = nil,
@@ -231,13 +237,13 @@ public extension DefaultTextField where Placeholder == Text, Label == Text, Capt
         } else {
             self.label = nil
         }
-        
+
         if let caption {
             self.caption = Text(caption)
         } else {
             self.caption = nil
         }
-        
+
         if let error {
             self.error = Text(error)
         } else {
@@ -248,10 +254,14 @@ public extension DefaultTextField where Placeholder == Text, Label == Text, Capt
     }
 }
 
-public extension DefaultTextField where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text, LeftView == Image, RightView == Image {
-    
+extension DefaultTextField
+where
+    Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text,
+    LeftView == Image, RightView == Image
+{
+
     @_semantics("swiftui.init_with_localization")
-    init(
+    public init(
         text: Binding<String>,
         axis: Axis? = nil,
         placeholderKey: LocalizedStringKey? = nil,
@@ -272,13 +282,13 @@ public extension DefaultTextField where Placeholder == Text, Label == Text, Capt
         } else {
             self.label = nil
         }
-        
+
         if let captionKey {
             self.caption = Text(captionKey)
         } else {
             self.caption = nil
         }
-        
+
         if let errorKey {
             self.error = Text(errorKey)
         } else {
@@ -295,9 +305,12 @@ public extension DefaultTextField where Placeholder == Text, Label == Text, Capt
             self.rightView = nil
         }
     }
-    
+
     @_disfavoredOverload
-    init<P: StringProtocol, L: StringProtocol, C: StringProtocol, E: StringProtocol>(
+    public init<
+        P: StringProtocol, L: StringProtocol, C: StringProtocol,
+        E: StringProtocol
+    >(
         text: Binding<String>,
         axis: Axis? = nil,
         placeholder: P? = nil,
@@ -318,13 +331,13 @@ public extension DefaultTextField where Placeholder == Text, Label == Text, Capt
         } else {
             self.label = nil
         }
-        
+
         if let caption {
             self.caption = Text(caption)
         } else {
             self.caption = nil
         }
-        
+
         if let error {
             self.error = Text(error)
         } else {
@@ -342,8 +355,6 @@ public extension DefaultTextField where Placeholder == Text, Label == Text, Capt
         }
     }
 }
-
-
 
 #if DEBUG
 
