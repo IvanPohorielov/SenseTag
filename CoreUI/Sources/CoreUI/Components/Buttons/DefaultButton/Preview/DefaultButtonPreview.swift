@@ -66,7 +66,7 @@ import SwiftUI
                 }
                 .defaultButtonSize(size)
                 .defaultButtonStyle(style)
-                .defaultButtonBorderShape(borderShage)
+                .buttonBorderShape(borderShage)
                 .defaultButtonFullWidth(isFullWidht)
                 .isLoading(isLoading)
                 .disabled(isDisabled)

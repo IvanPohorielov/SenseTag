@@ -15,8 +15,4 @@ public extension View {
     func iconButtonStyle(_ style: IconButtonStyle) -> some View {
         environment(\.iconButtonStyle, style)
     }
-
-    func iconButtonBorderShape(_ style: CoreButtonBorderShape) -> some View {
-        environment(\.buttonBorderShape, style)
-    }
 }

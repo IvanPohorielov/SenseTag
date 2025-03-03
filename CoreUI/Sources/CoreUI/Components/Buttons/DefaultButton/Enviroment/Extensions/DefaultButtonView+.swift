@@ -19,8 +19,4 @@ public extension View {
     func defaultButtonStyle(_ style: DefaultButtonStyle) -> some View {
         environment(\.buttonStyle, style)
     }
-
-    func defaultButtonBorderShape(_ style: CoreButtonBorderShape) -> some View {
-        environment(\.buttonBorderShape, style)
-    }
 }

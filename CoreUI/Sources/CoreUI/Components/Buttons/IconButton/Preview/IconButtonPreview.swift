@@ -56,7 +56,7 @@ import SwiftUI
                 }
                 .iconButtonSize(size)
                 .iconButtonStyle(style)
-                .iconButtonBorderShape(borderShage)
+                .buttonBorderShape(borderShage)
                 .isLoading(isLoading)
                 .disabled(isDisabled)
                 .frame(height: 200.0)
