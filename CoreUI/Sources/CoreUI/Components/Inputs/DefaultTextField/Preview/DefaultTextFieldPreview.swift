@@ -17,6 +17,9 @@ import SwiftUI
 
         @State
         private var text: String = ""
+        
+        @State
+        private var axis: Axis?
 
         // MARK: - State
 
@@ -119,6 +122,7 @@ import SwiftUI
         private var input: some View {
             DefaultTextField(
                 text: $text,
+                axis: axis,
                 placeholder: showPlaceholder ? "Placeholder" : nil,
                 label: showLabel ? "Label" : nil,
                 caption: showCaption ? "Caption" : nil,
@@ -157,6 +161,24 @@ import SwiftUI
         private var contentConfiguration: some View {
             Section("Configuration") {
                 Toggle("Show clear button", isOn: $showClearButton)
+                VStack {
+                    Text("Axis")
+                        .frame(maxWidth: .infinity)
+                    Picker("", selection: $axis) {
+                        ForEach(Axis?.allCases, id: \.self) {
+                            switch $0 {
+                            case .none:
+                                Text("None")
+                            case .horizontal:
+                                Text("Horizontal")
+                            case .vertical:
+                                Text("Vertical")
+                            }
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                }
+                .frame(height: 150)
             }
         }
 
@@ -186,5 +208,11 @@ import SwiftUI
     #Preview {
         DefaultTextFieldPreview()
     }
+
+extension Axis?: @retroactive CaseIterable {
+    public static var allCases: [Optional<Axis>] {
+        [.none, .vertical, .horizontal]
+    }
+}
 
 #endif
