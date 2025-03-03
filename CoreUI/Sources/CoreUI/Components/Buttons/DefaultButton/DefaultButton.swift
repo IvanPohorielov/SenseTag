@@ -92,7 +92,7 @@ public extension DefaultButton where Icon == Image, Label == Text {
     @_semantics("swiftui.init_with_localization")
     init(
         _ titleKey: LocalizedStringKey,
-        icon: ImageResource? = nil,
+        icon: ImageResource?,
         action: @escaping @MainActor @Sendable () -> Void
     ) {
         self.label = Text(titleKey)
@@ -107,7 +107,7 @@ public extension DefaultButton where Icon == Image, Label == Text {
     @_disfavoredOverload
     init<S>(
         _ title: S,
-        icon: ImageResource? = nil,
+        icon: ImageResource?,
         action: @escaping @MainActor @Sendable () -> Void
     ) where S : StringProtocol {
         self.label = Text(title)
