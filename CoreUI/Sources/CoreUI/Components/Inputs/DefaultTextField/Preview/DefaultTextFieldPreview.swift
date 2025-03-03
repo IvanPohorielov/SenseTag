@@ -122,7 +122,7 @@ import SwiftUI
         @ViewBuilder
         private var input: some View {
             DefaultTextField(
-                text: $text,
+                $text,
                 axis: axis,
                 placeholder: showPlaceholder ? "Placeholder" : nil,
                 label: showLabel ? "Label" : nil,

@@ -148,7 +148,7 @@ public struct DefaultTextField<
 
 extension DefaultTextField {
     public init(
-        text: Binding<String>,
+        _ text: Binding<String>,
         axis: Axis? = nil,
         @ViewBuilder placeholder: () -> Placeholder = { EmptyView?(nil) },
         @ViewBuilder label: () -> Label = { EmptyView?(nil) },
@@ -176,53 +176,12 @@ where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
 
     @_semantics("swiftui.init_with_localization")
     public init(
-        text: Binding<String>,
+        _ text: Binding<String>,
         axis: Axis? = nil,
-        placeholderKey: LocalizedStringKey? = nil,
-        labelKey: LocalizedStringKey? = nil,
-        captionKey: LocalizedStringKey? = nil,
-        errorKey: LocalizedStringKey? = nil,
-        @ViewBuilder leftView: () -> (LeftView) = { EmptyView?(nil) },
-        @ViewBuilder rightView: () -> (RightView) = { EmptyView?(nil) }
-    ) {
-        self._text = text
-        if let axis {
-            self.input = TextField(placeholderKey ?? "", text: text, axis: axis)
-        } else {
-            self.input = TextField(placeholderKey ?? "", text: text)
-        }
-        if let labelKey {
-            self.label = Text(labelKey)
-        } else {
-            self.label = nil
-        }
-
-        if let captionKey {
-            self.caption = Text(captionKey)
-        } else {
-            self.caption = nil
-        }
-
-        if let errorKey {
-            self.error = Text(errorKey)
-        } else {
-            self.error = nil
-        }
-        self.leftView = leftView()
-        self.rightView = rightView()
-    }
-
-    @_disfavoredOverload
-    public init<
-        P: StringProtocol, L: StringProtocol, C: StringProtocol,
-        E: StringProtocol
-    >(
-        text: Binding<String>,
-        axis: Axis? = nil,
-        placeholder: P? = nil,
-        label: L? = nil,
-        caption: C? = nil,
-        error: E? = nil,
+        placeholder: LocalizedStringKey? = nil,
+        label: LocalizedStringKey? = nil,
+        caption: LocalizedStringKey? = nil,
+        error: LocalizedStringKey? = nil,
         @ViewBuilder leftView: () -> (LeftView) = { EmptyView?(nil) },
         @ViewBuilder rightView: () -> (RightView) = { EmptyView?(nil) }
     ) {
@@ -232,23 +191,33 @@ where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
         } else {
             self.input = TextField(placeholder ?? "", text: text)
         }
-        if let label {
-            self.label = Text(label)
-        } else {
-            self.label = nil
-        }
+        self.label = Text(label)
+        self.caption = Text(caption)
+        self.error = Text(error)
+        self.leftView = leftView()
+        self.rightView = rightView()
+    }
 
-        if let caption {
-            self.caption = Text(caption)
+    @_disfavoredOverload
+    public init(
+        _ text: Binding<String>,
+        axis: Axis? = nil,
+        placeholder: String? = nil,
+        label: String? = nil,
+        caption: String? = nil,
+        error: String? = nil,
+        @ViewBuilder leftView: () -> (LeftView) = { EmptyView?(nil) },
+        @ViewBuilder rightView: () -> (RightView) = { EmptyView?(nil) }
+    ) {
+        self._text = text
+        if let axis {
+            self.input = TextField(placeholder ?? "", text: text, axis: axis)
         } else {
-            self.caption = nil
+            self.input = TextField(placeholder ?? "", text: text)
         }
-
-        if let error {
-            self.error = Text(error)
-        } else {
-            self.error = nil
-        }
+        self.label = Text(label)
+        self.caption = Text(caption)
+        self.error = Text(error)
         self.leftView = leftView()
         self.rightView = rightView()
     }
@@ -262,61 +231,36 @@ where
 
     @_semantics("swiftui.init_with_localization")
     public init(
-        text: Binding<String>,
+        _ text: Binding<String>,
         axis: Axis? = nil,
-        placeholderKey: LocalizedStringKey? = nil,
-        labelKey: LocalizedStringKey? = nil,
-        captionKey: LocalizedStringKey? = nil,
-        errorKey: LocalizedStringKey? = nil,
+        placeholder: LocalizedStringKey? = nil,
+        label: LocalizedStringKey? = nil,
+        caption: LocalizedStringKey? = nil,
+        error: LocalizedStringKey? = nil,
         leftIcon: ImageContent? = nil,
         rightIcon: ImageContent? = nil
     ) {
         self._text = text
         if let axis {
-            self.input = TextField(placeholderKey ?? "", text: text, axis: axis)
+            self.input = TextField(placeholder ?? "", text: text, axis: axis)
         } else {
-            self.input = TextField(placeholderKey ?? "", text: text)
+            self.input = TextField(placeholder ?? "", text: text)
         }
-        if let labelKey {
-            self.label = Text(labelKey)
-        } else {
-            self.label = nil
-        }
-
-        if let captionKey {
-            self.caption = Text(captionKey)
-        } else {
-            self.caption = nil
-        }
-
-        if let errorKey {
-            self.error = Text(errorKey)
-        } else {
-            self.error = nil
-        }
-        if let leftIcon {
-            self.leftView = Image(leftIcon)
-        } else {
-            self.leftView = nil
-        }
-        if let rightIcon {
-            self.rightView = Image(rightIcon)
-        } else {
-            self.rightView = nil
-        }
+        self.label = Text(label)
+        self.caption = Text(caption)
+        self.error = Text(error)
+        self.leftView = Image(leftIcon)
+        self.rightView = Image(rightIcon)
     }
 
     @_disfavoredOverload
-    public init<
-        P: StringProtocol, L: StringProtocol, C: StringProtocol,
-        E: StringProtocol
-    >(
-        text: Binding<String>,
+    public init(
+        _ text: Binding<String>,
         axis: Axis? = nil,
-        placeholder: P? = nil,
-        label: L? = nil,
-        caption: C? = nil,
-        error: E? = nil,
+        placeholder: String? = nil,
+        label: String? = nil,
+        caption: String? = nil,
+        error: String? = nil,
         leftIcon: ImageResource?,
         rightIcon: ImageResource?
     ) {
@@ -326,33 +270,11 @@ where
         } else {
             self.input = TextField(placeholder ?? "", text: text)
         }
-        if let label {
-            self.label = Text(label)
-        } else {
-            self.label = nil
-        }
-
-        if let caption {
-            self.caption = Text(caption)
-        } else {
-            self.caption = nil
-        }
-
-        if let error {
-            self.error = Text(error)
-        } else {
-            self.error = nil
-        }
-        if let leftIcon {
-            self.leftView = Image(leftIcon)
-        } else {
-            self.leftView = nil
-        }
-        if let rightIcon {
-            self.rightView = Image(rightIcon)
-        } else {
-            self.rightView = nil
-        }
+        self.label = Text(label)
+        self.caption = Text(caption)
+        self.error = Text(error)
+        self.leftView = Image(leftIcon)
+        self.rightView = Image(rightIcon)
     }
 }
 

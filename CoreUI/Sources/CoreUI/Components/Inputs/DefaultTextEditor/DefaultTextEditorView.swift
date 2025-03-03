@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import FoundationUI
 
 public struct DefaultTextEditor<
     Label: View,
@@ -103,7 +104,7 @@ public struct DefaultTextEditor<
 
 extension DefaultTextEditor {
     public init(
-        text: Binding<String>,
+        _ text: Binding<String>,
         @ViewBuilder placeholder: () -> Placeholder = { EmptyView?(nil) },
         @ViewBuilder label: () -> Label = { EmptyView?(nil) },
         @ViewBuilder caption: () -> Caption = { EmptyView?(nil) },
@@ -123,75 +124,34 @@ where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
 
     @_semantics("swiftui.init_with_localization")
     public init(
-        text: Binding<String>,
-        axis: Axis? = nil,
-        placeholderKey: LocalizedStringKey? = nil,
-        labelKey: LocalizedStringKey? = nil,
-        captionKey: LocalizedStringKey? = nil,
-        errorKey: LocalizedStringKey? = nil
+        _ text: Binding<String>,
+        placeholder: LocalizedStringKey? = nil,
+        label: LocalizedStringKey? = nil,
+        caption: LocalizedStringKey? = nil,
+        error: LocalizedStringKey? = nil
     ) {
         self._text = text
         self.editor = TextEditor(text: text)
-        if let placeholderKey {
-            self.placeholder = Text(placeholderKey)
-        } else {
-            self.placeholder = nil
-        }
-        if let labelKey {
-            self.label = Text(labelKey)
-        } else {
-            self.label = nil
-        }
-
-        if let captionKey {
-            self.caption = Text(captionKey)
-        } else {
-            self.caption = nil
-        }
-
-        if let errorKey {
-            self.error = Text(errorKey)
-        } else {
-            self.error = nil
-        }
+        self.placeholder = Text(placeholder)
+        self.label = Text(label)
+        self.caption = Text(caption)
+        self.error = Text(error)
     }
 
     @_disfavoredOverload
-    public init<
-        P: StringProtocol, L: StringProtocol, C: StringProtocol,
-        E: StringProtocol
-    >(
-        text: Binding<String>,
-        axis: Axis? = nil,
-        placeholder: P? = nil,
-        label: L? = nil,
-        caption: C? = nil,
-        error: E? = nil
+    public init(
+        _ text: Binding<String>,
+        placeholder: String? = nil,
+        label: String? = nil,
+        caption: String? = nil,
+        error: String? = nil
     ) {
         self._text = text
         self.editor = TextEditor(text: text)
-        if let placeholder {
-            self.placeholder = Text(placeholder)
-        } else {
-            self.placeholder = nil
-        }
-        if let label {
-            self.label = Text(label)
-        } else {
-            self.label = nil
-        }
-
-        if let caption {
-            self.caption = Text(caption)
-        } else {
-            self.caption = nil
-        }
-
-        if let error {
-            self.error = Text(error)
-        } else {
-            self.error = nil
-        }
+        self.placeholder = Text(placeholder)
+        self.label = Text(label)
+        self.caption = Text(caption)
+        self.error = Text(error)
     }
 }
 

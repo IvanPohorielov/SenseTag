@@ -6,6 +6,7 @@
 //
 
 import struct SwiftUI.Image
+import struct SwiftUI.ImageResource
 
 public extension Image {
     init(_ content: ImageContent) {
@@ -18,6 +19,17 @@ public extension Image {
     }
 
     init?(_ content: ImageContent?) {
+        if let content {
+            self.init(content)
+        } else {
+            return nil
+        }
+    }
+}
+
+public extension Image {
+
+    init?(_ content: ImageResource?) {
         if let content {
             self.init(content)
         } else {

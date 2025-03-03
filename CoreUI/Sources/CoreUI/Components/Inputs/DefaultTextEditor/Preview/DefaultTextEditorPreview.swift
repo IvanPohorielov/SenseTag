@@ -102,7 +102,7 @@ import SwiftUI
         @ViewBuilder
         private var input: some View {
             DefaultTextEditor(
-                text: $text,
+                $text,
                 placeholder: showPlaceholder ? "Placeholder" : nil,
                 label: showLabel ? "Label" : nil,
                 caption: showCaption ? "Caption" : nil,

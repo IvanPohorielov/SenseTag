@@ -74,7 +74,7 @@ struct WriteTagSheet: View {
     
     @ViewBuilder
     private var textEditor: some View {
-        var placeholder: String {
+        var placeholder: LocalizedStringKey {
             switch store.selectedPayload {
             case .text:
                 "Enter text"
@@ -83,17 +83,16 @@ struct WriteTagSheet: View {
             }
         }
         
-        var caption: String? {
+        var caption: LocalizedStringKey? {
             guard let bytes = store.payloadBytes else { return nil }
             
             return "Bytes: \(bytes)"
         }
         
         DefaultTextEditor(
-            text: $store.text,
+            $store.text,
             placeholder: placeholder,
-            caption: caption,
-            error: nil
+            caption: caption
         )
         .scrollDismissesKeyboard(.interactively)
         .defaultTextEditorHeight(nil)
