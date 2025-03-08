@@ -46,19 +46,17 @@ public final class NFCNDEFReaderSessionDelegateWrapper: NSObject,
     public func readerSession(
         _: NFCNDEFReaderSession, didInvalidateWithError error: any Error
     ) {
-        let nsError = error as NSError
-
-        if let continuation = streamContinuation {
-            switch nsError.code {
+        if let continuation = streamContinuation,
+            let NFCError = error as? NFCReaderError
+        {
+            switch NFCError {
             // User canceled NFC session
-            case NFCReaderError.readerSessionInvalidationErrorUserCanceled
-                .rawValue:
+            case NFCReaderError.readerSessionInvalidationErrorUserCanceled:
                 continuation.finish()
             // NFC session set to be canceled after first tag read
             // Works only if delegate method NOT implemented
             // readerSession(_ session: NFCNDEFReaderSession, didDetect tags: [any NFCNDEFTag])
-            case NFCReaderError.readerSessionInvalidationErrorFirstNDEFTagRead
-                .rawValue:
+            case NFCReaderError.readerSessionInvalidationErrorFirstNDEFTagRead:
                 continuation.finish()
             default:
                 continuation.finish(throwing: error)

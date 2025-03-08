@@ -1,0 +1,558 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "NFCNDEFManager.NFCReaderError.ndefReaderSessionErrorTagNotWritable" : {
+      "comment" : "Localized message for NFCReaderError: ndefReaderSessionErrorTagNotWritable",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The NDEF tag is not writable."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NDEF-метка не доступна для записи."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NDEF-мітка не доступна для запису."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.ndefReaderSessionErrorTagSizeTooSmall" : {
+      "comment" : "Localized message for NFCReaderError: ndefReaderSessionErrorTagSizeTooSmall",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The NDEF tag size is too small."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Недостаточно памяти на NDEF-метке."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Недостатньо пам’яті на NDEF-мітці."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.ndefReaderSessionErrorTagUpdateFailure" : {
+      "comment" : "Localized message for NFCReaderError: ndefReaderSessionErrorTagUpdateFailure",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Failed to update the NDEF tag."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка записи данных в NDEF-метку."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка запису даних у NDEF-мітку."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.ndefReaderSessionErrorZeroLengthMessage" : {
+      "comment" : "Localized message for NFCReaderError: ndefReaderSessionErrorZeroLengthMessage",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The NDEF tag contains no data."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NDEF-метка не содержит данных."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NDEF-мітка не містить даних."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerErrorInvalidParameter" : {
+      "comment" : "Localized message for NFCReaderError: readerErrorInvalidParameter",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Invalid parameter provided."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неверный параметр."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невірний параметр."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerErrorInvalidParameterLength" : {
+      "comment" : "Localized message for NFCReaderError: readerErrorInvalidParameterLength",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Parameter length is invalid."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Недопустимая длина параметра."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неприпустима довжина параметра."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerErrorParameterOutOfBound" : {
+      "comment" : "Localized message for NFCReaderError: readerErrorParameterOutOfBound",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Parameter value is out of bounds."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Значение параметра выходит за допустимые пределы."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Значення параметра виходить за допустимі межі."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerErrorRadioDisabled" : {
+      "comment" : "Localized message for NFCReaderError: readerErrorRadioDisabled",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "NFC Radio is disabled."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC отключен."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC вимкнено."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerErrorSecurityViolation" : {
+      "comment" : "Localized message for NFCReaderError: readerErrorSecurityViolation",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Missing required entitlement or privacy settings."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отсутствуют необходимые разрешения или настройки конфиденциальности."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відсутні необхідні дозволи або налаштування конфіденційності."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerErrorUnsupportedFeature" : {
+      "comment" : "Localized message for NFCReaderError: readerErrorUnsupportedFeature",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Core NFC is not supported on this device."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC не поддерживается на этом устройстве."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC не підтримується на цьому пристрої."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerSessionInvalidationErrorFirstNDEFTagRead" : {
+      "comment" : "Localized message for NFCReaderError: readerSessionInvalidationErrorFirstNDEFTagRead",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Session ended after reading the first NDEF tag."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс завершен после первого прочтения NDEF-метки."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс завершено після першого зчитування NDEF-мітки."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerSessionInvalidationErrorSessionTerminatedUnexpectedly" : {
+      "comment" : "Localized message for NFCReaderError: readerSessionInvalidationErrorSessionTerminatedUnexpectedly",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Session terminated unexpectedly."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс завершился неожиданно."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс завершився неочікувано."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerSessionInvalidationErrorSessionTimeout" : {
+      "comment" : "Localized message for NFCReaderError: readerSessionInvalidationErrorSessionTimeout",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "NFC session timed out."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Время ожидания сеанса истекло."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Час очікування сеансу минув."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerSessionInvalidationErrorSystemIsBusy" : {
+      "comment" : "Localized message for NFCReaderError: readerSessionInvalidationErrorSystemIsBusy",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Core NFC is temporarily unavailable."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC временно недоступен из-за нагрузки на систему."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC тимчасово недоступний через завантаженість системи."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerSessionInvalidationErrorUserCanceled" : {
+      "comment" : "Localized message for NFCReaderError: readerSessionInvalidationErrorUserCanceled",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Session was canceled by the user."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс был отменен пользователем."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс було скасовано користувачем."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerTransceiveErrorPacketTooLong" : {
+      "comment" : "Localized message for NFCReaderError: readerTransceiveErrorPacketTooLong",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Packet length exceeds the limit."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Длина пакета превышает лимит."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Довжина пакета перевищує ліміт."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerTransceiveErrorRetryExceeded" : {
+      "comment" : "Localized message for NFCReaderError: readerTransceiveErrorRetryExceeded",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum transmission retries reached."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Достигнут максимальный предел попыток передачи данных."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Досягнуто максимальну кількість спроб передачі даних."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerTransceiveErrorSessionInvalidated" : {
+      "comment" : "Localized message for NFCReaderError: readerTransceiveErrorSessionInvalidated",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Session has been invalidated."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс был завершен."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс був завершений."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerTransceiveErrorTagConnectionLost" : {
+      "comment" : "Localized message for NFCReaderError: readerTransceiveErrorTagConnectionLost",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Connection to the NFC tag was lost."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Соединение с NFC-меткой потеряно."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "З’єднання з NFC-міткою втрачено."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerTransceiveErrorTagNotConnected" : {
+      "comment" : "Localized message for NFCReaderError: readerTransceiveErrorTagNotConnected",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tag is not connected."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Метка не подключена."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мітка не підключена."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.readerTransceiveErrorTagResponseError" : {
+      "comment" : "Localized message for NFCReaderError: readerTransceiveErrorTagResponseError",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Invalid tag response or no response."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Некорректный ответ от метки или отсутствие ответа."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Некоректна відповідь від мітки або її відсутність."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCReaderError.tagCommandConfigurationErrorInvalidParameters" : {
+      "comment" : "Localized message for NFCReaderError: tagCommandConfigurationErrorInvalidParameters",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Invalid tag command configuration parameters."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неверные параметры конфигурации команды."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невірні параметри конфігурації команди."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.readerSession.message" : {
+      "comment" : "Message shown to the user when NFC session is started.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Hold your iPhone near the NFC tag."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поднесите iPhone к метке NFC."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тримайте iPhone біля мітки NFC."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

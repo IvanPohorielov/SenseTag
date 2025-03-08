@@ -45,8 +45,15 @@ public final actor NFCNDEFManager {
     // MARK: - Private Methods
 
     private func detectTag(handle: @Sendable @escaping (NFCNDEFTag) async throws -> Void) async throws {
+        let localizedAlertMessage = LocalizedStringResource(
+            "NFCNDEFManager.readerSession.message",
+            defaultValue: "Hold your iPhone near the NFC tag.",
+            bundle: .atURL(Bundle.module.bundleURL), 
+            comment: "Message shown to the user when NFC session is started."
+        )
+
         try self.startSession(
-            alertMessage: "Hold your iPhone near the NFC tag."
+            alertMessage: String(localized: localizedAlertMessage)
         )
 
         do {
