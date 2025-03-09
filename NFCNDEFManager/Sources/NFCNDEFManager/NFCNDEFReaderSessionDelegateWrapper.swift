@@ -47,9 +47,9 @@ public final class NFCNDEFReaderSessionDelegateWrapper: NSObject,
         _: NFCNDEFReaderSession, didInvalidateWithError error: any Error
     ) {
         if let continuation = streamContinuation,
-            let NFCError = error as? NFCReaderError
+            let nfcError = error as? NFCReaderError
         {
-            switch NFCError {
+            switch nfcError {
             // User canceled NFC session
             case NFCReaderError.readerSessionInvalidationErrorUserCanceled:
                 continuation.finish()

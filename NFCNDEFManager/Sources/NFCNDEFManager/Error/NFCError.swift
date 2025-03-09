@@ -13,7 +13,6 @@ public enum NFCError: Error, Sendable {
 
     // Session
     case sessionAlreadyRunning
-    case sessionInvalidated(String)
 
     // Tag status specific
     case tagNotSupportedStatus

@@ -65,7 +65,11 @@ public final actor NFCNDEFManager {
             }
             self.invalidateSession()
         } catch {
-            self.invalidateSession(with: error.localizedDescription)
+            if let nfcError = error as? NFCReaderError {
+                self.invalidateSession(with: String(localized: nfcError.localizedString))
+            } else {
+                self.invalidateSession(with: error.localizedDescription)
+            }
             throw error
         }
     }

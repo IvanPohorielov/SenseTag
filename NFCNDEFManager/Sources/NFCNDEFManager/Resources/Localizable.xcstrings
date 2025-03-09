@@ -1,6 +1,126 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "NFCNDEFManager.NFCError.readerNFCUnsupported" : {
+      "comment" : "Localized message for NFCError.readerNFCUnsupported",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "NFC is not supported on this device."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC не поддерживается на этом устройстве."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC не підтримується на цьому пристрої."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCError.sessionAlreadyRunning" : {
+      "comment" : "Localized message for NFCError.sessionAlreadyRunning",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "NFC session is already running."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс NFC уже запущен."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеанс NFC вже запущений."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCError.tagNotSupportedStatus" : {
+      "comment" : "Localized message for NFCError.tagNotSupportedStatus",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "NFC tag is not supported."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC-метка не поддерживается."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC-мітка не підтримується."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCError.tagReadOnlyStatus" : {
+      "comment" : "Localized message for NFCError.tagReadOnlyStatus",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "NFC tag is read-only."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC-метка доступна только для чтения."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NFC-мітка доступна тільки для читання."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCError.tagUnknownStatus" : {
+      "comment" : "Localized message for NFCError.tagUnknownStatus",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Unknown NFC tag status."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неизвестный статус NFC-метки."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невідомий статус NFC-мітки."
+          }
+        }
+      }
+    },
     "NFCNDEFManager.NFCReaderError.ndefReaderSessionErrorTagNotWritable" : {
       "comment" : "Localized message for NFCReaderError: ndefReaderSessionErrorTagNotWritable",
       "extractionState" : "extracted_with_value",
