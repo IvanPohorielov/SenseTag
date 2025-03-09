@@ -17,14 +17,3 @@ public extension Text {
         }
     }
 }
-
-public extension Text {
-
-    init?(_ content: String?) {
-        if let content {
-            self.init(content)
-        } else {
-            return nil
-        }
-    }
-}

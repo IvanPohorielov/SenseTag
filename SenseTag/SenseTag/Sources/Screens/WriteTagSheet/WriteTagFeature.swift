@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Foundation
 import NFCNDEFManager
+import CoreNFC
 
 @Reducer
 struct WriteTagFeature {
@@ -17,6 +18,7 @@ struct WriteTagFeature {
         var text: String = ""
         var payloadBytes: Int? = nil
         var isButtonsEnabled: Bool = false
+        var screenState: ScreenState = .content
     }
 
     enum Action: BindableAction {
@@ -27,6 +29,7 @@ struct WriteTagFeature {
         case openURL
         case updatePayloadBytes(Int?)
         case updateButtonsEnabled(Bool)
+        case updateScreenState(ScreenState)
     }
 
     @Dependency(\.openURL) var openURL
@@ -68,13 +71,28 @@ struct WriteTagFeature {
                     }
                 }
             case .writeToTag:
-                return .run { [state] _ in
+                return .run { [state] send in
                     guard let payloads = await createPayload(state) else {
                         return
                     }
-                    try? await nfcClient.write(payloads: [payloads])
-                    await self.dismiss()
+                    await send(.updateScreenState(.loading), animation: .default)
+                    do {
+                        try await nfcClient.write(payloads: [payloads])
+                        await self.dismiss()
+                    } catch {
+                        switch error {
+                        case let nfcError as NFCError :
+                            await send(.updateScreenState(.error(String(localized: nfcError.localizedString))), animation: .default)
+                        case let nfcReaderError as NFCReaderError:
+                            await send(.updateScreenState(.error(String(localized: nfcReaderError.localizedString))), animation: .default)
+                        default:
+                            await send(.updateScreenState(.error(error.localizedDescription)), animation: .default)
+                        }
+                    }
                 }
+            case .updateScreenState(let screenState):
+                state.screenState = screenState
+                return .none
             case .binding:
                 return .none
             }
@@ -114,5 +132,13 @@ extension WriteTagFeature {
             }
             return .wellKnown(.url(url))
         }
+    }
+}
+
+extension WriteTagFeature {
+    enum ScreenState: Hashable, Sendable {
+        case content
+        case loading
+        case error(String)
     }
 }

@@ -148,10 +148,29 @@ where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
     ) {
         self._text = text
         self.editor = TextEditor(text: text)
-        self.placeholder = Text(placeholder)
-        self.label = Text(label)
-        self.caption = Text(caption)
-        self.error = Text(error)
+        if let placeholder {
+            self.placeholder = Text(placeholder)
+        } else {
+            self.placeholder = nil
+        }
+        
+        if let label {
+            self.label = Text(label)
+        } else {
+            self.label = nil
+        }
+        
+        if let caption {
+            self.caption = Text(caption)
+        } else {
+            self.caption = nil
+        }
+        
+        if let error {
+            self.error = Text(error)
+        } else {
+            self.error = nil
+        }
     }
 }
 

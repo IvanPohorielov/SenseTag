@@ -21,6 +21,42 @@ struct WriteTagSheet: View {
     // MARK: - Body
     
     var body: some View {
+        switch store.screenState {
+        case .content:
+            self.content
+        case .error(let message):
+            self.error(message)
+        case .loading:
+            self.loading
+            
+        }
+    }
+    
+    // MARK: - Views
+    
+    @ViewBuilder
+    private var loading: some View {
+        ProgressView("writeTagSheet.progressView.title")
+            .foregroundStyle(Color.blue.primary)
+    }
+    
+    @ViewBuilder
+    private func error(_ message: String) -> some View {
+        PlaceholderScreen {
+            Text("writeTagSheet.error.title")
+                .font(.senseHOne)
+        } label: {
+            Text(message)
+                .font(.senseLabelM)
+        } actions: {
+            DefaultButton("writeTagSheet.error.action") {
+                store.send(.writeToTag)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var content: some View {
         VStack {
             Picker("", selection: $store.selectedPayload) {
                 ForEach(NFCNDEFWellKnownPayloadType.allCases) { type in
@@ -69,8 +105,6 @@ struct WriteTagSheet: View {
             }
         }
     }
-    
-    // MARK: - Views
     
     @ViewBuilder
     private var textEditor: some View {
