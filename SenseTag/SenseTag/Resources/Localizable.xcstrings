@@ -2,7 +2,26 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " "
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " "
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " "
+          }
+        }
+      }
     },
     "mainScreen.alert.action.confirm" : {
       "localizations" : {
@@ -10,6 +29,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirm"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтвердить"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підтвердити"
           }
         }
       }
@@ -21,6 +52,18 @@
             "state" : "translated",
             "value" : "Clear action cannot be undone. Are you sure?"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Действие очистки нельзя отменить. Вы уверены?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дію очищення не можна скасувати. Ви впевнені?"
+          }
         }
       }
     },
@@ -30,6 +73,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lock action cannot be undone. Are you sure?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Действие блокировки нельзя отменить. Вы уверены?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дію блокування не можна скасувати. Ви впевнені?"
           }
         }
       }
@@ -41,6 +96,18 @@
             "state" : "translated",
             "value" : "Clear tag?"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить метку?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистити мітку?"
+          }
         }
       }
     },
@@ -50,6 +117,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lock tag?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заблокировать метку?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заблокувати мітку?"
           }
         }
       }
@@ -61,6 +140,18 @@
             "state" : "translated",
             "value" : "Clear Tag"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить метку"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистити мітку"
+          }
         }
       }
     },
@@ -70,6 +161,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lock Tag"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заблокировать метку"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заблокувати мітку"
           }
         }
       }
@@ -81,6 +184,18 @@
             "state" : "translated",
             "value" : "Other actions"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Другие действия"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Інші дії"
+          }
         }
       }
     },
@@ -90,6 +205,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Other"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Другое"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Інше"
           }
         }
       }
@@ -101,6 +228,18 @@
             "state" : "translated",
             "value" : "Read Tag"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прочитать метку"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прочитати мітку"
+          }
         }
       }
     },
@@ -110,6 +249,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Create Tag"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Создать метку"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Створити мітку"
           }
         }
       }
@@ -121,6 +272,18 @@
             "state" : "translated",
             "value" : "Read Tag"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прочитать метку"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прочитати мітку"
+          }
         }
       }
     },
@@ -130,6 +293,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Empty payload"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пустой полезный груз"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пустий корисний вантаж"
           }
         }
       }
@@ -141,6 +316,18 @@
             "state" : "translated",
             "value" : "Record #%lld"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запись #%lld"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запис #%lld"
+          }
         }
       }
     },
@@ -150,6 +337,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unknown payload"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неизвестный полезный груз"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невідомий корисний вантаж"
           }
         }
       }
@@ -161,6 +360,18 @@
             "state" : "translated",
             "value" : "Create Tag"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Создать метку"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Створити мітку"
+          }
         }
       }
     },
@@ -169,7 +380,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "\"Write\""
+            "value" : "Write"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Записать"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Записати"
           }
         }
       }
@@ -181,6 +404,18 @@
             "state" : "translated",
             "value" : "Bytes: %lld"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Байты: %lld"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Байти: %lld"
+          }
         }
       }
     },
@@ -191,6 +426,18 @@
             "state" : "translated",
             "value" : "Enter text"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите текст"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введіть текст"
+          }
         }
       }
     },
@@ -200,6 +447,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter URL"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите URL"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введіть URL"
           }
         }
       }
