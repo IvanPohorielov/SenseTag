@@ -121,6 +121,54 @@
         }
       }
     },
+    "NFCNDEFManager.NFCNDEFWellKnownPayloadType.text" : {
+      "comment" : "Localized message for NFCNDEFWellKnownPayloadType.text",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Text"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Текст"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Текст"
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.NFCNDEFWellKnownPayloadType.url" : {
+      "comment" : "Localized message for NFCNDEFWellKnownPayloadType.url",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "URL"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ссылка"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посилання"
+          }
+        }
+      }
+    },
     "NFCNDEFManager.NFCReaderError.ndefReaderSessionErrorTagNotWritable" : {
       "comment" : "Localized message for NFCReaderError: ndefReaderSessionErrorTagNotWritable",
       "extractionState" : "extracted_with_value",

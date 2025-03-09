@@ -11,12 +11,22 @@ public enum NFCNDEFWellKnownPayloadType: String, Identifiable, Hashable, CaseIte
     case text = "T"
     case url = "U"
 
-    public var title: String {
+    public var title: LocalizedStringResource {
         switch self {
         case .text:
-            "Text"
+            LocalizedStringResource(
+                "NFCNDEFManager.NFCNDEFWellKnownPayloadType.text",
+                defaultValue: "Text",
+                bundle: .atURL(Bundle.module.bundleURL),
+                comment: "Localized message for NFCNDEFWellKnownPayloadType.text"
+            )
         case .url:
-            "URL"
+            LocalizedStringResource(
+                "NFCNDEFManager.NFCNDEFWellKnownPayloadType.url",
+                defaultValue: "URL",
+                bundle: .atURL(Bundle.module.bundleURL),
+                comment: "Localized message for NFCNDEFWellKnownPayloadType.url"
+            )
         }
     }
     

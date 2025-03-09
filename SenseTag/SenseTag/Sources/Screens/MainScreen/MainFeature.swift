@@ -9,6 +9,7 @@
 import ComposableArchitecture
 import CoreUI
 import NFCNDEFManager
+import CoreNFC
 import SwiftUI
 
 @Reducer
@@ -25,6 +26,7 @@ struct MainFeature {
         case writeTapped
         case otherTapped
         case startAnimation
+        case handleError(any Error, Action.Alert)
         case destination(PresentationAction<Destination.Action>)
 
         enum ConfirmationDialog: Equatable {
@@ -35,6 +37,7 @@ struct MainFeature {
         enum Alert: Equatable {
             case clear
             case lock
+            case read
         }
     }
 
@@ -58,6 +61,8 @@ struct MainFeature {
             case .startAnimation:
                 state.animate = true
                 return .none
+            case .handleError(let error, let action):
+                return handleNFCManagerError(error, action: action, state: &state)
             case .destination:
                 return .none
             }
@@ -67,10 +72,12 @@ struct MainFeature {
     
     private func handleReadTapped(state: inout State) -> Effect<Action> {
         return .run { send in
-            guard let payloads = try? await nfcClient.read(), !payloads.isEmpty else {
-                return
+            do {
+                let payloads = try await nfcClient.read()
+                await send(.openReadSheet(payloads))
+            } catch {
+                await send(.handleError(error, .read))
             }
-            await send(.openReadSheet(payloads))
         }
     }
 
@@ -112,12 +119,43 @@ struct MainFeature {
     }
 
     private func handleAlertAction(_ action: Action.Alert) -> Effect<Action> {
-        switch action {
-        case .clear:
-            return .run { _ in try? await nfcClient.clear() }
-        case .lock:
-            return .run { _ in try? await nfcClient.lock() }
+        .run { send in
+            do {
+                switch action {
+                case .clear:
+                    try await nfcClient.clear()
+                case .lock:
+                    try await nfcClient.lock()
+                case .read:
+                    await send(.readTapped)
+                }
+            } catch {
+                await send(.handleError(error, action))
+            }
         }
+    }
+    
+    private func handleNFCManagerError(_ error: any Error, action: Action.Alert, state: inout State) -> Effect<Action> {
+        state.destination = .alert(
+            AlertState {
+                TextState("mainScreen.alert.error.title")
+            }
+            actions: {
+                ButtonState(role: .destructive, action: action) {
+                    TextState("mainScreen.alert.error.confirm")
+                }
+            } message: {
+                switch error {
+                case let nfcError as NFCError :
+                    TextState(String(localized: nfcError.localizedString))
+                case let nfcReaderError as NFCReaderError:
+                    TextState(String(localized: nfcReaderError.localizedString))
+                default:
+                    TextState(error.localizedDescription)
+                }
+            }
+        )
+        return .none
     }
 }
 
