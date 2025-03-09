@@ -86,10 +86,10 @@ struct MainFeature {
 
     private func handleOtherTapped(state: inout State) -> Effect<Action> {
         state.destination = .confirmationDialog(
-            ConfirmationDialogState { TextState("Other actions") }
+            ConfirmationDialogState { TextState("mainScreen.dialog.otherActions") }
             actions: {
-                ButtonState(action: .lock) { TextState("Lock Tag") }
-                ButtonState(action: .clear) { TextState("Clear Tag") }
+                ButtonState(action: .lock) { TextState("mainScreen.dialog.action.lockTag") }
+                ButtonState(action: .clear) { TextState("mainScreen.dialog.action.clearTag") }
             }
         )
         return .none
@@ -102,7 +102,7 @@ struct MainFeature {
             }
             actions: {
                 ButtonState(role: .destructive, action: getAlertAction(action)) {
-                    TextState("Confirm")
+                    TextState("mainScreen.alert.action.confirm")
                 }
             } message: {
                 TextState(getAlertMessage(action))
@@ -135,15 +135,15 @@ extension MainFeature {
 extension MainFeature {
     private func getAlertTitle(_ action: Action.ConfirmationDialog) -> LocalizedStringKey {
         switch action {
-        case .clear: return "Clear tag?"
-        case .lock: return "Lock tag?"
+        case .clear: return "mainScreen.alert.title.clearTag"
+        case .lock: return "mainScreen.alert.title.lockTag"
         }
     }
 
     private func getAlertMessage(_ action: Action.ConfirmationDialog) -> LocalizedStringKey {
         switch action {
-        case .clear: return "Clear action cannot be undone. Are you sure?"
-        case .lock: return "Lock action cannot be undone. Are you sure?"
+        case .clear: return "mainScreen.alert.message.clearTag"
+        case .lock: return "mainScreen.alert.message.lockTag"
         }
     }
 

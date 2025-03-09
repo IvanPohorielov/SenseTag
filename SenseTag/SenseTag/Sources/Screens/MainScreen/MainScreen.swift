@@ -23,21 +23,21 @@ struct MainScreen: View {
 
             VStack(spacing: .spacer16) {
                 tile(
-                    "Other",
+                    "mainScreen.tile.other",
                     image: "ellipsis.circle.fill",
                     span: 2
                 ) {
                     store.send(.otherTapped)
                 }
                 tile(
-                    "Read Tag",
+                    "mainScreen.tile.read",
                     image: "magnifyingglass.circle.fill",
                     span: 4
                 ) {
                     store.send(.readTapped)
                 }
                 tile(
-                    "Create Tag",
+                    "mainScreen.tile.write",
                     image: "plus.circle.fill",
                     span: 4
                 ) {

@@ -1,0 +1,209 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "mainScreen.alert.action.confirm" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm"
+          }
+        }
+      }
+    },
+    "mainScreen.alert.message.clearTag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear action cannot be undone. Are you sure?"
+          }
+        }
+      }
+    },
+    "mainScreen.alert.message.lockTag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock action cannot be undone. Are you sure?"
+          }
+        }
+      }
+    },
+    "mainScreen.alert.title.clearTag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear tag?"
+          }
+        }
+      }
+    },
+    "mainScreen.alert.title.lockTag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock tag?"
+          }
+        }
+      }
+    },
+    "mainScreen.dialog.action.clearTag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Tag"
+          }
+        }
+      }
+    },
+    "mainScreen.dialog.action.lockTag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock Tag"
+          }
+        }
+      }
+    },
+    "mainScreen.dialog.otherActions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other actions"
+          }
+        }
+      }
+    },
+    "mainScreen.tile.other" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
+          }
+        }
+      }
+    },
+    "mainScreen.tile.read" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read Tag"
+          }
+        }
+      }
+    },
+    "mainScreen.tile.write" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Tag"
+          }
+        }
+      }
+    },
+    "readTagSheet.navigationTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read Tag"
+          }
+        }
+      }
+    },
+    "readTagSheet.recordItem.empty" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty payload"
+          }
+        }
+      }
+    },
+    "readTagSheet.recordItem.record %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record #%lld"
+          }
+        }
+      }
+    },
+    "readTagSheet.recordItem.unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown payload"
+          }
+        }
+      }
+    },
+    "writeTagSheet.navigationTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Tag"
+          }
+        }
+      }
+    },
+    "writeTagSheet.saveButton.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"Write\""
+          }
+        }
+      }
+    },
+    "writeTagSheet.textEditor.caption %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bytes: %lld"
+          }
+        }
+      }
+    },
+    "writeTagSheet.textEditor.placeholder.text" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter text"
+          }
+        }
+      }
+    },
+    "writeTagSheet.textEditor.placeholder.url" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter URL"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

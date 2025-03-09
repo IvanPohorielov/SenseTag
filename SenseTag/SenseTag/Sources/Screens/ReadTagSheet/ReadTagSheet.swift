@@ -29,7 +29,7 @@ struct ReadTagSheet: View {
             .safeAreaPadding(.horizontal, .spacer16)
             .safeAreaPadding(.bottom, .spacer16)
         }
-        .navigationTitle("Read Tag")
+        .navigationTitle("readTagSheet.navigationTitle")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -57,7 +57,8 @@ struct ReadTagSheet: View {
     ) -> some View {
         HStack(spacing: .spacer8) {
             VStack(spacing: .spacer8) {
-                Text("Record #\(number)")
+                let localizedStringKey: LocalizedStringKey = "readTagSheet.recordItem.record \(number)"
+                Text(localizedStringKey)
                     .font(.senseCaption)
                     .foregroundStyle(Color.black.shade700)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -116,9 +117,9 @@ extension ReadTagSheet {
                 LocalizedStringKey(url.absoluteString)
             }
         case .empty:
-            "Empty payload"
+            "readTagSheet.recordItem.empty"
         case .other:
-            "Unknown payload"
+            "readTagSheet.recordItem.unknown"
         }
     }
 }

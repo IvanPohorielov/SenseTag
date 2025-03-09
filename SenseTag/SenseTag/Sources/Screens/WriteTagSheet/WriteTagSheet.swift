@@ -43,7 +43,7 @@ struct WriteTagSheet: View {
             .safeAreaPadding(.horizontal, .spacer16)
             .safeAreaPadding(.bottom, .spacer16)
         }
-        .navigationTitle("Create Tag")
+        .navigationTitle("writeTagSheet.navigationTitle")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -77,16 +77,16 @@ struct WriteTagSheet: View {
         var placeholder: LocalizedStringKey {
             switch store.selectedPayload {
             case .text:
-                "Enter text"
+                "writeTagSheet.textEditor.placeholder.text"
             case .url:
-                "Enter URL"
+                "writeTagSheet.textEditor.placeholder.url"
             }
         }
         
         var caption: LocalizedStringKey? {
             guard let bytes = store.payloadBytes else { return nil }
             
-            return "Bytes: \(bytes)"
+            return "writeTagSheet.textEditor.caption \(bytes)"
         }
         
         DefaultTextEditor(
@@ -118,7 +118,7 @@ struct WriteTagSheet: View {
     
     @ViewBuilder
     private var saveButton: some View {
-        DefaultButton("Write") {
+        DefaultButton("writeTagSheet.saveButton.title") {
             store.send(.writeToTag)
         }
         .defaultButtonSize(.large)
