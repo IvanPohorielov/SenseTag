@@ -62,9 +62,7 @@ struct ReadTagSheet: View {
                     .font(.senseCaption)
                     .foregroundStyle(Color.black.shade700)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(getText(from: payload))
-                    .font(.senseBodyL)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                self.getContentView(from: payload)
             }
             recordActions(payload)
         }
@@ -91,12 +89,7 @@ struct ReadTagSheet: View {
                     store.send(.copyToClipboard(text))
                 }
             case let .url(url):
-                IconButton(icon: .systemImage("link")) {
-                    store.send(.openURL(url))
-                }
-                IconButton(icon: .systemImage("document.on.document.fill")) {
-                    store.send(.copyToClipboard(url.absoluteString))
-                }
+                EmptyView()
             }
         default:
             EmptyView()
@@ -105,21 +98,28 @@ struct ReadTagSheet: View {
 }
 
 extension ReadTagSheet {
-    fileprivate func getText(from payload: NFCNDEFManagerPayload)
-        -> LocalizedStringKey
+    @ViewBuilder
+    fileprivate func getContentView(from payload: NFCNDEFManagerPayload)
+        -> some View
     {
         switch payload {
         case let .wellKnown(wellKnownPayload):
             switch wellKnownPayload {
             case let .text(text, _):
-                LocalizedStringKey(text)
+                Text(text)
+                    .font(.senseBodyL)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             case let .url(url):
-                LocalizedStringKey(url.absoluteString)
+                LinkPresentationView(url: url)
             }
         case .empty:
-            "readTagSheet.recordItem.empty"
+            Text("readTagSheet.recordItem.empty")
+                .font(.senseBodyL)
+                .frame(maxWidth: .infinity, alignment: .leading)
         case .other:
-            "readTagSheet.recordItem.unknown"
+            Text("readTagSheet.recordItem.unknown")
+                .font(.senseBodyL)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
@@ -131,7 +131,9 @@ extension ReadTagSheet {
                 initialState: ReadTagFeature.State(
                     payloads: [
                         .wellKnown(.text("Hello, Preview", .current)),
+                        .wellKnown(.text("Ти така гарна", .current)),
                         .wellKnown(.url(URL(string: "https://www.apple.com")!)),
+                        .wellKnown(.url(URL(string: "https://www.youtube.com/watch?v=KPqK5LyGsiE")!))
                     ]
                 )
             ) {

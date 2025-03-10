@@ -23,10 +23,8 @@ struct ReadTagFeature {
         case dismiss
         case speakUp(NFCNDEFManagerPayload.WellKnownPayload)
         case copyToClipboard(String)
-        case openURL(URL)
     }
-
-    @Dependency(\.openURL) var openURL
+    
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.pasteboard) var pasteboard
     @Dependency(\.speechSynthesizer) var speechSynthesizer
@@ -53,8 +51,6 @@ struct ReadTagFeature {
                 }
             case let .copyToClipboard(text):
                 return .run { _ in await self.pasteboard.setString(text) }
-            case let .openURL(url):
-                return .run { _ in await self.openURL(url) }
             }
         }
     }
