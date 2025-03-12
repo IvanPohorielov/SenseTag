@@ -88,7 +88,7 @@ struct ReadTagSheet: View {
                 IconButton(icon: .systemImage("document.on.document.fill")) {
                     store.send(.copyToClipboard(text))
                 }
-            case let .url(url):
+            case .url:
                 EmptyView()
             }
         default:

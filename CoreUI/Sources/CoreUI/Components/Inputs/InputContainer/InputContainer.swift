@@ -49,7 +49,7 @@ struct InputContainer<
         state == .error ? AnyView(error) : AnyView(caption)
     }
 
-    private var isAppearenceLimit: Bool? {
+    private var isAppearanceLimit: Bool? {
         guard let appearenceLimit = characterLimitConfiguration?.appearenceLimit else {
             return nil
         }
@@ -91,7 +91,7 @@ struct InputContainer<
         }
         .animation(
             .easeInOut(duration: 0.2),
-            value: isAppearenceLimit
+            value: isAppearanceLimit
         )
     }
 
@@ -130,7 +130,7 @@ struct InputContainer<
                 }
 
                 if let characterCounter = counterText,
-                   isAppearenceLimit ?? true
+                   isAppearanceLimit ?? true
                 {
                     Spacer(minLength: 0.0)
 
