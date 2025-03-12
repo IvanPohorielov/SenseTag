@@ -45,26 +45,27 @@ struct InputContainer<
     @State
     private var counterError: Bool = false
 
-    private var captionProxy: AnyView? {
+    private var captionProxy: AnyView {
         state == .error ? AnyView(error) : AnyView(caption)
     }
 
     private var isAppearanceLimit: Bool? {
-        guard let appearenceLimit = characterLimitConfiguration?.appearenceLimit else {
+        guard let appearenceLimit = characterLimitConfiguration?.appearenceLimit
+        else {
             return nil
         }
 
         return appearenceLimit <= text.count
     }
-    
+
     // MARK: - Init
 
     init(
         _ text: Binding<String>,
         state: CoreInputState,
-        label: Label,
-        caption: Caption,
-        error: ErrorLabel,
+        label: Label?,
+        caption: Caption?,
+        error: ErrorLabel?,
         input: () -> Input
     ) {
         _text = text
@@ -89,66 +90,51 @@ struct InputContainer<
             captionView
                 .zIndex(1)
         }
-        .animation(
-            .easeInOut(duration: 0.2),
-            value: isAppearanceLimit
-        )
+        .animation(.easeInOut, value: label != nil)
+        .animation(.easeInOut, value: caption != nil)
+        .animation(.easeInOut, value: error != nil)
+        .animation(.easeInOut, value: state)
+        .animation(.default, value: counterText)
     }
 
     @ViewBuilder
     private var labelView: some View {
-        if let label = label {
-            HStack(spacing: 0.0) {
-                label
-                    .font(size.labelFont)
-                    .foregroundColor(style.labelForegroundColor)
-                    .accessibilityIdentifier(Accessibility.labelView.rawValue)
-            }
-            .transition(
-                .move(
-                    edge: .bottom
-                )
-                .combined(
-                    with: .opacity
-                )
-            )
+        HStack(spacing: 0.0) {
+            label
+                .font(size.labelFont)
+                .foregroundColor(style.labelForegroundColor)
+                .accessibilityIdentifier(Accessibility.labelView.rawValue)
         }
+        .transition(.identity)
     }
 
     @ViewBuilder
     private var captionView: some View {
-        if captionProxy != nil || counterText != nil {
-            HStack(
-                alignment: .top,
-                spacing: size.captionStackSpacing
-            ) {
-                if let caption = captionProxy {
-                    caption
-                        .font(size.captionFont)
-                        .foregroundColor(style.captionForegroundColor(for: state))
-                        .accessibilityIdentifier(Accessibility.captionView.rawValue)
-                }
+        HStack(
+            alignment: .top,
+            spacing: size.captionStackSpacing
+        ) {
+            captionProxy
+                .font(size.captionFont)
+                .foregroundColor(style.captionForegroundColor(for: state))
+                .accessibilityIdentifier(Accessibility.captionView.rawValue)
 
-                if let characterCounter = counterText,
-                   isAppearanceLimit ?? true
-                {
-                    Spacer(minLength: 0.0)
+            if let characterCounter = counterText,
+                isAppearanceLimit ?? true
+            {
+                Spacer(minLength: 0.0)
 
-                    Text(characterCounter)
-                        .font(size.counterFont)
-                        .foregroundColor(style.counterForegroundColor(for: self.counterError ? .error : state))
-                        .accessibilityIdentifier(Accessibility.characterCounterView.rawValue)
-                }
+                Text(characterCounter)
+                    .font(size.counterFont)
+                    .foregroundColor(
+                        style.counterForegroundColor(
+                            for: self.counterError ? .error : state)
+                    )
+                    .accessibilityIdentifier(
+                        Accessibility.characterCounterView.rawValue)
             }
-            .transition(
-                .move(
-                    edge: .top
-                )
-                .combined(
-                    with: .opacity
-                )
-            )
         }
+        .transition(.identity)
     }
 
     private var inputView: some View {
@@ -196,7 +182,9 @@ struct InputContainer<
     // MARK: - Private
 
     private func makeCharactersCounterText(_ text: String) -> String? {
-        guard let characterLimit = characterLimitConfiguration?.limit else { return nil }
+        guard let characterLimit = characterLimitConfiguration?.limit else {
+            return nil
+        }
 
         return "\(text.count)/\(characterLimit)"
     }
@@ -206,7 +194,7 @@ struct InputContainer<
         text: String
     ) -> (limitedText: String, isLimit: Bool) {
         if let characterLimit = limit,
-           text.count >= characterLimit
+            text.count >= characterLimit
         {
             let limitedText = String(text.prefix(characterLimit))
             return (limitedText: limitedText, isLimit: true)
