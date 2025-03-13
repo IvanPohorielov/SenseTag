@@ -74,6 +74,7 @@ public struct DefaultTextField<
     public var body: some View {
         HStack(spacing: size.inputStackSpacing) {
             leftView
+                .scaledToFit()
                 .frame(
                     width: self.leftViewSize,
                     height: self.leftViewSize
@@ -81,6 +82,7 @@ public struct DefaultTextField<
                 .accessibilityIdentifier(Accessibility.leftView.rawValue)
             textField
             rightView
+                .scaledToFit()
                 .frame(
                     width: self.rightViewSize,
                     height: self.rightViewSize
@@ -264,8 +266,8 @@ where
         self.label = Text(label)
         self.caption = Text(caption)
         self.error = Text(error)
-        self.leftView = Image(leftIcon)
-        self.rightView = Image(rightIcon)
+        self.leftView = Image(leftIcon)?.resizable()
+        self.rightView = Image(rightIcon)?.resizable()
     }
 
     @_disfavoredOverload
@@ -303,8 +305,8 @@ where
         } else {
             self.error = nil
         }
-        self.leftView = Image(leftIcon)
-        self.rightView = Image(rightIcon)
+        self.leftView = Image(leftIcon)?.resizable()
+        self.rightView = Image(rightIcon)?.resizable()
     }
 }
 

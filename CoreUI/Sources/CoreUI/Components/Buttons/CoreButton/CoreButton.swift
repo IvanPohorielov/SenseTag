@@ -85,6 +85,7 @@ extension CoreButton {
     @ViewBuilder
     private var iconView: some View {
         icon
+            .scaledToFit()
             .frame(
                 width: _iconSize,
                 height: _iconSize

@@ -66,7 +66,7 @@ public extension LinkButton where Icon == Image, Label == Text {
         action: @escaping @MainActor @Sendable () -> Void
     ) {
         self.label = Text(titleKey)
-        self.icon = Image(icon)
+        self.icon = Image(icon)?.resizable()
         self.action = action
     }
     
@@ -77,7 +77,7 @@ public extension LinkButton where Icon == Image, Label == Text {
         action: @escaping @MainActor @Sendable () -> Void
     ) where S : StringProtocol {
         self.label = Text(title)
-        self.icon = Image(icon)
+        self.icon = Image(icon)?.resizable()
         self.action = action
     }
     
@@ -89,7 +89,7 @@ public extension LinkButton where Icon == Image, Label == Text {
     ) {
         self.label = Text(titleKey)
         if let icon  {
-            self.icon = Image(icon)
+            self.icon = Image(icon)?.resizable()
         } else {
             self.icon = nil
         }
@@ -104,7 +104,7 @@ public extension LinkButton where Icon == Image, Label == Text {
     ) where S : StringProtocol {
         self.label = Text(title)
         if let icon  {
-            self.icon = Image(icon)
+            self.icon = Image(icon)?.resizable()
         } else {
             self.icon = nil
         }

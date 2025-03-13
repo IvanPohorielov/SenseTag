@@ -67,7 +67,7 @@ public extension IconButton where Icon == Image, Label == EmptyView {
         action: @escaping @MainActor @Sendable () -> Void
     ) {
         self.label = EmptyView()
-        self.icon = Image(icon)
+        self.icon = Image(icon)?.resizable()
         self.action = action
     }
     
@@ -76,7 +76,7 @@ public extension IconButton where Icon == Image, Label == EmptyView {
         action: @escaping @MainActor @Sendable () -> Void
     ) {
         self.label = EmptyView()
-        self.icon = Image(icon)
+        self.icon = Image(icon)?.resizable()
         self.action = action
     }
 }
