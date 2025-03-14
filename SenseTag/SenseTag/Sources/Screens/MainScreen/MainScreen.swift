@@ -46,6 +46,9 @@ struct MainScreen: View {
             }
             .safeAreaPadding(.spacer16)
         }
+        .onAppear {
+            store.send(.startAnimation)
+        }
         .alert(
             $store.scope(
                 state: \.destination?.alert,
@@ -141,9 +144,6 @@ struct MainScreen: View {
                         .delay(Double(index) * 2),
                     value: store.animate
                 )
-        }
-        .onAppear {
-            store.send(.startAnimation)
         }
     }
 }
