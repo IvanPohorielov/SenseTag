@@ -142,7 +142,7 @@ struct MainFeature {
             }
             actions: {
                 ButtonState(role: .destructive, action: action) {
-                    TextState("mainScreen.alert.error.confirm")
+                    TextState("mainScreen.alert.error.tryAgain")
                 }
             } message: {
                 switch error {
