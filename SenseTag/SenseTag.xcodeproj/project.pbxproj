@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA4A6F782D0757BE004DDC46 /* NFCNDEFManager in Frameworks */ = {isa = PBXBuildFile; productRef = FA4A6F772D0757BE004DDC46 /* NFCNDEFManager */; };
+		FA9A1D5C2D84744400B1DFA8 /* SenseTagClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = FA9A1D372D84744200B1DFA8 /* SenseTagClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FA9DC2632D2BDE0B00359E58 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FA9DC2622D2BDE0B00359E58 /* ComposableArchitecture */; };
 		FAB708A72D0EFADA009B20B0 /* CoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAB708A62D0EFADA009B20B0 /* CoreUI */; };
 		FAB708A92D0EFADA009B20B0 /* FoundationUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAB708A82D0EFADA009B20B0 /* FoundationUI */; };
@@ -21,12 +22,42 @@
 			remoteGlobalIDString = FA4A6F462D074F10004DDC46;
 			remoteInfo = SenseTag;
 		};
+		FA9A1D492D84744400B1DFA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA4A6F3F2D074F10004DDC46 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA9A1D362D84744200B1DFA8;
+			remoteInfo = SenseTagClip;
+		};
+		FA9A1D5A2D84744400B1DFA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA4A6F3F2D074F10004DDC46 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA9A1D362D84744200B1DFA8;
+			remoteInfo = SenseTagClip;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FA9A1D5D2D84744400B1DFA8 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				FA9A1D5C2D84744400B1DFA8 /* SenseTagClip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FA4A6F472D074F10004DDC46 /* SenseTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SenseTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4A6F572D074F12004DDC46 /* SenseTagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SenseTagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4A6F752D0756F5004DDC46 /* NFCNDEFManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NFCNDEFManager; path = ../NFCNDEFManager; sourceTree = SOURCE_ROOT; };
+		FA9A1D372D84744200B1DFA8 /* SenseTagClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SenseTagClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA9A1D482D84744400B1DFA8 /* SenseTagClipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SenseTagClipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB708A52D0EF741009B20B0 /* CoreUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreUI; path = /Users/macbook/Work/SenseTag/CoreUI; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -37,6 +68,13 @@
 				Configs/InfoPlist/Info.plist,
 			);
 			target = FA4A6F462D074F10004DDC46 /* SenseTag */;
+		};
+		FA9A1D652D84744400B1DFA8 /* Exceptions for "SenseTagClip" folder in "SenseTagClip" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Configs/InfoPlist/Info.plist,
+			);
+			target = FA9A1D362D84744200B1DFA8 /* SenseTagClip */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -52,6 +90,19 @@
 		FA4A6F5A2D074F12004DDC46 /* SenseTagTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SenseTagTests;
+			sourceTree = "<group>";
+		};
+		FA9A1D382D84744200B1DFA8 /* SenseTagClip */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FA9A1D652D84744400B1DFA8 /* Exceptions for "SenseTagClip" folder in "SenseTagClip" target */,
+			);
+			path = SenseTagClip;
+			sourceTree = "<group>";
+		};
+		FA9A1D4B2D84744400B1DFA8 /* SenseTagClipTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SenseTagClipTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +126,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA9A1D342D84744200B1DFA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA9A1D452D84744400B1DFA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -82,7 +147,9 @@
 			isa = PBXGroup;
 			children = (
 				FA4A6F492D074F10004DDC46 /* SenseTag */,
+				FA9A1D382D84744200B1DFA8 /* SenseTagClip */,
 				FA4A6F5A2D074F12004DDC46 /* SenseTagTests */,
+				FA9A1D4B2D84744400B1DFA8 /* SenseTagClipTests */,
 				FAB708A52D0EF741009B20B0 /* CoreUI */,
 				FA4A6F752D0756F5004DDC46 /* NFCNDEFManager */,
 				FA4A6F762D0757BE004DDC46 /* Frameworks */,
@@ -95,6 +162,8 @@
 			children = (
 				FA4A6F472D074F10004DDC46 /* SenseTag.app */,
 				FA4A6F572D074F12004DDC46 /* SenseTagTests.xctest */,
+				FA9A1D372D84744200B1DFA8 /* SenseTagClip.app */,
+				FA9A1D482D84744400B1DFA8 /* SenseTagClipTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,10 +185,12 @@
 				FA4A6F432D074F10004DDC46 /* Sources */,
 				FA4A6F442D074F10004DDC46 /* Frameworks */,
 				FA4A6F452D074F10004DDC46 /* Resources */,
+				FA9A1D5D2D84744400B1DFA8 /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FA9A1D5B2D84744400B1DFA8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				FA4A6F492D074F10004DDC46 /* SenseTag */,
@@ -158,6 +229,51 @@
 			productReference = FA4A6F572D074F12004DDC46 /* SenseTagTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		FA9A1D362D84744200B1DFA8 /* SenseTagClip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA9A1D642D84744400B1DFA8 /* Build configuration list for PBXNativeTarget "SenseTagClip" */;
+			buildPhases = (
+				FA9A1D332D84744200B1DFA8 /* Sources */,
+				FA9A1D342D84744200B1DFA8 /* Frameworks */,
+				FA9A1D352D84744200B1DFA8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FA9A1D382D84744200B1DFA8 /* SenseTagClip */,
+			);
+			name = SenseTagClip;
+			packageProductDependencies = (
+			);
+			productName = SenseTagClip;
+			productReference = FA9A1D372D84744200B1DFA8 /* SenseTagClip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
+		};
+		FA9A1D472D84744400B1DFA8 /* SenseTagClipTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA9A1D662D84744400B1DFA8 /* Build configuration list for PBXNativeTarget "SenseTagClipTests" */;
+			buildPhases = (
+				FA9A1D442D84744400B1DFA8 /* Sources */,
+				FA9A1D452D84744400B1DFA8 /* Frameworks */,
+				FA9A1D462D84744400B1DFA8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA9A1D4A2D84744400B1DFA8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FA9A1D4B2D84744400B1DFA8 /* SenseTagClipTests */,
+			);
+			name = SenseTagClipTests;
+			packageProductDependencies = (
+			);
+			productName = SenseTagClipTests;
+			productReference = FA9A1D482D84744400B1DFA8 /* SenseTagClipTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -165,7 +281,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					FA4A6F462D074F10004DDC46 = {
@@ -174,6 +290,13 @@
 					FA4A6F562D074F12004DDC46 = {
 						CreatedOnToolsVersion = 16.1;
 						TestTargetID = FA4A6F462D074F10004DDC46;
+					};
+					FA9A1D362D84744200B1DFA8 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					FA9A1D472D84744400B1DFA8 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = FA9A1D362D84744200B1DFA8;
 					};
 				};
 			};
@@ -197,7 +320,9 @@
 			projectRoot = "";
 			targets = (
 				FA4A6F462D074F10004DDC46 /* SenseTag */,
+				FA9A1D362D84744200B1DFA8 /* SenseTagClip */,
 				FA4A6F562D074F12004DDC46 /* SenseTagTests */,
+				FA9A1D472D84744400B1DFA8 /* SenseTagClipTests */,
 			);
 		};
 /* End PBXProject section */
@@ -211,6 +336,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FA4A6F552D074F12004DDC46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA9A1D352D84744200B1DFA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA9A1D462D84744400B1DFA8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,6 +373,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA9A1D332D84744200B1DFA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA9A1D442D84744400B1DFA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -241,6 +394,16 @@
 			isa = PBXTargetDependency;
 			target = FA4A6F462D074F10004DDC46 /* SenseTag */;
 			targetProxy = FA4A6F582D074F12004DDC46 /* PBXContainerItemProxy */;
+		};
+		FA9A1D4A2D84744400B1DFA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA9A1D362D84744200B1DFA8 /* SenseTagClip */;
+			targetProxy = FA9A1D492D84744400B1DFA8 /* PBXContainerItemProxy */;
+		};
+		FA9A1D5B2D84744400B1DFA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA9A1D362D84744200B1DFA8 /* SenseTagClip */;
+			targetProxy = FA9A1D5A2D84744400B1DFA8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -490,6 +653,110 @@
 			};
 			name = Release;
 		};
+		FA9A1D5E2D84744400B1DFA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SenseTagClip/Configs/Entitlements/SenseTagClip.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RBACX948TU;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SenseTagClip/Configs/InfoPlist/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SenseTag;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanpohorielov.sensetag.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FA9A1D5F2D84744400B1DFA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SenseTagClip/Configs/Entitlements/SenseTagClip.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RBACX948TU;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SenseTagClip/Configs/InfoPlist/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SenseTag;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanpohorielov.sensetag.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FA9A1D602D84744400B1DFA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RBACX948TU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanpohorielov.sensetag.SenseTagClipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SenseTagClip.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SenseTagClip";
+			};
+			name = Debug;
+		};
+		FA9A1D612D84744400B1DFA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RBACX948TU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivanpohorielov.sensetag.SenseTagClipTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SenseTagClip.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SenseTagClip";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -516,6 +783,24 @@
 			buildConfigurations = (
 				FA4A6F6F2D074F12004DDC46 /* Debug */,
 				FA4A6F702D074F12004DDC46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA9A1D642D84744400B1DFA8 /* Build configuration list for PBXNativeTarget "SenseTagClip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA9A1D5E2D84744400B1DFA8 /* Debug */,
+				FA9A1D5F2D84744400B1DFA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA9A1D662D84744400B1DFA8 /* Build configuration list for PBXNativeTarget "SenseTagClipTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA9A1D602D84744400B1DFA8 /* Debug */,
+				FA9A1D612D84744400B1DFA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
