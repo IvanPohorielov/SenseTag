@@ -6,9 +6,9 @@
 //
 
 import ComposableArchitecture
+import CoreNFC
 import Foundation
 import NFCNDEFManager
-import CoreNFC
 
 @Reducer
 struct WriteTagFeature {
@@ -75,18 +75,33 @@ struct WriteTagFeature {
                     guard let payloads = await createPayload(state) else {
                         return
                     }
-                    await send(.updateScreenState(.loading), animation: .default)
+                    await send(
+                        .updateScreenState(.loading), animation: .default)
                     do {
                         try await nfcClient.write(payloads: [payloads])
                         await self.dismiss()
                     } catch {
                         switch error {
-                        case let nfcError as NFCError :
-                            await send(.updateScreenState(.error(String(localized: nfcError.localizedString))), animation: .default)
+                        case let nfcError as NFCError:
+                            await send(
+                                .updateScreenState(
+                                    .error(
+                                        String(
+                                            localized: nfcError.localizedString)
+                                    )), animation: .default)
                         case let nfcReaderError as NFCReaderError:
-                            await send(.updateScreenState(.error(String(localized: nfcReaderError.localizedString))), animation: .default)
+                            await send(
+                                .updateScreenState(
+                                    .error(
+                                        String(
+                                            localized: nfcReaderError
+                                                .localizedString))),
+                                animation: .default)
                         default:
-                            await send(.updateScreenState(.error(error.localizedDescription)), animation: .default)
+                            await send(
+                                .updateScreenState(
+                                    .error(error.localizedDescription)),
+                                animation: .default)
                         }
                     }
                 }
@@ -115,8 +130,10 @@ extension WriteTagFeature {
         let payload = await self.createPayload(state)?.mapped()
         return payload?.payload.count
     }
-    
-    fileprivate func createPayload(_ state: State) async -> NFCNDEFManagerPayload? {
+
+    fileprivate func createPayload(_ state: State) async
+        -> NFCNDEFManagerPayload?
+    {
         switch state.selectedPayload {
         case .text:
             let text = state.text

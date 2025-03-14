@@ -12,15 +12,47 @@ import NFCNDEFManager
 import SwiftUI
 
 struct WriteTagSheet: View {
-    
+
     @Bindable var store: StoreOf<WriteTagFeature>
-    
+
     @FocusState
     private var isFocused: Bool
-    
+
     // MARK: - Body
-    
+
     var body: some View {
+        screenView
+            .navigationTitle("writeTagSheet.navigationTitle")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        store.send(.dismiss)
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(Color.secondary)
+                            .font(.system(size: 20))
+                            .opacity(0.8)
+                    }
+                }
+
+                ToolbarItemGroup(placement: .keyboard) {
+
+                    Spacer()  // To move button towards trailng
+
+                    Button {
+                        isFocused = false
+                    } label: {
+                        Image(systemName: "keyboard.chevron.compact.down")
+                    }
+                }
+            }
+    }
+
+    // MARK: - Views
+
+    @ViewBuilder
+    private var screenView: some View {
         switch store.screenState {
         case .content:
             self.content
@@ -28,18 +60,15 @@ struct WriteTagSheet: View {
             self.error(message)
         case .loading:
             self.loading
-            
         }
     }
-    
-    // MARK: - Views
-    
+
     @ViewBuilder
     private var loading: some View {
         ProgressView("writeTagSheet.progressView.title")
             .foregroundStyle(Color.blue.primary)
     }
-    
+
     @ViewBuilder
     private func error(_ message: String) -> some View {
         PlaceholderScreen {
@@ -54,7 +83,7 @@ struct WriteTagSheet: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private var content: some View {
         VStack {
@@ -65,13 +94,13 @@ struct WriteTagSheet: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, -.spacer12)
-            
+
             textEditor
         }
         .safeAreaPadding(.horizontal, .spacer16)
         .safeAreaPadding(.bottom, .spacer16)
         .safeAreaInset(edge: .bottom) {
-            HStack{
+            HStack {
                 quickActions
                 saveButton
             }
@@ -79,33 +108,8 @@ struct WriteTagSheet: View {
             .safeAreaPadding(.horizontal, .spacer16)
             .safeAreaPadding(.bottom, .spacer16)
         }
-        .navigationTitle("writeTagSheet.navigationTitle")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    store.send(.dismiss)
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(Color.secondary)
-                        .font(.system(size: 20))
-                        .opacity(0.8)
-                }
-            }
-            
-            ToolbarItemGroup(placement: .keyboard) {
-                
-                Spacer() // To move button towards trailng
-                
-                Button {
-                    isFocused = false
-                } label: {
-                    Image(systemName: "keyboard.chevron.compact.down")
-                }
-            }
-        }
     }
-    
+
     @ViewBuilder
     private var textEditor: some View {
         var placeholder: LocalizedStringKey {
@@ -116,13 +120,13 @@ struct WriteTagSheet: View {
                 "writeTagSheet.textEditor.placeholder.url"
             }
         }
-        
+
         var caption: LocalizedStringKey? {
             guard let bytes = store.payloadBytes else { return nil }
-            
+
             return "writeTagSheet.textEditor.caption \(bytes)"
         }
-        
+
         DefaultTextEditor(
             $store.text,
             placeholder: placeholder,
@@ -132,7 +136,7 @@ struct WriteTagSheet: View {
         .defaultTextEditorHeight(nil)
         .focused($isFocused)
     }
-    
+
     @ViewBuilder
     private var quickActions: some View {
         Group {
@@ -149,7 +153,7 @@ struct WriteTagSheet: View {
         }
         .iconButtonSize(.large)
     }
-    
+
     @ViewBuilder
     private var saveButton: some View {
         DefaultButton("writeTagSheet.saveButton.title") {

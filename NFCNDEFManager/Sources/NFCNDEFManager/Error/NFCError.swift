@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum NFCError: Error, Sendable {
+public enum NFCError: Error, Hashable, Sendable {
     // Common error
     case readerNFCUnsupported
 

@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		FA4A6F782D0757BE004DDC46 /* NFCNDEFManager in Frameworks */ = {isa = PBXBuildFile; productRef = FA4A6F772D0757BE004DDC46 /* NFCNDEFManager */; };
 		FA9A1D5C2D84744400B1DFA8 /* SenseTagClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = FA9A1D372D84744200B1DFA8 /* SenseTagClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FA9A35B32D84B7F100B1DFA8 /* CoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = FA9A35B22D84B7F100B1DFA8 /* CoreUI */; };
+		FA9A35B52D84B7F100B1DFA8 /* FoundationUI in Frameworks */ = {isa = PBXBuildFile; productRef = FA9A35B42D84B7F100B1DFA8 /* FoundationUI */; };
+		FA9A35B72D84B7F100B1DFA8 /* NFCNDEFManager in Frameworks */ = {isa = PBXBuildFile; productRef = FA9A35B62D84B7F100B1DFA8 /* NFCNDEFManager */; };
+		FA9A35B92D84B7F100B1DFA8 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FA9A35B82D84B7F100B1DFA8 /* ComposableArchitecture */; };
 		FA9DC2632D2BDE0B00359E58 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FA9DC2622D2BDE0B00359E58 /* ComposableArchitecture */; };
 		FAB708A72D0EFADA009B20B0 /* CoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAB708A62D0EFADA009B20B0 /* CoreUI */; };
 		FAB708A92D0EFADA009B20B0 /* FoundationUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAB708A82D0EFADA009B20B0 /* FoundationUI */; };
@@ -130,6 +134,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9A35B72D84B7F100B1DFA8 /* NFCNDEFManager in Frameworks */,
+				FA9A35B32D84B7F100B1DFA8 /* CoreUI in Frameworks */,
+				FA9A35B92D84B7F100B1DFA8 /* ComposableArchitecture in Frameworks */,
+				FA9A35B52D84B7F100B1DFA8 /* FoundationUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +254,10 @@
 			);
 			name = SenseTagClip;
 			packageProductDependencies = (
+				FA9A35B22D84B7F100B1DFA8 /* CoreUI */,
+				FA9A35B42D84B7F100B1DFA8 /* FoundationUI */,
+				FA9A35B62D84B7F100B1DFA8 /* NFCNDEFManager */,
+				FA9A35B82D84B7F100B1DFA8 /* ComposableArchitecture */,
 			);
 			productName = SenseTagClip;
 			productReference = FA9A1D372D84744200B1DFA8 /* SenseTagClip.app */;
@@ -822,6 +834,23 @@
 		FA4A6F772D0757BE004DDC46 /* NFCNDEFManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NFCNDEFManager;
+		};
+		FA9A35B22D84B7F100B1DFA8 /* CoreUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreUI;
+		};
+		FA9A35B42D84B7F100B1DFA8 /* FoundationUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FoundationUI;
+		};
+		FA9A35B62D84B7F100B1DFA8 /* NFCNDEFManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NFCNDEFManager;
+		};
+		FA9A35B82D84B7F100B1DFA8 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA9DC2612D2BDE0B00359E58 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 		FA9DC2622D2BDE0B00359E58 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
