@@ -33,15 +33,14 @@ struct ReadTagFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                return .run { [payload = state.payloads.first] _ in
+                return .run { [payload = state.payloads.first] send in
 
                     guard await UIAccessibility.isVoiceOverRunning,
                         case .wellKnown(let wellKnownPayload) = payload
                     else {
                         return
                     }
-                    
-                    await self.speakUp(wellKnownPayload)
+                    await send(.speakUp(wellKnownPayload))
                 }
             case .dismiss:
                 return .run { _ in await self.dismiss() }

@@ -74,6 +74,7 @@ struct MainFeature {
         return .run { send in
             do {
                 let payloads = try await nfcClient.read()
+                guard !payloads.isEmpty else { return }
                 await send(.openReadSheet(payloads))
             } catch {
                 await send(.handleError(error, .read))
