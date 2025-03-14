@@ -18,7 +18,7 @@ struct SenseTagApp: App {
     var body: some Scene {
         WindowGroup {
             MainScreen(store: SenseTagApp.store)
-                .tint(.violet.primary)
+                .tint(.blue.primary)
         }
     }
 }

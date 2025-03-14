@@ -18,6 +18,47 @@ struct ReadTagSheet: View {
     // MARK: - Body
 
     var body: some View {
+        self.screenView
+            .navigationTitle("readTagSheet.navigationTitle")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        store.send(.dismiss)
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(Color.secondary)
+                            .font(.system(size: 20))
+                            .opacity(0.8)
+                    }
+                }
+            }
+    }
+
+    // MARK: - Views
+
+    @ViewBuilder
+    private var screenView: some View {
+        if store.payloads.allSatisfy({ $0 == .empty }) {
+            empty
+        } else {
+            content
+        }
+    }
+    
+    @ViewBuilder
+    private var empty: some View {
+        PlaceholderScreen {
+            Text("readTagSheet.empty.title")
+                .font(.senseHOne)
+        } label: {
+            Text("readTagSheet.empty.label")
+                .font(.senseLabelM)
+        }
+    }
+    
+    @ViewBuilder
+    private var content: some View {
         ScrollView {
             LazyVStack(spacing: .spacer8) {
                 ForEach(
@@ -29,26 +70,11 @@ struct ReadTagSheet: View {
             .safeAreaPadding(.horizontal, .spacer16)
             .safeAreaPadding(.bottom, .spacer16)
         }
-        .navigationTitle("readTagSheet.navigationTitle")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    store.send(.dismiss)
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(Color.secondary)
-                        .font(.system(size: 20))
-                        .opacity(0.8)
-                }
-            }
-        }
         .onAppear {
             store.send(.onAppear)
         }
     }
-
-    // MARK: - Views
+    
 
     @ViewBuilder
     private func recordItem(
@@ -57,7 +83,8 @@ struct ReadTagSheet: View {
     ) -> some View {
         HStack(spacing: .spacer8) {
             VStack(spacing: .spacer8) {
-                let localizedStringKey: LocalizedStringKey = "readTagSheet.recordItem.record \(number)"
+                let localizedStringKey: LocalizedStringKey =
+                    "readTagSheet.recordItem.record \(number)"
                 Text(localizedStringKey)
                     .font(.senseCaption)
                     .foregroundStyle(Color.black.shade700)
@@ -133,7 +160,12 @@ extension ReadTagSheet {
                         .wellKnown(.text("Hello, Preview", .current)),
                         .wellKnown(.text("Ти така гарна", .current)),
                         .wellKnown(.url(URL(string: "https://www.apple.com")!)),
-                        .wellKnown(.url(URL(string: "https://www.youtube.com/watch?v=KPqK5LyGsiE")!))
+                        .wellKnown(
+                            .url(
+                                URL(
+                                    string:
+                                        "https://www.youtube.com/watch?v=KPqK5LyGsiE"
+                                )!)),
                     ]
                 )
             ) {
