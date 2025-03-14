@@ -276,7 +276,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Прочитать метку"
+            "value" : "Сканировать метку"
           }
         },
         "uk" : {
@@ -320,13 +320,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Прочитать метку"
+            "value" : "Сканировать метку"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Прочитати мітку"
+            "value" : "Сканувати мітку"
           }
         }
       }
