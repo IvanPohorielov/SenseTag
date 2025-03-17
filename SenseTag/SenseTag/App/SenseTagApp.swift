@@ -6,19 +6,20 @@
 //
 
 import ComposableArchitecture
-import SwiftUI
 import FoundationUI
+import SwiftUI
 
 @main
 struct SenseTagApp: App {
-    static let store = Store(initialState: MainFeature.State()) {
-        MainFeature()
-    }
 
     var body: some Scene {
         WindowGroup {
-            MainScreen(store: SenseTagApp.store)
-                .tint(.blue.primary)
+            MainScreen(
+                store: Store(initialState: MainFeature.State()) {
+                    MainFeature()
+                }
+            )
+            .tint(.blue.primary)
         }
     }
 }

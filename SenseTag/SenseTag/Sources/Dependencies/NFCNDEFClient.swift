@@ -21,8 +21,14 @@ extension NFCNDEFClient: DependencyKey {
     static var liveValue: Self {
         let nfcManager = NFCNDEFManager()
         return Self(
-            read: { try await nfcManager.read() },
-            write: { payloads in try await nfcManager.write(payloads) },
+            read: {
+                var payloads = try await nfcManager.read()
+                return AppClipNFCLinkService.removeDefaultLink(&payloads)
+            },
+            write: { payloads in
+                var payloads = consume payloads
+                try await nfcManager.write(AppClipNFCLinkService.addDefaultLink(&payloads))
+            },
             clear: { try await nfcManager.clear() },
             lock: { try await nfcManager.lock() }
         )
