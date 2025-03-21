@@ -45,6 +45,94 @@
         }
       }
     },
+    "common.closeButton.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Press to close the screen"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите, чтобы закрыть экран"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть, щоб закрити екран"
+          }
+        }
+      }
+    },
+    "common.closeButton.label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close button"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кнопка закрыть"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кнопка закрити"
+          }
+        }
+      }
+    },
+    "common.copyButton.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click to copy text to clipboard"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите, чтобы скопировать текст в буфер обмена"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть, щоб скопіювати текст в буфер обміну"
+          }
+        }
+      }
+    },
+    "common.copyButton.label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy text"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скопировать текст"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скопіювати текст"
+          }
+        }
+      }
+    },
     "mainScreen.alert.action.confirm" : {
       "localizations" : {
         "en" : {
@@ -292,19 +380,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap to open the tag lock and clear functions."
+            "value" : "Tap twice to open the tag lock and clear functions."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нажмите, чтобы открыть блокировку и очистку метки."
+            "value" : "Нажмите два раза, чтобы открыть блокировку и очистку метки."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Натисніть, щоб відкрити функції блокування і очищення мітки."
+            "value" : "Натисніть двічі, щоб відкрити функції блокування і очищення мітки."
           }
         }
       }
@@ -336,19 +424,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Click to start scanning the tag."
+            "value" : "Tap twice to start scanning the tag."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нажмите для начала сканирования метки."
+            "value" : "Нажмите два раза, чтобы начала сканирования метки."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Натисніть, щоб почати сканування мітки."
+            "value" : "Натисніть двічі, щоб почати сканування мітки."
           }
         }
       }
@@ -380,19 +468,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Click to start creating a tag."
+            "value" : "Tap twice to start creating a tag."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нажмите, чтобы начать создание метки."
+            "value" : "Нажмите два раза, чтобы начать создание метки."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Натисніть, щоб почати створення мітки."
+            "value" : "Натисніть двічі, щоб почати створення мітки."
           }
         }
       }
@@ -459,6 +547,116 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сканувати мітку"
+          }
+        }
+      }
+    },
+    "readTagSheet.recordItem.contentView.empty.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This record contains no data."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Эта запись не содержит данных."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цей запис не містить даних."
+          }
+        }
+      }
+    },
+    "readTagSheet.recordItem.contentView.empty.label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty record"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пустая запись"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пустий запис"
+          }
+        }
+      }
+    },
+    "readTagSheet.recordItem.contentView.other.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This record has an unknown data format."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запись имеет неизвестный формат данных."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цей запис має невідомий формат даних."
+          }
+        }
+      }
+    },
+    "readTagSheet.recordItem.contentView.other.label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown entry"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неизвестная запись"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невідомий запис"
+          }
+        }
+      }
+    },
+    "readTagSheet.recordItem.contentView.text.label %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text entry: %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Текстовая запись: %@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Текстовий запис: %@"
           }
         }
       }
