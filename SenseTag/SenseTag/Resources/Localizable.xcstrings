@@ -23,6 +23,28 @@
         }
       }
     },
+    "common.cancel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасувати"
+          }
+        }
+      }
+    },
     "mainScreen.alert.action.confirm" : {
       "localizations" : {
         "en" : {
@@ -50,19 +72,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "An error occurred."
+            "value" : "An error occurred"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Произошла ошибка."
+            "value" : "Произошла ошибка"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сталась помилка."
+            "value" : "Сталась помилка"
           }
         }
       }

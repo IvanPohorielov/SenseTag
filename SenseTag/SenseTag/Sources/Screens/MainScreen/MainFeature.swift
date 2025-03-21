@@ -144,8 +144,11 @@ struct MainFeature {
                 TextState("mainScreen.alert.error.title")
             }
             actions: {
-                ButtonState(role: .destructive, action: action) {
+                ButtonState(action: action) {
                     TextState("mainScreen.alert.error.tryAgain")
+                }
+                ButtonState(role: .cancel) {
+                    TextState("common.cancel")
                 }
             } message: {
                 switch error {
