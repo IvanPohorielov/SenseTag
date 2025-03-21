@@ -142,8 +142,8 @@ struct WriteTagSheet: View {
         Group {
             switch store.selectedPayload {
             case .text:
-                IconButton(icon: .systemImage("waveform")) {
-                    store.send(.speakUp)
+                IconButton(icon: .systemImage("document.on.document.fill")) {
+                    store.send(.copyToClipboard)
                 }
             case .url:
                 IconButton(icon: .systemImage("link")) {

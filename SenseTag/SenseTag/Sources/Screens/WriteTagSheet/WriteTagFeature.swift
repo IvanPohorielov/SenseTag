@@ -9,6 +9,7 @@ import ComposableArchitecture
 import CoreNFC
 import Foundation
 import NFCNDEFManager
+import enum SwiftUI.AccessibilityNotification
 
 @Reducer
 struct WriteTagFeature {
@@ -25,7 +26,7 @@ struct WriteTagFeature {
         case dismiss
         case binding(BindingAction<State>)
         case writeToTag
-        case speakUp
+        case copyToClipboard
         case openURL
         case updatePayloadBytes(Int?)
         case updateButtonsEnabled(Bool)
@@ -37,7 +38,7 @@ struct WriteTagFeature {
     @Dependency(\.application) var application
     @Dependency(\.nfcClient) var nfcClient
     @Dependency(\.languageRecognizer) var languageRecognizer
-    @Dependency(\.speechSynthesizer) var speechSynthesizer
+    @Dependency(\.pasteboard) var pasteboard
 
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -60,9 +61,9 @@ struct WriteTagFeature {
                 return .none
             case .dismiss:
                 return .run { _ in await self.dismiss() }
-            case .speakUp:
-                return .run { [state] _ in
-                    await speechSynthesizer.speak(state.text)
+            case .copyToClipboard:
+                return .run { [text = state.text] _ in
+                    await self.pasteboard.setString(text)
                 }
             case .openURL:
                 return .run { [text = state.text] _ in

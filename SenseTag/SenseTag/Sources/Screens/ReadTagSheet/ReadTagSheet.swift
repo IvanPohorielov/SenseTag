@@ -106,9 +106,6 @@ struct ReadTagSheet: View {
         case let .wellKnown(wellKnownPayload):
             switch wellKnownPayload {
             case let .text(text, _):
-                IconButton(icon: .systemImage("waveform")) {
-                    store.send(.speakUp(wellKnownPayload))
-                }
                 IconButton(icon: .systemImage("document.on.document.fill")) {
                     store.send(.copyToClipboard(text))
                 }
