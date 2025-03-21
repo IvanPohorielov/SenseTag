@@ -91,6 +91,7 @@ struct ReadTagSheet: View {
                     .font(.senseCaption)
                     .foregroundStyle(Color.black.shade700)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .accessibilityAddTraits(.isHeader)
                 self.getContentView(from: payload)
             }
             .contentShape(
@@ -108,7 +109,6 @@ struct ReadTagSheet: View {
         .contentShape(
             .rect(cornerRadius: .radius8)
         )
-        .accessibilityElement(children: .contain)
     }
 
     @ViewBuilder
@@ -120,8 +120,8 @@ struct ReadTagSheet: View {
             IconButton(icon: .systemImage("document.on.document.fill")) {
                 store.send(.copyToClipboard(text))
             }
-            .accessibilityLabel("readTagSheet.recordItem.copyButton.label")
-            .accessibilityHint("readTagSheet.recordItem.copyButton.hint")
+            .accessibilityLabel("common.copyButton.label")
+            .accessibilityHint("common.copyButton.hint")
         default:
             EmptyView()
         }
@@ -143,8 +143,8 @@ extension ReadTagSheet {
                     .accessibilityLabel("readTagSheet.recordItem.contentView.text.label \(text)")
             case let .url(url):
                 LinkPresentationView(url: url)
-                    .accessibilityElement(children: .combine)
-//                    .accessibilityLabel("readTagSheet.recordItem.contentView.url.label")
+                    .accessibilityElement(children: .contain)
+                    .accessibilityAddTraits(.isLink)
             }
         case .empty:
             Text("readTagSheet.recordItem.empty")
