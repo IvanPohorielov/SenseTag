@@ -31,7 +31,12 @@ struct ReadTagSheet: View {
                             .font(.system(size: 20))
                             .opacity(0.8)
                     }
+                    .accessibilityLabel("common.closeButton.label")
+                    .accessibilityHint("common.closeButton.hint")
                 }
+            }
+            .onAppear {
+                AccessibilityNotification.ScreenChanged().post()
             }
     }
 
@@ -45,18 +50,19 @@ struct ReadTagSheet: View {
             content
         }
     }
-    
+
     @ViewBuilder
     private var empty: some View {
         PlaceholderScreen {
             Text("readTagSheet.empty.title")
                 .font(.senseHOne)
+                .accessibilityAddTraits(.isHeader)
         } label: {
             Text("readTagSheet.empty.label")
                 .font(.senseLabelM)
         }
     }
-    
+
     @ViewBuilder
     private var content: some View {
         ScrollView {
@@ -71,7 +77,6 @@ struct ReadTagSheet: View {
             .safeAreaPadding(.bottom, .spacer16)
         }
     }
-    
 
     @ViewBuilder
     private func recordItem(
@@ -88,7 +93,11 @@ struct ReadTagSheet: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 self.getContentView(from: payload)
             }
-            recordActions(payload)
+            .contentShape(
+                .rect(cornerRadius: .radius8)
+            )
+            .accessibilityElement(children: .combine)
+            recordAction(payload)
         }
         .padding(.spacer16)
         .frame(maxWidth: .infinity)
@@ -96,22 +105,23 @@ struct ReadTagSheet: View {
         .clipShape(
             .rect(cornerRadius: .radius8)
         )
+        .contentShape(
+            .rect(cornerRadius: .radius8)
+        )
+        .accessibilityElement(children: .contain)
     }
 
     @ViewBuilder
-    private func recordActions(
+    private func recordAction(
         _ payload: NFCNDEFManagerPayload
     ) -> some View {
         switch payload {
-        case let .wellKnown(wellKnownPayload):
-            switch wellKnownPayload {
-            case let .text(text, _):
-                IconButton(icon: .systemImage("document.on.document.fill")) {
-                    store.send(.copyToClipboard(text))
-                }
-            case .url:
-                EmptyView()
+        case let .wellKnown(.text(text, _)):
+            IconButton(icon: .systemImage("document.on.document.fill")) {
+                store.send(.copyToClipboard(text))
             }
+            .accessibilityLabel("readTagSheet.recordItem.copyButton.label")
+            .accessibilityHint("readTagSheet.recordItem.copyButton.hint")
         default:
             EmptyView()
         }
@@ -130,17 +140,24 @@ extension ReadTagSheet {
                 Text(text)
                     .font(.senseBodyL)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .accessibilityLabel("readTagSheet.recordItem.contentView.text.label \(text)")
             case let .url(url):
                 LinkPresentationView(url: url)
+                    .accessibilityElement(children: .combine)
+//                    .accessibilityLabel("readTagSheet.recordItem.contentView.url.label")
             }
         case .empty:
             Text("readTagSheet.recordItem.empty")
                 .font(.senseBodyL)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityLabel("readTagSheet.recordItem.contentView.empty.label")
+                .accessibilityHint("readTagSheet.recordItem.contentView.empty.hint")
         case .other:
             Text("readTagSheet.recordItem.unknown")
                 .font(.senseBodyL)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityLabel("readTagSheet.recordItem.contentView.other.label")
+                .accessibilityHint("readTagSheet.recordItem.contentView.other.hint")
         }
     }
 }
