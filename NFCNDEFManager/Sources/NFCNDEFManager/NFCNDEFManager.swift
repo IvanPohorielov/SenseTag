@@ -86,7 +86,7 @@ public final actor NFCNDEFManager {
                 try await handle(tag)
 
                 // Exit after first tag readed
-                break
+                self.invalidateSession()
             }
             self.invalidateSession()
         } catch {
