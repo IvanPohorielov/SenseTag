@@ -29,6 +29,8 @@ struct MainScreen: View {
                 ) {
                     store.send(.otherTapped)
                 }
+                .accessibilitySortPriority(0)
+                .accessibilityHint(Text("mainScreen.tile.other.hint"))
                 tile(
                     "mainScreen.tile.read",
                     image: "magnifyingglass.circle.fill",
@@ -36,6 +38,8 @@ struct MainScreen: View {
                 ) {
                     store.send(.readTapped)
                 }
+                .accessibilitySortPriority(2)
+                .accessibilityHint(Text("mainScreen.tile.read.hint"))
                 tile(
                     "mainScreen.tile.write",
                     image: "plus.circle.fill",
@@ -43,6 +47,8 @@ struct MainScreen: View {
                 ) {
                     store.send(.writeTapped)
                 }
+                .accessibilitySortPriority(1)
+                .accessibilityHint(Text("mainScreen.tile.write.hint"))
             }
             .safeAreaPadding(.spacer16)
         }
@@ -115,10 +121,16 @@ struct MainScreen: View {
         .clipShape(
             .rect(cornerRadius: .radius24)
         )
+        .contentShape(
+            .rect(cornerRadius: .radius24)
+        )
         .onTapGesture {
             DefaultHaptics.sendHapticFeedback(.selection)
             action()
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityLabel(Text(title))
     }
 
     @ViewBuilder
@@ -144,6 +156,7 @@ struct MainScreen: View {
                         .delay(Double(index) * 2),
                     value: store.animate
                 )
+                .accessibilityHidden(true)
         }
     }
 }

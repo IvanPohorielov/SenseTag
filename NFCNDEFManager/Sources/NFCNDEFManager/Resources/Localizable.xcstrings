@@ -697,26 +697,98 @@
         }
       }
     },
-    "NFCNDEFManager.readerSession.message" : {
-      "comment" : "Message shown to the user when NFC session is started.",
+    "NFCNDEFManager.readerSession.message.clear" : {
+      "comment" : "Message shown to the user when NFC clear session is started.",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Hold your iPhone near the NFC tag."
+            "value" : "Hold your iPhone close to the NFC tag to erase its data."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Поднесите iPhone к метке NFC."
+            "value" : "Поднесите iPhone к метке, чтобы стереть данные."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Тримайте iPhone біля мітки NFC."
+            "value" : "Піднесіть iPhone до мітки, щоб стерти дані."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.readerSession.message.lock" : {
+      "comment" : "Message shown to the user when NFC lock session is started.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Hold your iPhone close to the NFC tag to lock it permanently."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поднесите iPhone к метке, чтобы заблокировать её навсегда."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Піднесіть iPhone до мітки, щоб заблокувати його назавжди."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.readerSession.message.read" : {
+      "comment" : "Message shown to the user when NFC read session is started.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Hold your iPhone close to the NFC tag to start scanning."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поднесите iPhone к метке, чтобы начать сканирование."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Піднесіть iPhone до мітки, щоб розпочати сканування."
+          }
+        }
+      }
+    },
+    "NFCNDEFManager.readerSession.message.write" : {
+      "comment" : "Message shown to the user when NFC write session is started.",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Hold your iPhone close to the NFC tag to write data."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поднесите iPhone к метке, чтобы записать данные."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Піднесіть iPhone до NFC-теґа, щоб записати дані."
           }
         }
       }

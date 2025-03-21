@@ -84,11 +84,13 @@ struct MainFeature {
 
     private func openReadSheet(state: inout State, payloads: [NFCNDEFManagerPayload]) -> Effect<Action> {
         state.destination = .readTag(ReadTagFeature.State(payloads: payloads))
+        AccessibilityNotification.ScreenChanged().post()
         return .none
     }
 
     private func handleWriteTapped(state: inout State) -> Effect<Action> {
         state.destination = .writeTag(WriteTagFeature.State())
+        AccessibilityNotification.ScreenChanged().post()
         return .none
     }
 

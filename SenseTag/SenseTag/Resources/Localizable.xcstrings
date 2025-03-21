@@ -265,6 +265,28 @@
         }
       }
     },
+    "mainScreen.tile.other.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to open the tag lock and clear functions."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите, чтобы открыть блокировку и очистку метки."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть, щоб відкрити функції блокування і очищення мітки."
+          }
+        }
+      }
+    },
     "mainScreen.tile.read" : {
       "localizations" : {
         "en" : {
@@ -287,6 +309,28 @@
         }
       }
     },
+    "mainScreen.tile.read.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click to start scanning the tag."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите для начала сканирования метки."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть, щоб почати сканування мітки."
+          }
+        }
+      }
+    },
     "mainScreen.tile.write" : {
       "localizations" : {
         "en" : {
@@ -305,6 +349,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Створити мітку"
+          }
+        }
+      }
+    },
+    "mainScreen.tile.write.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click to start creating a tag."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите, чтобы начать создание метки."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть, щоб почати створення мітки."
           }
         }
       }

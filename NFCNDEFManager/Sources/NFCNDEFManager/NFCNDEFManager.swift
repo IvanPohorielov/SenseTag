@@ -1,4 +1,5 @@
 @preconcurrency import CoreNFC
+import enum SwiftUI.AccessibilityNotification
 
 public final actor NFCNDEFManager {
     // MARK: - Properties
@@ -15,8 +16,15 @@ public final actor NFCNDEFManager {
 
     public func read() async throws -> [NFCNDEFManagerPayload] {
         var payloads: [NFCNDEFManagerPayload] = []
+        
+        let message = LocalizedStringResource(
+            "NFCNDEFManager.readerSession.message.read",
+            defaultValue: "Hold your iPhone close to the NFC tag to start scanning.",
+            bundle: .atURL(Bundle.module.bundleURL),
+            comment: "Message shown to the user when NFC read session is started."
+        )
 
-        try await detectTag { tag in
+        try await detectTag(message) { tag in
             let tagPayloads = try await self.handleRead(tag)
             await MainActor.run {
                 payloads.append(contentsOf: tagPayloads)
@@ -27,34 +35,51 @@ public final actor NFCNDEFManager {
     }
 
     public func write(_ payloads: [NFCNDEFManagerPayload]) async throws {
-        try await detectTag { tag in
+        let message = LocalizedStringResource(
+            "NFCNDEFManager.readerSession.message.write",
+            defaultValue: "Hold your iPhone close to the NFC tag to write data.",
+            bundle: .atURL(Bundle.module.bundleURL),
+            comment: "Message shown to the user when NFC write session is started."
+        )
+        
+        try await detectTag(message) { tag in
             try await self.handleWrite(to: tag, payloads: payloads)
         }
     }
 
     public func clear() async throws {
-        try await write([])
+        let message = LocalizedStringResource(
+            "NFCNDEFManager.readerSession.message.clear",
+            defaultValue: "Hold your iPhone close to the NFC tag to erase its data.",
+            bundle: .atURL(Bundle.module.bundleURL),
+            comment: "Message shown to the user when NFC clear session is started."
+        )
+        try await detectTag(message) { tag in
+            try await self.handleWrite(to: tag, payloads: [])
+        }
     }
 
     public func lock() async throws {
-        try await detectTag { tag in
+        let message = LocalizedStringResource(
+            "NFCNDEFManager.readerSession.message.lock",
+            defaultValue: "Hold your iPhone close to the NFC tag to lock it permanently.",
+            bundle: .atURL(Bundle.module.bundleURL),
+            comment: "Message shown to the user when NFC lock session is started."
+        )
+        try await detectTag(message) { tag in
             try await self.handleLock(tag)
         }
     }
 
     // MARK: - Private Methods
 
-    private func detectTag(handle: @Sendable @escaping (NFCNDEFTag) async throws -> Void) async throws {
-        let localizedAlertMessage = LocalizedStringResource(
-            "NFCNDEFManager.readerSession.message",
-            defaultValue: "Hold your iPhone near the NFC tag.",
-            bundle: .atURL(Bundle.module.bundleURL), 
-            comment: "Message shown to the user when NFC session is started."
-        )
+    private func detectTag(_ message: LocalizedStringResource, handle: @Sendable @escaping (NFCNDEFTag) async throws -> Void) async throws {
 
         try self.startSession(
-            alertMessage: String(localized: localizedAlertMessage)
+            alertMessage: String(localized: message)
         )
+        
+        AccessibilityNotification.ScreenChanged().post()
 
         do {
             for try await tag in sessionDelegate.detect() {
