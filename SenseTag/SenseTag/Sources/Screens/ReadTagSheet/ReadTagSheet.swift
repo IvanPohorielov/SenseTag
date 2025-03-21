@@ -71,6 +71,7 @@ struct ReadTagSheet: View {
                     Array(zip(store.payloads.indices, store.payloads)), id: \.1
                 ) { index, payload in
                     recordItem(payload, number: index + 1)
+                        .accessibilitySortPriority(0)
                 }
             }
             .safeAreaPadding(.horizontal, .spacer16)
@@ -97,7 +98,7 @@ struct ReadTagSheet: View {
             .contentShape(
                 .rect(cornerRadius: .radius8)
             )
-            .accessibilityElement(children: .combine)
+            .accessibilityElement(children: .contain)
             recordAction(payload)
         }
         .padding(.spacer16)
@@ -109,6 +110,7 @@ struct ReadTagSheet: View {
         .contentShape(
             .rect(cornerRadius: .radius8)
         )
+        .accessibilityElement(children: .contain)
     }
 
     @ViewBuilder

@@ -64,7 +64,7 @@ extension CoreButton {
                 isFullWidth: isFullWidth
             )
         )
-        .contentShape(Rectangle())
+        .contentShape(borderShape?.shape(coreRadius: size.cornerRadius) ?? AnyShape(.rect()))
         .accessibilityIdentifier(CoreButtonAccessibility.CoreButton.rawValue)
     }
 
