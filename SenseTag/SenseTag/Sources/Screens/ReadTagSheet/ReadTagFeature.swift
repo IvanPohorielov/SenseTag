@@ -19,7 +19,6 @@ struct ReadTagFeature {
     }
 
     enum Action {
-        case onAppear
         case dismiss
         case speakUp(NFCNDEFManagerPayload.WellKnownPayload)
         case copyToClipboard(String)
@@ -32,16 +31,6 @@ struct ReadTagFeature {
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .onAppear:
-                return .run { [payload = state.payloads.first] send in
-
-                    guard await UIAccessibility.isVoiceOverRunning,
-                        case .wellKnown(let wellKnownPayload) = payload
-                    else {
-                        return
-                    }
-                    await send(.speakUp(wellKnownPayload))
-                }
             case .dismiss:
                 return .run { _ in await self.dismiss() }
             case let .speakUp(payload):

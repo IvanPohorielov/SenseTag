@@ -70,9 +70,6 @@ struct ReadTagSheet: View {
             .safeAreaPadding(.horizontal, .spacer16)
             .safeAreaPadding(.bottom, .spacer16)
         }
-        .onAppear {
-            store.send(.onAppear)
-        }
     }
     
 

@@ -402,19 +402,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The tag contains no data."
+            "value" : "The tag contains no data"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Метка не содержит данных."
+            "value" : "Метка не содержит данных"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Мітка не містить данних."
+            "value" : "Мітка не містить данних"
           }
         }
       }
