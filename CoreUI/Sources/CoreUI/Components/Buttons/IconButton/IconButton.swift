@@ -51,7 +51,7 @@ public struct IconButton<Icon: View, Label: View>: CoreButton, IconButtonEnvProt
 
 public extension IconButton where Label == EmptyView {
     init(
-        @ViewBuilder iconBuilder: () -> Icon = { EmptyView?(nil) },
+        @ViewBuilder iconBuilder: () -> Icon,
         action: @escaping @MainActor @Sendable () -> Void
     ) {
         self.label = EmptyView()

@@ -55,8 +55,8 @@ public struct DefaultButton<Icon: View, Label: View>: CoreButton, DefaultButtonE
 
 public extension DefaultButton {
     init(
-        @ViewBuilder labelBuilder: () -> Label = { EmptyView?(nil) },
-        @ViewBuilder iconBuilder: () -> Icon = { EmptyView?(nil) },
+        @ViewBuilder labelBuilder: () -> Label,
+        @ViewBuilder iconBuilder: () -> Icon? = { EmptyView?(nil) },
         action: @escaping @MainActor @Sendable () -> Void
     ) {
         self.label = labelBuilder()

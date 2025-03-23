@@ -1,28 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " "
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " "
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " "
-          }
-        }
-      }
-    },
     "common.cancel" : {
       "localizations" : {
         "en" : {
@@ -50,19 +28,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press to close the screen"
+            "value" : "Tap twice to close the screen"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нажмите, чтобы закрыть экран"
+            "value" : "Нажмите дважды, чтобы закрыть экран"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Натисніть, щоб закрити екран"
+            "value" : "Натисніть двічі, щоб закрити екран"
           }
         }
       }
@@ -72,19 +50,63 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Close button"
+            "value" : "Close screen"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Кнопка закрыть"
+            "value" : "Закрыть экран"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Кнопка закрити"
+            "value" : "Закрити екран"
+          }
+        }
+      }
+    },
+    "common.closeKeyboardButton.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close keyboard"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрыть клавиатуру"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрити клавіатуру"
+          }
+        }
+      }
+    },
+    "common.closeKeyboardButton.label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap twice to close keyboard"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите дважды, чтобы закрыть клавиатуру"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть двічі, щоб закрити клавіатуру"
           }
         }
       }
@@ -94,19 +116,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Click to copy text to clipboard"
+            "value" : "Tap twice to copy text to clipboard"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нажмите, чтобы скопировать текст в буфер обмена"
+            "value" : "Нажмите дважды, чтобы скопировать текст в буфер обмена"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Натисніть, щоб скопіювати текст в буфер обміну"
+            "value" : "Натисніть двічі, щоб скопіювати текст в буфер обміну"
           }
         }
       }
@@ -129,6 +151,94 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скопіювати текст"
+          }
+        }
+      }
+    },
+    "common.linkButton.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap twice to open URL"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите дважды, чтобы открыть ссылку"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть двічі, щоб відкрити посилання"
+          }
+        }
+      }
+    },
+    "common.linkButton.label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open URL"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Открыть ссылку"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відкрити посилання"
+          }
+        }
+      }
+    },
+    "common.progressView.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading…"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузка…"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завантаження…"
+          }
+        }
+      }
+    },
+    "common.saveButton.hint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap twice to write data to tag"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите дважды, чтобы записать данные на метку"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть двічі, щоб записати данні на мітку"
           }
         }
       }
@@ -386,7 +496,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нажмите два раза, чтобы открыть блокировку и очистку метки."
+            "value" : "Нажмите дважды, чтобы открыть блокировку и очистку метки."
           }
         },
         "uk" : {
@@ -430,7 +540,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нажмите два раза, чтобы начала сканирования метки."
+            "value" : "Нажмите дважды, чтобы начала сканирования метки."
           }
         },
         "uk" : {
@@ -474,7 +584,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нажмите два раза, чтобы начать создание метки."
+            "value" : "Нажмите дважды, чтобы начать создание метки."
           }
         },
         "uk" : {
@@ -749,24 +859,46 @@
         }
       }
     },
-    "writeTagSheet.error.title" : {
+    "writeTagSheet.error.action.hint" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "An error occurred."
+            "value" : "Tap twice to try write tag"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Произошла ошибка."
+            "value" : "Нажмите дважды, чтобы попробовать записать метку"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сталась помилка."
+            "value" : "Натисніть двічі, щоб спробувати записати мітку"
+          }
+        }
+      }
+    },
+    "writeTagSheet.error.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Произошла ошибка"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сталась помилка"
           }
         }
       }
@@ -793,24 +925,46 @@
         }
       }
     },
-    "writeTagSheet.progressView.title" : {
+    "writeTagSheet.picker.hint" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Loading…"
+            "value" : "Tap twice to select payload type"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Загрузка…"
+            "value" : "Нажмите дважды, чтобы выбрать тип данных"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Завантаження…"
+            "value" : "Натисніть двічі, щоб вибрати тип данних"
+          }
+        }
+      }
+    },
+    "writeTagSheet.picker.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Payload type"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тип данных"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тип данних"
           }
         }
       }
@@ -892,13 +1046,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Введите URL"
+            "value" : "Введите ссылку"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Введіть URL"
+            "value" : "Введіть посилання"
           }
         }
       }

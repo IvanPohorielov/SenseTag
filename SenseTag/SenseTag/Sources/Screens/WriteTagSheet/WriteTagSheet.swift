@@ -34,6 +34,8 @@ struct WriteTagSheet: View {
                             .font(.system(size: 20))
                             .opacity(0.8)
                     }
+                    .accessibilityLabel("common.closeButton.label")
+                    .accessibilityHint("common.closeButton.hint")
                 }
 
                 ToolbarItemGroup(placement: .keyboard) {
@@ -45,7 +47,12 @@ struct WriteTagSheet: View {
                     } label: {
                         Image(systemName: "keyboard.chevron.compact.down")
                     }
+                    .accessibilityLabel("common.closeKeyboardButton.label")
+                    .accessibilityHint("common.closeKeyboardButton.hint")
                 }
+            }
+            .onAppear {
+                AccessibilityNotification.ScreenChanged().post()
             }
     }
 
@@ -65,7 +72,7 @@ struct WriteTagSheet: View {
 
     @ViewBuilder
     private var loading: some View {
-        ProgressView("writeTagSheet.progressView.title")
+        ProgressView("common.progressView.title")
             .foregroundStyle(Color.blue.primary)
     }
 
@@ -74,26 +81,32 @@ struct WriteTagSheet: View {
         PlaceholderScreen {
             Text("writeTagSheet.error.title")
                 .font(.senseHOne)
+                .accessibilityAddTraits(.isHeader)
+                .contentShape(.rect(cornerRadius: .radius4))
         } label: {
             Text(message)
                 .font(.senseLabelM)
+                .contentShape(.rect(cornerRadius: .radius4))
         } actions: {
             DefaultButton("writeTagSheet.error.action") {
                 store.send(.writeToTag)
             }
+            .accessibilityHint("writeTagSheet.error.action.hint")
         }
     }
 
     @ViewBuilder
     private var content: some View {
         VStack {
-            Picker("", selection: $store.selectedPayload) {
+            Picker("writeTagSheet.picker.title", selection: $store.selectedPayload) {
                 ForEach(NFCNDEFWellKnownPayloadType.allCases) { type in
                     Text(type.title)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, -.spacer12)
+            .contentShape(.rect(cornerRadius: .radius4))
+            .accessibilityHint("writeTagSheet.picker.hint")
 
             textEditor
         }
@@ -145,10 +158,14 @@ struct WriteTagSheet: View {
                 IconButton(icon: .systemImage("document.on.document.fill")) {
                     store.send(.copyToClipboard)
                 }
+                .accessibilityLabel("common.copyButton.label")
+                .accessibilityHint("common.copyButton.hint")
             case .url:
                 IconButton(icon: .systemImage("link")) {
                     store.send(.openURL)
                 }
+                .accessibilityLabel("common.linkButton.label")
+                .accessibilityHint("common.linkButton.hint")
             }
         }
         .iconButtonSize(.large)
@@ -161,6 +178,7 @@ struct WriteTagSheet: View {
         }
         .defaultButtonSize(.large)
         .defaultButtonFullWidth(true)
+        .accessibilityHint("common.saveButton.hint")
     }
 }
 

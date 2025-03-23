@@ -85,9 +85,9 @@ public struct PlaceholderScreen<
 extension PlaceholderScreen {
     public init(
         @ViewBuilder illustration: () -> Illustration = { EmptyView?(nil) },
-        @ViewBuilder title: () -> Title = { EmptyView?(nil) },
-        @ViewBuilder label: () -> Label = { EmptyView?(nil) },
-        @ViewBuilder actions: () -> Actions = { EmptyView?(nil) }
+        @ViewBuilder title: () -> Title,
+        @ViewBuilder label: () -> Label? = { EmptyView?(nil) },
+        @ViewBuilder actions: () -> Actions? = { EmptyView?(nil) }
     ) {
         self.illustration = illustration()
         self.title = title()

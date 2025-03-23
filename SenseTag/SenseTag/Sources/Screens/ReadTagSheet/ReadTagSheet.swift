@@ -57,9 +57,11 @@ struct ReadTagSheet: View {
             Text("readTagSheet.empty.title")
                 .font(.senseHOne)
                 .accessibilityAddTraits(.isHeader)
+                .contentShape(.rect(cornerRadius: .radius4))
         } label: {
             Text("readTagSheet.empty.label")
                 .font(.senseLabelM)
+                .contentShape(.rect(cornerRadius: .radius4))
         }
     }
 
@@ -92,6 +94,7 @@ struct ReadTagSheet: View {
                     .font(.senseCaption)
                     .foregroundStyle(Color.black.shade700)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(.rect(cornerRadius: .radius4))
                 self.getContentView(from: payload)
             }
             .accessibilityElement(children: accessibilityElement(from: payload))
@@ -129,6 +132,7 @@ extension ReadTagSheet {
                 Text(text)
                     .font(.senseBodyL)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(.rect(cornerRadius: .radius4))
                     .accessibilityLabel(
                         "readTagSheet.recordItem.contentView.text.label \(text)"
                     )
@@ -140,6 +144,7 @@ extension ReadTagSheet {
             Text("readTagSheet.recordItem.empty")
                 .font(.senseBodyL)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(.rect(cornerRadius: .radius4))
                 .accessibilityLabel(
                     "readTagSheet.recordItem.contentView.empty.label"
                 )
@@ -149,6 +154,7 @@ extension ReadTagSheet {
             Text("readTagSheet.recordItem.unknown")
                 .font(.senseBodyL)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(.rect(cornerRadius: .radius4))
                 .accessibilityLabel(
                     "readTagSheet.recordItem.contentView.other.label"
                 )

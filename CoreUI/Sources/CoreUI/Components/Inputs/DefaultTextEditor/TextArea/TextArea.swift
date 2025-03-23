@@ -38,20 +38,19 @@ struct TextArea<
     // MARK: - View
 
     var body: some View {
-        editor
-            .introspect(
-                .textEditor,
-                on: .iOS(.v15...)
-            ) { textView in
-                textView.backgroundColor = UIColor(backgroudColor)
-            }
-            .overlay(
-                VStack {
-                    HStack {
-                        text.isEmpty ? AnyView(placeholder) : AnyView(EmptyView())
-                        Spacer()
-                    }
-                    .foregroundColor(
+        ZStack(alignment: .topLeading) {
+            editor
+                .contentShape(.rect(cornerRadius: .radius4))
+                .introspect(
+                    .textEditor,
+                    on: .iOS(.v15...)
+                ) { textView in
+                    textView.backgroundColor = UIColor(backgroudColor)
+                }
+
+            if text.isEmpty {
+                placeholder
+                    .foregroundStyle(
                         Color(UIColor.placeholderText)
                     )
                     .padding(
@@ -62,9 +61,8 @@ struct TextArea<
                             trailing: 0.0
                         )
                     )
-                    Spacer()
-                }
-            )
+            }
+        }
     }
 
     public func backgroundColor(_ color: Color) -> Self {
@@ -79,7 +77,7 @@ struct TextArea<
     #Preview {
         @Previewable @State
         var text: String = ""
-        
+
         TextArea(
             placeholder: Text("Hello"),
             editor: TextEditor(text: $text),

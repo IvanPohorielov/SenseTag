@@ -47,8 +47,8 @@ public struct LinkButton<Icon: View, Label: View>: CoreButton, LinkButtonEnvProt
 
 public extension LinkButton {
     init(
-        @ViewBuilder labelBuilder: () -> Label = { EmptyView?(nil) },
-        @ViewBuilder iconBuilder: () -> Icon = { EmptyView?(nil) },
+        @ViewBuilder labelBuilder: () -> Label,
+        @ViewBuilder iconBuilder: () -> Icon? = { EmptyView?(nil) },
         action: @escaping @MainActor @Sendable () -> Void
     ) {
         self.label = labelBuilder()

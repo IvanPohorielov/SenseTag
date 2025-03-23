@@ -6,8 +6,8 @@
 //  Copyright © 2024 Evo.company. All rights reserved.
 //
 
-import SwiftUI
 import FoundationUI
+import SwiftUI
 
 public struct DefaultTextEditor<
     Label: View,
@@ -106,9 +106,9 @@ extension DefaultTextEditor {
     public init(
         _ text: Binding<String>,
         @ViewBuilder placeholder: () -> Placeholder = { EmptyView?(nil) },
-        @ViewBuilder label: () -> Label = { EmptyView?(nil) },
-        @ViewBuilder caption: () -> Caption = { EmptyView?(nil) },
-        @ViewBuilder error: () -> ErrorLabel = { EmptyView?(nil) }
+        @ViewBuilder label: () -> Label? = { EmptyView?(nil) },
+        @ViewBuilder caption: () -> Caption? = { EmptyView?(nil) },
+        @ViewBuilder error: () -> ErrorLabel? = { EmptyView?(nil) }
     ) {
         self._text = text
         self.editor = TextEditor(text: text)
@@ -153,19 +153,19 @@ where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
         } else {
             self.placeholder = nil
         }
-        
+
         if let label {
             self.label = Text(label)
         } else {
             self.label = nil
         }
-        
+
         if let caption {
             self.caption = Text(caption)
         } else {
             self.caption = nil
         }
-        
+
         if let error {
             self.error = Text(error)
         } else {

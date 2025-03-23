@@ -153,11 +153,11 @@ extension DefaultTextField {
         _ text: Binding<String>,
         axis: Axis? = nil,
         @ViewBuilder placeholder: () -> Placeholder = { EmptyView?(nil) },
-        @ViewBuilder label: () -> Label = { EmptyView?(nil) },
-        @ViewBuilder caption: () -> Caption = { EmptyView?(nil) },
-        @ViewBuilder error: () -> ErrorLabel = { EmptyView?(nil) },
-        @ViewBuilder leftView: () -> (LeftView) = { EmptyView?(nil) },
-        @ViewBuilder rightView: () -> (RightView) = { EmptyView?(nil) }
+        @ViewBuilder label: () -> Label? = { EmptyView?(nil) },
+        @ViewBuilder caption: () -> Caption? = { EmptyView?(nil) },
+        @ViewBuilder error: () -> ErrorLabel? = { EmptyView?(nil) },
+        @ViewBuilder leftView: () -> LeftView? = { EmptyView?(nil) },
+        @ViewBuilder rightView: () -> RightView? = { EmptyView?(nil) }
     ) {
         self._text = text
         if let axis {
@@ -184,8 +184,8 @@ where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
         label: LocalizedStringKey? = nil,
         caption: LocalizedStringKey? = nil,
         error: LocalizedStringKey? = nil,
-        @ViewBuilder leftView: () -> (LeftView) = { EmptyView?(nil) },
-        @ViewBuilder rightView: () -> (RightView) = { EmptyView?(nil) }
+        @ViewBuilder leftView: () -> LeftView? = { EmptyView?(nil) },
+        @ViewBuilder rightView: () -> RightView? = { EmptyView?(nil) }
     ) {
         self._text = text
         if let axis {
@@ -208,8 +208,8 @@ where Placeholder == Text, Label == Text, Caption == Text, ErrorLabel == Text {
         label: String? = nil,
         caption: String? = nil,
         error: String? = nil,
-        @ViewBuilder leftView: () -> (LeftView) = { EmptyView?(nil) },
-        @ViewBuilder rightView: () -> (RightView) = { EmptyView?(nil) }
+        @ViewBuilder leftView: () -> LeftView? = { EmptyView?(nil) },
+        @ViewBuilder rightView: () -> RightView? = { EmptyView?(nil) }
     ) {
         self._text = text
         if let axis {
