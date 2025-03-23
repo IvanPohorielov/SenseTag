@@ -71,8 +71,8 @@ struct ReadTagSheet: View {
                     Array(zip(store.payloads.indices, store.payloads)), id: \.1
                 ) { index, payload in
                     recordItem(payload, number: index + 1)
-                        .accessibilitySortPriority(0)
                 }
+                .accessibilitySortPriority(0)
             }
             .safeAreaPadding(.horizontal, .spacer16)
             .safeAreaPadding(.bottom, .spacer16)
@@ -84,7 +84,7 @@ struct ReadTagSheet: View {
         _ payload: NFCNDEFManagerPayload,
         number: Int
     ) -> some View {
-        HStack(spacing: .spacer8) {
+        RecordContainerView {
             VStack(spacing: .spacer8) {
                 let localizedStringKey: LocalizedStringKey =
                     "readTagSheet.recordItem.record \(number)"
@@ -92,25 +92,12 @@ struct ReadTagSheet: View {
                     .font(.senseCaption)
                     .foregroundStyle(Color.black.shade700)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .accessibilityAddTraits(.isHeader)
                 self.getContentView(from: payload)
             }
-            .contentShape(
-                .rect(cornerRadius: .radius8)
-            )
-            .accessibilityElement(children: .contain)
+            .accessibilityElement(children: accessibilityElement(from: payload))
             recordAction(payload)
         }
-        .padding(.spacer16)
-        .frame(maxWidth: .infinity)
-        .background(.ultraThinMaterial)
-        .clipShape(
-            .rect(cornerRadius: .radius8)
-        )
-        .contentShape(
-            .rect(cornerRadius: .radius8)
-        )
-        .accessibilityElement(children: .contain)
+        .accessibilityElement(children: accessibilityElement(from: payload))
     }
 
     @ViewBuilder
@@ -142,24 +129,51 @@ extension ReadTagSheet {
                 Text(text)
                     .font(.senseBodyL)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .accessibilityLabel("readTagSheet.recordItem.contentView.text.label \(text)")
+                    .accessibilityLabel(
+                        "readTagSheet.recordItem.contentView.text.label \(text)"
+                    )
             case let .url(url):
                 LinkPresentationView(url: url)
                     .accessibilityElement(children: .contain)
-                    .accessibilityAddTraits(.isLink)
             }
         case .empty:
             Text("readTagSheet.recordItem.empty")
                 .font(.senseBodyL)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .accessibilityLabel("readTagSheet.recordItem.contentView.empty.label")
-                .accessibilityHint("readTagSheet.recordItem.contentView.empty.hint")
+                .accessibilityLabel(
+                    "readTagSheet.recordItem.contentView.empty.label"
+                )
+                .accessibilityHint(
+                    "readTagSheet.recordItem.contentView.empty.hint")
         case .other:
             Text("readTagSheet.recordItem.unknown")
                 .font(.senseBodyL)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .accessibilityLabel("readTagSheet.recordItem.contentView.other.label")
-                .accessibilityHint("readTagSheet.recordItem.contentView.other.hint")
+                .accessibilityLabel(
+                    "readTagSheet.recordItem.contentView.other.label"
+                )
+                .accessibilityHint(
+                    "readTagSheet.recordItem.contentView.other.hint")
+        }
+    }
+}
+
+extension ReadTagSheet {
+    fileprivate func accessibilityElement(from payload: NFCNDEFManagerPayload)
+        -> AccessibilityChildBehavior
+    {
+        switch payload {
+        case .wellKnown(let wellKnownPayload):
+            switch wellKnownPayload {
+            case .text:
+                return .combine
+            case .url:
+                return .contain
+            }
+        case .empty:
+            return .combine
+        case .other:
+            return .combine
         }
     }
 }
