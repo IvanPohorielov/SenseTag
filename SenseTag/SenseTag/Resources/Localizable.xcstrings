@@ -534,19 +534,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Read Tag"
+            "value" : "Scanned tag"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сканировать метку"
+            "value" : "Сканированная метка"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сканувати мітку"
+            "value" : "Сканована мітка"
           }
         }
       }
