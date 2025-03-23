@@ -8,7 +8,7 @@
 import Foundation
 import NFCNDEFManager
 
-struct AppClipNFCLinkService: Hashable, Sendable {
+public struct AppClipNFCLinkService: Hashable, Sendable {
 
     static func addDefaultLink(_ data: inout [NFCNDEFManagerPayload])
         -> [NFCNDEFManagerPayload]

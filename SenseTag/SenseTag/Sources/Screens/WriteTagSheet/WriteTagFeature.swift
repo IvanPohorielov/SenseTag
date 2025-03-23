@@ -9,6 +9,7 @@ import ComposableArchitecture
 import CoreNFC
 import Foundation
 import NFCNDEFManager
+import CoreDependencies
 import enum SwiftUI.AccessibilityNotification
 
 @Reducer

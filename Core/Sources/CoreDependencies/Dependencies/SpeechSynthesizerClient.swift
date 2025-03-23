@@ -9,16 +9,16 @@
 import ComposableArchitecture
 
 @DependencyClient
-struct SpeechSynthesizerClient {
-    var speak: @MainActor @Sendable (String) async -> Void
-    var stopSpeaking: @MainActor @Sendable (AVSpeechBoundary) async -> Void
-    var pauseSpeaking: @MainActor @Sendable (AVSpeechBoundary) async -> Void
-    var continueSpeaking: @MainActor @Sendable () async -> Void
-    var isSpeaking: @MainActor @Sendable () async -> Bool = { false }
+public struct SpeechSynthesizerClient: Sendable {
+    public var speak: @MainActor @Sendable (String) async -> Void
+    public var stopSpeaking: @MainActor @Sendable (AVSpeechBoundary) async -> Void
+    public var pauseSpeaking: @MainActor @Sendable (AVSpeechBoundary) async -> Void
+    public var continueSpeaking: @MainActor @Sendable () async -> Void
+    public var isSpeaking: @MainActor @Sendable () async -> Bool = { false }
 }
 
 extension SpeechSynthesizerClient: DependencyKey {
-    static let liveValue: SpeechSynthesizerClient = {
+    public static let liveValue: SpeechSynthesizerClient = {
         nonisolated(unsafe) let synthesizer = AVSpeechSynthesizer()
         @Dependency(\.languageRecognizer) var languageRecognizer
 
@@ -92,7 +92,7 @@ extension SpeechSynthesizerClient {
     }
 }
 
-extension DependencyValues {
+public extension DependencyValues {
     var speechSynthesizer: SpeechSynthesizerClient {
         get { self[SpeechSynthesizerClient.self] }
         set { self[SpeechSynthesizerClient.self] = newValue }

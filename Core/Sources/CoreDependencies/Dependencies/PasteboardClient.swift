@@ -9,13 +9,13 @@ import ComposableArchitecture
 import UIKit
 
 @DependencyClient
-struct PasteboardClient {
-    var getString: @MainActor @Sendable () async -> String?
-    var setString: @MainActor @Sendable (String) async -> Void
+public struct PasteboardClient: Sendable {
+    public var getString: @MainActor @Sendable () async -> String?
+    public var setString: @MainActor @Sendable (String) async -> Void
 }
 
 extension PasteboardClient: DependencyKey {
-    static let liveValue = PasteboardClient(
+    public static let liveValue = PasteboardClient(
         getString: {
             UIPasteboard.general.string
         },
@@ -25,7 +25,7 @@ extension PasteboardClient: DependencyKey {
     )
 }
 
-extension DependencyValues {
+public extension DependencyValues {
     var pasteboard: PasteboardClient {
         get { self[PasteboardClient.self] }
         set { self[PasteboardClient.self] = newValue }

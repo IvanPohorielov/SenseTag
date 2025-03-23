@@ -8,6 +8,7 @@
 @preconcurrency import AVFoundation
 import ComposableArchitecture
 import CoreUI
+import CoreDependencies
 import NFCNDEFManager
 import CoreNFC
 import SwiftUI

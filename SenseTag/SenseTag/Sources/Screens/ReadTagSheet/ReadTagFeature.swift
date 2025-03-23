@@ -8,6 +8,7 @@
 import AVFoundation
 import ComposableArchitecture
 import Foundation
+import CoreDependencies
 import NFCNDEFManager
 import enum SwiftUI.AccessibilityNotification
 

@@ -16,6 +16,8 @@
 		FA9DC2632D2BDE0B00359E58 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FA9DC2622D2BDE0B00359E58 /* ComposableArchitecture */; };
 		FAB708A72D0EFADA009B20B0 /* CoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAB708A62D0EFADA009B20B0 /* CoreUI */; };
 		FAB708A92D0EFADA009B20B0 /* FoundationUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAB708A82D0EFADA009B20B0 /* FoundationUI */; };
+		FAF7C0852D90ADFA009A7E4B /* CoreDependencies in Frameworks */ = {isa = PBXBuildFile; productRef = FAF7C0842D90ADFA009A7E4B /* CoreDependencies */; };
+		FAF7C0872D90ADFA009A7E4B /* CoreFeature in Frameworks */ = {isa = PBXBuildFile; productRef = FAF7C0862D90ADFA009A7E4B /* CoreFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,7 @@
 		FA9A1D372D84744200B1DFA8 /* SenseTagClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SenseTagClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9A1D482D84744400B1DFA8 /* SenseTagClipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SenseTagClipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB708A52D0EF741009B20B0 /* CoreUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreUI; path = /Users/macbook/Work/SenseTag/CoreUI; sourceTree = "<absolute>"; };
+		FAF7C0822D90A74F009A7E4B /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Core; path = /Users/macbook/Work/SenseTag/Core; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -117,8 +120,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4A6F782D0757BE004DDC46 /* NFCNDEFManager in Frameworks */,
+				FAF7C0852D90ADFA009A7E4B /* CoreDependencies in Frameworks */,
 				FAB708A92D0EFADA009B20B0 /* FoundationUI in Frameworks */,
 				FA9DC2632D2BDE0B00359E58 /* ComposableArchitecture in Frameworks */,
+				FAF7C0872D90ADFA009A7E4B /* CoreFeature in Frameworks */,
 				FAB708A72D0EFADA009B20B0 /* CoreUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +163,7 @@
 				FA9A1D382D84744200B1DFA8 /* SenseTagClip */,
 				FA4A6F5A2D074F12004DDC46 /* SenseTagTests */,
 				FA9A1D4B2D84744400B1DFA8 /* SenseTagClipTests */,
+				FAF7C0822D90A74F009A7E4B /* Core */,
 				FAB708A52D0EF741009B20B0 /* CoreUI */,
 				FA4A6F752D0756F5004DDC46 /* NFCNDEFManager */,
 				FA4A6F762D0757BE004DDC46 /* Frameworks */,
@@ -209,6 +215,8 @@
 				FAB708A62D0EFADA009B20B0 /* CoreUI */,
 				FAB708A82D0EFADA009B20B0 /* FoundationUI */,
 				FA9DC2622D2BDE0B00359E58 /* ComposableArchitecture */,
+				FAF7C0842D90ADFA009A7E4B /* CoreDependencies */,
+				FAF7C0862D90ADFA009A7E4B /* CoreFeature */,
 			);
 			productName = SenseTag;
 			productReference = FA4A6F472D074F10004DDC46 /* SenseTag.app */;
@@ -864,6 +872,14 @@
 		FAB708A82D0EFADA009B20B0 /* FoundationUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FoundationUI;
+		};
+		FAF7C0842D90ADFA009A7E4B /* CoreDependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreDependencies;
+		};
+		FAF7C0862D90ADFA009A7E4B /* CoreFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

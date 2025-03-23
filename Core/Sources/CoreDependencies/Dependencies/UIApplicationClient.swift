@@ -9,16 +9,16 @@ import ComposableArchitecture
 import UIKit
 
 @DependencyClient
-struct UIApplicationClient {
-    var canOpenURL: @MainActor @Sendable (URL) async -> Bool = { _ in false }
-    var openSettings: @MainActor @Sendable () async -> Void = {}
-    var openNotificationSettings: @MainActor @Sendable () async -> Void = {}
-    var openDefaultApplicationsSettings: @MainActor @Sendable () async -> Void =
+public struct UIApplicationClient: Sendable {
+    public var canOpenURL: @MainActor @Sendable (URL) async -> Bool = { _ in false }
+    public var openSettings: @MainActor @Sendable () async -> Void = {}
+    public var openNotificationSettings: @MainActor @Sendable () async -> Void = {}
+    public var openDefaultApplicationsSettings: @MainActor @Sendable () async -> Void =
         {}
 }
 
 extension UIApplicationClient: DependencyKey {
-    static let liveValue: UIApplicationClient = {
+    public static let liveValue: UIApplicationClient = {
         @Dependency(\.openURL) var openURL
 
         return UIApplicationClient(
@@ -51,7 +51,7 @@ extension UIApplicationClient: DependencyKey {
     }()
 }
 
-extension DependencyValues {
+public extension DependencyValues {
     var application: UIApplicationClient {
         get { self[UIApplicationClient.self] }
         set { self[UIApplicationClient.self] = newValue }

@@ -10,15 +10,15 @@ import NFCNDEFManager
 import SwiftUI
 
 @DependencyClient
-struct NFCNDEFClient {
-    var read: @Sendable () async throws -> [NFCNDEFManagerPayload]
-    var write: @Sendable (_ payloads: [NFCNDEFManagerPayload]) async throws -> Void
-    var clear: @Sendable () async throws -> Void
-    var lock: @Sendable () async throws -> Void
+public struct NFCNDEFClient : Sendable {
+    public var read: @Sendable () async throws -> [NFCNDEFManagerPayload]
+    public var write: @Sendable (_ payloads: [NFCNDEFManagerPayload]) async throws -> Void
+    public var clear: @Sendable () async throws -> Void
+    public var lock: @Sendable () async throws -> Void
 }
 
 extension NFCNDEFClient: DependencyKey {
-    static var liveValue: Self {
+    public static var liveValue: Self {
         let nfcManager = NFCNDEFManager()
         return Self(
             read: {
@@ -35,7 +35,7 @@ extension NFCNDEFClient: DependencyKey {
     }
 }
 
-extension DependencyValues {
+public extension DependencyValues {
     var nfcClient: NFCNDEFClient {
         get { self[NFCNDEFClient.self] }
         set { self[NFCNDEFClient.self] = newValue }
