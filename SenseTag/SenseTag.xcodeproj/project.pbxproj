@@ -112,6 +112,11 @@
 			path = SenseTagClipTests;
 			sourceTree = "<group>";
 		};
+		FAF7F0EE2D91A110009A7E4B /* ci_scripts */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ci_scripts;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +164,7 @@
 		FA4A6F3E2D074F10004DDC46 = {
 			isa = PBXGroup;
 			children = (
+				FAF7F0EE2D91A110009A7E4B /* ci_scripts */,
 				FA4A6F492D074F10004DDC46 /* SenseTag */,
 				FA9A1D382D84744200B1DFA8 /* SenseTagClip */,
 				FA4A6F5A2D074F12004DDC46 /* SenseTagTests */,
@@ -208,6 +214,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				FA4A6F492D074F10004DDC46 /* SenseTag */,
+				FAF7F0EE2D91A110009A7E4B /* ci_scripts */,
 			);
 			name = SenseTag;
 			packageProductDependencies = (
