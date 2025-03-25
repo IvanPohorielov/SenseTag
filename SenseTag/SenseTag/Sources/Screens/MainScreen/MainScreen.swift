@@ -13,47 +13,32 @@ import SwiftUI
 struct MainScreen: View {
 
     @Bindable var store: StoreOf<MainFeature>
-
-    @ScaledMetric(relativeTo: DefaultFont.hZero.textStyle)
-    private var largeImageSize: CGFloat = .image56
-
+    
     var body: some View {
-        DefaultBackground {
-            backgroundAnimation
-
-            VStack(spacing: .spacer16) {
-                tile(
-                    "mainScreen.tile.other",
-                    image: "ellipsis.circle.fill",
-                    span: 2
-                ) {
-                    store.send(.otherTapped)
-                }
-                .accessibilitySortPriority(0)
-                .accessibilityHint("mainScreen.tile.other.hint")
-                tile(
-                    "mainScreen.tile.read",
-                    image: "magnifyingglass.circle.fill",
-                    span: 4
-                ) {
-                    store.send(.readTapped)
-                }
-                .accessibilitySortPriority(2)
-                .accessibilityHint("mainScreen.tile.read.hint")
-                tile(
-                    "mainScreen.tile.write",
-                    image: "plus.circle.fill",
-                    span: 4
-                ) {
-                    store.send(.writeTapped)
-                }
-                .accessibilitySortPriority(1)
-                .accessibilityHint("mainScreen.tile.write.hint")
+        MainScreenContainerView {
+            MainScreenTileView(
+                "mainScreen.tile.other",
+                systemImage: "ellipsis.circle.fill",
+                span: 2
+            ) {
+                store.send(.otherTapped)
             }
-            .safeAreaPadding(.spacer16)
-        }
-        .onAppear {
-            store.send(.startAnimation)
+            .accessibilitySortPriority(0)
+            .accessibilityHint("mainScreen.tile.other.hint")
+            ReadTileView(span: 4) {
+                store.send(.readTapped)
+            }
+            .accessibilitySortPriority(2)
+            .accessibilityHint("mainScreen.tile.read.hint")
+            MainScreenTileView(
+                "mainScreen.tile.write",
+                systemImage: "plus.circle.fill",
+                span: 4
+            ) {
+                store.send(.writeTapped)
+            }
+            .accessibilitySortPriority(1)
+            .accessibilityHint("mainScreen.tile.write.hint")
         }
         .alert(
             $store.scope(
@@ -73,11 +58,10 @@ struct MainScreen: View {
                 action: \.destination.readTag
             )
         ) { readTagStore in
-            self.sheetBuilder {
-                NavigationStack {
-                    ReadTagSheet(store: readTagStore)
-                }
+            NavigationStack {
+                ReadTagSheet(store: readTagStore)
             }
+            .senseSheet()
         }
         .sheet(
             item: $store.scope(
@@ -85,78 +69,10 @@ struct MainScreen: View {
                 action: \.destination.writeTag
             )
         ) { writeTagStore in
-            self.sheetBuilder {
-                NavigationStack {
-                    WriteTagSheet(store: writeTagStore)
-                }
+            NavigationStack {
+                WriteTagSheet(store: writeTagStore)
             }
-        }
-    }
-
-    private func tile(
-        _ title: LocalizedStringKey,
-        image: String,
-        span: Int,
-        action: @MainActor @escaping () -> Void
-    ) -> some View {
-        VStack {
-            Image(systemName: image)
-                .resizable()
-                .frame(width: largeImageSize, height: largeImageSize)
-                .foregroundStyle(Color.blue.primary)
-
-            Text(title)
-                .font(.senseHZero)
-                .frame(maxWidth: .infinity)
-        }
-        .padding(.spacer16)
-        .containerRelativeFrame(
-            .vertical,
-            count: 10,
-            span: span,
-            spacing: .spacer16,
-            alignment: .center
-        )
-        .background(.ultraThinMaterial)
-        .clipShape(
-            .rect(cornerRadius: .radius24)
-        )
-        .contentShape(
-            .rect(cornerRadius: .radius24)
-        )
-        .onTapGesture {
-            DefaultHaptics.sendHapticFeedback(.selection)
-            action()
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityAddTraits(.isButton)
-        .accessibilityLabel(Text(title))
-    }
-
-    @ViewBuilder
-    private func sheetBuilder(
-        @ViewBuilder sheet: () -> some View
-    ) -> some View {
-        sheet()
-            .presentationCornerRadius(40.0)
-            .presentationDetents([.medium, .large])
-            .presentationBackground(.regularMaterial)
-    }
-
-    private var backgroundAnimation: some View {
-        ForEach(0..<5) { index in
-            Circle()
-                .stroke(lineWidth: 12.0)
-                .foregroundStyle(Color.blue.primary)
-                .opacity(store.animate ? 0 : 0.5)
-                .scaleEffect(store.animate ? 2 : 0.1)
-                .animation(
-                    Animation.easeOut(duration: 12)
-                        .repeatForever()
-                        .delay(Double(index) * 2),
-                    value: store.animate
-                )
-                .accessibilityHidden(true)
+            .senseSheet()
         }
     }
 }

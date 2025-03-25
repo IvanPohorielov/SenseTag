@@ -17,7 +17,6 @@ import SwiftUI
 struct MainFeature {
     @ObservableState
     struct State {
-        var animate: Bool = false
         @Presents var destination: Destination.State?
     }
 
@@ -26,7 +25,6 @@ struct MainFeature {
         case openReadSheet([NFCNDEFManagerPayload])
         case writeTapped
         case otherTapped
-        case startAnimation
         case handleError(any Error, Action.Alert)
         case destination(PresentationAction<Destination.Action>)
 
@@ -59,9 +57,6 @@ struct MainFeature {
                 return handleConfirmationDialog(action, state: &state)
             case let .destination(.presented(.alert(action))):
                 return handleAlertAction(action)
-            case .startAnimation:
-                state.animate = true
-                return .none
             case .handleError(let error, let action):
                 return handleNFCManagerError(error, action: action, state: &state)
             case .destination:

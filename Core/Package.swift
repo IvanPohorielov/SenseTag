@@ -13,13 +13,7 @@ let package = Package(
             name: TargetNames.coreDependencies,
             targets: [
                 TargetNames.coreDependencies
-            ]),
-        .library(
-            name: TargetNames.coreFeature,
-            targets: [
-                TargetNames.coreFeature,
-                TargetNames.coreDependencies,
-            ]),
+            ])
     ],
     dependencies: [
         .package(
@@ -27,14 +21,6 @@ let package = Package(
             from: "1.17.0")
     ],
     targets: [
-        .target(
-            name: TargetNames.coreFeature,
-            dependencies: [
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture")
-            ]
-        ),
         .target(
             name: TargetNames.coreDependencies,
             dependencies: [
@@ -49,7 +35,5 @@ let package = Package(
 // MARK: - TARGET NAMES
 
 private enum TargetNames {
-    static let coreFeature: String = "CoreFeature"
-    static let coreFeatureUI: String = "CoreFeatureUI"
     static let coreDependencies: String = "CoreDependencies"
 }

@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
+import FoundationUI
 
 @main
 struct SenseTagClipApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DemoMainScreen(
+                store: Store(initialState: DemoMainFeature.State()) {
+                    DemoMainFeature()
+                }
+            )
+            .tint(.blue.primary)
         }
     }
 }
