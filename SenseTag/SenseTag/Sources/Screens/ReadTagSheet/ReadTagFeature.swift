@@ -10,7 +10,6 @@ import ComposableArchitecture
 import Foundation
 import CoreDependencies
 import NFCNDEFManager
-import enum SwiftUI.AccessibilityNotification
 
 @Reducer
 struct ReadTagFeature {

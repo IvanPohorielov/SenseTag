@@ -33,6 +33,6 @@ public struct AppClipNFCLinkService: Hashable, Sendable {
 extension URL {
     static var appClipDefault: URL {
         return URL(
-            string: "https://appclip.apple.com/id?p=com.ivanpohorielov.sensetag.Clip")!
+            string: "https://ivanpohorielov.github.io/tag/" + UUID().uuidString)!
     }
 }

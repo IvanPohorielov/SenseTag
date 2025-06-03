@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 import FoundationUI
+import NFCNDEFManager
 
 @main
 struct SenseTagClipApp: App {
@@ -19,6 +20,9 @@ struct SenseTagClipApp: App {
                 }
             )
             .tint(.blue.primary)
+            .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
+                
+            }
         }
     }
 }

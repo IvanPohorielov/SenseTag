@@ -11,7 +11,9 @@ import SwiftUI
 
 @main
 struct SenseTagApp: App {
-
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             MainScreen(
@@ -20,6 +22,9 @@ struct SenseTagApp: App {
                 }
             )
             .tint(.blue.primary)
+            .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
+                
+            }
         }
     }
 }

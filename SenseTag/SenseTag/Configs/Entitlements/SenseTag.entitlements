@@ -2,13 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>com.apple.developer.associated-appclip-app-identifiers</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.ivanpohorielov.sensetag.Clip</string>
+	</array>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>webcredentials:ivanpohorielov.github.io?mode=developer</string>
+		<string>applinks:ivanpohorielov.github.io?mode=developer</string>
+		<string>appclips:ivanpohorielov.github.io?mode=developer</string>
+	</array>
 	<key>com.apple.developer.nfc.readersession.formats</key>
 	<array>
 		<string>TAG</string>
 	</array>
-        <key>com.apple.developer.associated-appclip-app-identifiers</key>
-        <array>
-        	<string>$(AppIdentifierPrefix)com.ivanpohorielov.sensetag.Clip</string>
-        </array>
 </dict>
 </plist>
