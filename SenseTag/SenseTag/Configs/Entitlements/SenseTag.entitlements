@@ -8,9 +8,9 @@
 	</array>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>webcredentials:ivanpohorielov.github.io?mode=developer</string>
-		<string>applinks:ivanpohorielov.github.io?mode=developer</string>
-		<string>appclips:ivanpohorielov.github.io?mode=developer</string>
+		<string>webcredentials:ivanpohorielov.github.io</string>
+		<string>applinks:ivanpohorielov.github.io</string>
+		<string>appclips:ivanpohorielov.github.io</string>
 	</array>
 	<key>com.apple.developer.nfc.readersession.formats</key>
 	<array>

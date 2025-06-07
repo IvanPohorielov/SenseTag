@@ -13,15 +13,14 @@ import SwiftUI
 struct SenseTagApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some Scene {
         WindowGroup {
-            MainScreen(
-                store: Store(initialState: MainFeature.State()) {
-                    MainFeature()
-                }
-            )
-            .tint(.blue.primary)
+            AppView(store:  self.appDelegate.store)
+            .onChange(of: self.scenePhase) { _, newPhase in
+              self.appDelegate.store.send(.didChangeScenePhase(newPhase))
+            }
             .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
                 
             }
