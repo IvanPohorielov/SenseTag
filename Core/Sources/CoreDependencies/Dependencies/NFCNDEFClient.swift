@@ -6,15 +6,17 @@
 //
 
 import ComposableArchitecture
+@preconcurrency import CoreNFC
 import NFCNDEFManager
 import SwiftUI
 
 @DependencyClient
-public struct NFCNDEFClient : Sendable {
+public struct NFCNDEFClient: Sendable {
     public var read: @Sendable () async throws -> [NFCNDEFManagerPayload]
     public var write: @Sendable (_ payloads: [NFCNDEFManagerPayload]) async throws -> Void
     public var clear: @Sendable () async throws -> Void
     public var lock: @Sendable () async throws -> Void
+    public var parseNDEFMessage: @Sendable (_ message: NFCNDEFMessage) async -> [NFCNDEFManagerPayload] = { _ in [] }
 }
 
 extension NFCNDEFClient: DependencyKey {
@@ -27,16 +29,19 @@ extension NFCNDEFClient: DependencyKey {
             },
             write: { payloads in
                 var payloads = consume payloads
-                try await nfcManager.write(AppClipNFCLinkService.addDefaultLink(&payloads))
+                try await nfcManager.write(
+                    AppClipNFCLinkService.addDefaultLink(&payloads)
+                )
             },
             clear: { try await nfcManager.clear() },
-            lock: { try await nfcManager.lock() }
+            lock: { try await nfcManager.lock() },
+            parseNDEFMessage: { await nfcManager.parseNDEFMessage($0) }
         )
     }
 }
 
-public extension DependencyValues {
-    var nfcClient: NFCNDEFClient {
+extension DependencyValues {
+    public var nfcClient: NFCNDEFClient {
         get { self[NFCNDEFClient.self] }
         set { self[NFCNDEFClient.self] = newValue }
     }

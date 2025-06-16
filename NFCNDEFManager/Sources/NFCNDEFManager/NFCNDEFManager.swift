@@ -70,6 +70,11 @@ public final actor NFCNDEFManager {
             try await self.handleLock(tag)
         }
     }
+    
+    public func parseNDEFMessage(_ message: NFCNDEFMessage) -> [NFCNDEFManagerPayload]
+    {
+        message.records.map { $0.mapped() }
+    }
 
     // MARK: - Private Methods
 
@@ -146,15 +151,9 @@ extension NFCNDEFManager {
         -> [NFCNDEFManagerPayload]
     {
         let message = try await { try await tag.readNDEF() }()
-        return getPayloads(message)
+        return parseNDEFMessage(message)
     }
-
-    private func getPayloads(_ message: NFCNDEFMessage)
-        -> [NFCNDEFManagerPayload]
-    {
-        message.records.map { $0.mapped() }
-    }
-
+    
     // MARK: - Writing
 
     private func handleWrite(

@@ -9,6 +9,8 @@ import ComposableArchitecture
 import CoreDependencies
 import Foundation
 import SwiftUI
+import NFCNDEFManager
+@preconcurrency import CoreNFC
 
 @Reducer
 struct AppFeature {
@@ -30,10 +32,13 @@ struct AppFeature {
     public enum Action {
         case appDelegate(AppDelegateFeature.Action)
         case didChangeScenePhase(ScenePhase)
+        case onContinueUserActivityNDEF(NFCNDEFMessage)
         case main(MainFeature.Action)
     }
 
     public init() {}
+    
+    @Dependency(\.nfcClient) var nfcClient
 
     public var body: some ReducerOf<Self> {
         self.core
@@ -55,9 +60,18 @@ struct AppFeature {
                 return .none
             case .didChangeScenePhase:
                 return .none
+            case let .onContinueUserActivityNDEF(ndefMessage):
+                return handleUserActivityNDEF(ndefMessage)
             case .main:
                 return .none
             }
+        }
+    }
+    
+    private func handleUserActivityNDEF(_ message: NFCNDEFMessage) -> Effect<Action> {
+        return .run { send in
+            let payloads = await nfcClient.parseNDEFMessage(message)
+            await send(.main(.openReadSheet(payloads)))
         }
     }
 }
